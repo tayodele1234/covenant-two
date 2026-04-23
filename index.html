@@ -17,14 +17,14 @@
   --steel:#3a5a7a;--steel-pale:#eef3f8;--steel-border:#9ab8d4;
   --nav-h:72px;
 }
-body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav-h)+20px);font-size:16px}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav-h) + 40px + env(safe-area-inset-bottom,0px));font-size:16px}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 90% 0%,rgba(196,154,60,0.1) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 0% 100%,rgba(90,138,94,0.07) 0%,transparent 55%);pointer-events:none;z-index:0}
-.nav{position:fixed;bottom:0;background:var(--charcoal);border-top:2px solid var(--gold);display:flex;justify-content:space-around;align-items:center;height:var(--nav-h);z-index:100;padding-bottom:env(safe-area-inset-bottom,0);width:100%;max-width:520px;left:50%;transform:translateX(-50%)}
+.nav{position:fixed;bottom:0;background:var(--charcoal);border-top:2px solid var(--gold);display:flex;justify-content:space-around;align-items:center;height:calc(var(--nav-h) + env(safe-area-inset-bottom,0px));z-index:100;padding-bottom:env(safe-area-inset-bottom,0px);width:100%;max-width:520px;left:50%;transform:translateX(-50%)}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(255,255,255,0.35);transition:color 0.2s;font-family:'Montserrat',sans-serif}
 .nav-btn.active{color:var(--gold)}
 .nav-btn svg{width:24px;height:24px;stroke-width:2.5}
 .nav-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
-.screen{display:none;max-width:520px;margin:0 auto;padding:0 16px 24px;position:relative;z-index:1}
+.screen{display:none;max-width:520px;margin:0 auto;padding:0 16px 48px;position:relative;z-index:1}
 .screen.active{display:block;animation:fadeUp 0.3s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:24px;margin-bottom:16px;box-shadow:0 4px 24px rgba(26,20,10,0.07)}

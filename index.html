@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Covenant Two</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --cream:#f7f2eb;--cream-dark:#ede5d8;--charcoal:#2d2d2d;--charcoal-light:#4a4a4a;
+  --gold:#b8935a;--gold-light:#d4b483;--gold-pale:#f5eddc;--gold-border:#dfc99a;
+  --white:#fff9f4;--card:#fffcf7;--border:#e4d8c4;--muted:#8a7560;--hint:#b8a48a;
+  --sage:#7a9e7e;--sage-pale:#f0f6f1;--sage-border:#bcd8c0;
+  --rose:#b86b5a;--rose-pale:#f5ebe8;--rose-border:#ddb8b0;
+  --nav-h:68px;
+}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav-h) + 16px)}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 45% at 85% 0%,rgba(184,147,90,0.09) 0%,transparent 65%),radial-gradient(ellipse 50% 60% at 5% 90%,rgba(184,147,90,0.06) 0%,transparent 60%);pointer-events:none;z-index:0}
+.nav{position:fixed;bottom:0;left:0;right:0;background:rgba(247,242,235,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;height:var(--nav-h);z-index:100;padding-bottom:env(safe-area-inset-bottom,0)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:8px 4px;color:var(--hint);transition:color 0.2s;font-family:'Montserrat',sans-serif}
+.nav-btn.active{color:var(--gold)}
+.nav-btn svg{width:22px;height:22px;stroke-width:1.8}
+.nav-label{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase}
+.screen{display:none;max-width:520px;margin:0 auto;padding:0 16px 24px;position:relative;z-index:1}
+.screen.active{display:block;animation:fadeUp 0.3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:24px;margin-bottom:14px;box-shadow:0 2px 18px rgba(45,45,45,0.06)}
+.card-sm{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:0 1px 8px rgba(45,45,45,0.04)}
+.display{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal);letter-spacing:0.01em;line-height:1.2}
+.heading{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal)}
+.overline{font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-weight:600}
+.body-text{font-size:14px;line-height:1.8;color:var(--charcoal-light)}
+.muted{color:var(--muted);font-size:12px;font-weight:400}
+.btn{border:none;border-radius:14px;padding:14px 20px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.03em}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:active{background:#9a7a48;transform:scale(0.98)}
+.btn-charcoal{background:var(--charcoal);color:#fff}.btn-charcoal:active{background:#1a1a1a;transform:scale(0.98)}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--charcoal)}.btn-outline:active{background:var(--gold-pale)}
+.btn-ghost{background:transparent;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;letter-spacing:0.03em;padding:4px 0}
+.btn-full{width:100%}
+.input{width:100%;background:var(--cream);border:1.5px solid var(--border);border-radius:13px;padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:14px;color:var(--charcoal);outline:none;transition:border-color 0.2s;-webkit-appearance:none;font-weight:400}
+.input:focus{border-color:var(--gold);background:#fff}
+.input::placeholder{color:var(--hint)}
+textarea.input{resize:none;min-height:100px;line-height:1.7}
+.tag{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:4px 12px;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+.tag-gold{background:var(--gold-pale);border:1px solid var(--gold-border);color:var(--gold)}
+.tag-charcoal{background:#f0efed;border:1px solid #d5d0c8;color:var(--charcoal)}
+.tag-sage{background:var(--sage-pale);border:1px solid var(--sage-border);color:#4a7a4e}
+.verse-block{background:linear-gradient(135deg,var(--gold-pale),#f0e4c8);border-left:3px solid var(--gold);border-radius:0 14px 14px 0;padding:16px 18px;margin:16px 0}
+.verse-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--charcoal);line-height:1.65}
+.verse-ref{font-size:11px;color:var(--gold);margin-top:6px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.streak-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--gold);line-height:1}
+.streak-lbl{font-size:11px;color:var(--muted);font-weight:500;margin-top:2px;letter-spacing:0.05em}
+.day-dot{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:var(--hint)}
+.day-dot.done{background:var(--gold);border-color:var(--gold);color:#fff}
+.day-dot.today{border-color:var(--gold);color:var(--gold)}
+.convo-card{background:linear-gradient(150deg,var(--gold-pale),#efe3cc);border:1.5px solid var(--gold-border);border-radius:20px;padding:30px 24px;text-align:center;min-height:160px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:opacity 0.25s,transform 0.25s;position:relative;overflow:hidden}
+.convo-card::before{content:'✦';position:absolute;top:14px;right:18px;font-size:12px;color:var(--gold-light);opacity:0.5}
+.convo-card::after{content:'✦';position:absolute;bottom:14px;left:18px;font-size:8px;color:var(--gold-light);opacity:0.35}
+.convo-q{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.5;color:var(--charcoal);font-style:italic;position:relative;z-index:1}
+.convo-ph{font-size:13px;color:var(--muted);font-style:italic;font-weight:400}
+.prog-wrap{background:var(--cream-dark);border-radius:10px;height:4px;margin:8px 0}
+.prog-bar{background:linear-gradient(90deg,var(--gold),var(--gold-light));height:4px;border-radius:10px;transition:width 0.4s ease}
+.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;border:2px solid var(--border)}
+.av1{background:var(--gold-pale);color:var(--gold)}.av2{background:#f0efed;color:var(--charcoal)}
+.quick-topics{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.qt{background:transparent;border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:11px;color:var(--muted);cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.2s}
+.qt:active{background:var(--gold-pale);border-color:var(--gold);color:var(--gold)}
+.divider{border:none;border-top:1px solid var(--border);margin:18px 0}
+.loading-state{text-align:center;padding:56px 20px}
+.loading-cross{font-size:40px;animation:breathe 1.8s ease-in-out infinite;display:block;margin-bottom:18px}
+@keyframes breathe{0%,100%{opacity:0.3;transform:scale(0.9)}50%{opacity:1;transform:scale(1.08)}}
+.loading-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--muted)}
+.loading-sub{font-size:12px;color:var(--hint);margin-top:8px;font-weight:500;letter-spacing:0.04em}
+.stat-box{text-align:center;padding:16px 10px;border-radius:16px}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;line-height:1}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:500;margin-top:4px;letter-spacing:0.04em}
+.toggle-wrap{position:relative;width:48px;height:26px;cursor:pointer;flex-shrink:0}
+.toggle-bg{position:absolute;inset:0;border-radius:13px;transition:background 0.25s}
+.toggle-th{position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform 0.25s;box-shadow:0 1px 4px rgba(0,0,0,0.18)}
+.setup-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:520px;margin:0 auto}
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(30,25,18,0.55);z-index:200;align-items:flex-end;justify-content:center}
+.modal-bg.open{display:flex}
+.modal{background:var(--cream);border-radius:26px 26px 0 0;padding:30px 20px 44px;width:100%;max-width:520px;animation:slideUp 0.3s ease}
+@keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:var(--charcoal);margin-bottom:10px}
+.empty-state{text-align:center;padding:44px 20px;color:var(--muted)}
+
+/* Logo SVG styles */
+.logo-svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- SETUP -->
+<div id="screen-setup" class="screen" style="padding:0">
+  <div class="setup-screen">
+    <svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:24px;border-radius:28px">
+      <rect width="200" height="200" rx="40" fill="#f7f2eb"/>
+      <path d="M62,100 A38,38 0 1,1 100,138" fill="none" stroke="#2d2d2d" stroke-width="13" stroke-linecap="round"/>
+      <path d="M100,138 A38,38 0 1,1 138,100 L138,118 Q138,135 124,145 L108,157 Q104,160 100,157 L84,145 Q70,135 70,118 L70,100" fill="none" stroke="#b8935a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="100" y1="76" x2="100" y2="108" stroke="#b8935a" stroke-width="8" stroke-linecap="round"/>
+      <line x1="86" y1="92" x2="114" y2="92" stroke="#b8935a" stroke-width="8" stroke-linecap="round"/>
+    </svg>
+    <div style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px">Welcome to</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--charcoal);letter-spacing:0.06em;line-height:1">COVENANT</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;color:var(--gold);letter-spacing:0.14em;margin-top:-4px">TWO</div>
+    <p class="body-text" style="margin:18px 0 32px;max-width:300px;color:var(--muted);text-align:center">Grow closer to God and each other — one session at a time.</p>
+    <div style="width:100%;max-width:360px">
+      <div style="margin-bottom:12px">
+        <div class="muted" style="text-align:left;margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.1em;text-transform:uppercase">Partner 1</div>
+        <input class="input" id="setup-p1" placeholder="First name">
+      </div>
+      <div style="margin-bottom:24px">
+        <div class="muted" style="text-align:left;margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.1em;text-transform:uppercase">Partner 2</div>
+        <input class="input" id="setup-p2" placeholder="First name">
+      </div>
+      <button class="btn btn-charcoal btn-full" style="font-size:13px;letter-spacing:0.08em;padding:16px" onclick="completeSetup()">Begin Together →</button>
+    </div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="screen-home" class="screen" style="display:none">
+  <div style="padding:28px 0 16px;display:flex;align-items:center;justify-content:space-between">
+    <div>
+      <div class="overline" style="margin-bottom:4px" id="greet-sub">Good morning</div>
+      <div class="display" id="greet-names">Covenant Two</div>
+    </div>
+    <div id="home-avatars" style="display:flex"></div>
+  </div>
+  <div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:18px 22px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <span style="font-size:30px">🔥</span>
+      <div><div class="streak-num" id="h-streak">0</div><div class="streak-lbl">day streak</div></div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal)" id="h-sessions">0</div>
+      <div class="streak-lbl">sessions together</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="overline" style="margin-bottom:6px">What's on your hearts today?</div>
+    <div id="random-prompt" class="body-text" style="font-style:italic;color:var(--muted);font-size:13px;margin-bottom:14px"></div>
+    <div style="display:flex;gap:8px">
+      <input class="input" id="topicInput" placeholder="Type any topic..." maxlength="60" style="flex:1">
+      <button class="btn btn-gold" style="padding:13px 18px;flex-shrink:0" onclick="handleStart()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="quick-topics">
+      <button class="qt" onclick="pickTopic('finances')">Finances</button>
+      <button class="qt" onclick="pickTopic('trust')">Trust</button>
+      <button class="qt" onclick="pickTopic('communication')">Communication</button>
+      <button class="qt" onclick="pickTopic('forgiveness')">Forgiveness</button>
+      <button class="qt" onclick="pickTopic('intimacy')">Intimacy</button>
+      <button class="qt" onclick="pickTopic('purpose')">Purpose</button>
+      <button class="qt" onclick="pickTopic('grief')">Grief</button>
+      <button class="qt" onclick="pickTopic('joy')">Joy</button>
+      <button class="qt" onclick="pickTopic('parenting')">Parenting</button>
+      <button class="qt" onclick="pickTopic('anxiety')">Anxiety</button>
+    </div>
+  </div>
+  <div class="card" id="last-card" style="display:none">
+    <div class="overline" style="margin-bottom:10px">Last session</div>
+    <div id="last-content"></div>
+  </div>
+  <div class="card" id="prayer-preview" style="display:none">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="overline">Recent prayers</div>
+      <button class="btn-ghost" onclick="goTo('prayers')">See all →</button>
+    </div>
+    <div id="prayer-preview-list"></div>
+  </div>
+</div>
+
+<!-- SESSION -->
+<div id="screen-session" class="screen" style="display:none">
+  <div style="display:flex;align-items:center;gap:10px;padding:24px 0 18px">
+    <button class="btn-ghost" onclick="confirmLeave()" style="display:flex;align-items:center">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="heading" id="sess-title" style="text-transform:capitalize">Session</div>
+  </div>
+  <div id="sess-loading" style="display:none">
+    <div class="loading-state">
+      <span class="loading-cross">✝</span>
+      <div class="loading-text">Preparing your devotional...</div>
+      <div class="loading-sub">Writing something just for you two</div>
+    </div>
+  </div>
+  <div id="step-devo" style="display:none">
+    <div class="card">
+      <div class="tag tag-gold" style="margin-bottom:16px">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M2 12h20" stroke-linecap="round"/></svg>
+        Spark — Devotional
+      </div>
+      <div id="devo-inner"></div>
+      <button class="btn btn-charcoal btn-full" style="margin-top:22px" onclick="goToGame()">Continue to Connect Game →</button>
+    </div>
+  </div>
+  <div id="step-game" style="display:none">
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <div class="tag tag-charcoal">Connect — Game</div>
+        <div id="q-num" class="muted">0 / 5</div>
+      </div>
+      <div class="prog-wrap"><div class="prog-bar" id="q-bar" style="width:0%"></div></div>
+      <div class="convo-card" id="convo-card"><div class="convo-ph">Tap "Next →" to begin</div></div>
+      <div style="display:flex;gap:10px;margin-bottom:10px">
+        <button class="btn btn-gold" style="flex:1" onclick="doAIQ()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg>
+          AI Question
+        </button>
+        <button class="btn btn-charcoal" style="flex:1" onclick="doNextQ()">Next →</button>
+      </div>
+      <button class="btn btn-outline btn-full" onclick="goToWrap()">Finish &amp; Pray Together</button>
+    </div>
+  </div>
+  <div id="step-wrap" style="display:none">
+    <div class="card" style="text-align:center">
+      <div style="font-size:40px;margin-bottom:14px">✝</div>
+      <div class="heading" style="margin-bottom:12px">Close in Prayer</div>
+      <div class="verse-block" style="text-align:left">
+        <div class="verse-text" id="close-verse">"May the God of hope fill you with all joy and peace as you trust in Him."</div>
+        <div class="verse-ref" id="close-ref">Romans 15:13</div>
+      </div>
+      <p class="body-text" style="margin:14px 0 0;color:var(--muted)">Take a moment together. Let one of you pray aloud over what came up today.</p>
+    </div>
+    <div class="card">
+      <div class="overline" style="margin-bottom:10px">Prayer Log</div>
+      <p class="muted" style="margin-bottom:10px;font-size:13px">What did you pray for together today?</p>
+      <textarea class="input" id="prayer-text" placeholder="Write what God put on your hearts — anything you want to remember..."></textarea>
+      <div style="display:flex;gap:10px;margin-top:14px;align-items:center">
+        <button class="btn-ghost" onclick="finishSession(false)">Skip</button>
+        <button class="btn btn-gold btn-full" onclick="finishSession(true)">Save &amp; Finish</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRAYERS -->
+<div id="screen-prayers" class="screen" style="display:none">
+  <div style="padding:28px 0 16px">
+    <div class="overline" style="margin-bottom:4px">Your history</div>
+    <div class="display">Prayer Log</div>
+  </div>
+  <div id="prayers-body"></div>
+</div>
+
+<!-- STREAK -->
+<div id="screen-streak" class="screen" style="display:none">
+  <div style="padding:28px 0 16px">
+    <div class="overline" style="margin-bottom:4px">Your consistency</div>
+    <div class="display">Streak &amp; Stats</div>
+  </div>
+  <div class="card">
+    <div style="display:flex;align-items:center;gap:22px">
+      <span style="font-size:38px">🔥</span>
+      <div><div class="streak-num" id="s-cur">0</div><div class="streak-lbl">current streak</div></div>
+      <div style="width:1px;background:var(--border);height:52px"></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--sage)" id="s-best">0</div><div class="streak-lbl">best streak</div></div>
+    </div>
+    <hr class="divider">
+    <div class="overline" style="margin-bottom:12px">Last 14 days</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap" id="s-cal"></div>
+  </div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="stat-box" style="background:var(--gold-pale)"><div class="stat-num" style="color:var(--gold)" id="s-tsess">0</div><div class="stat-lbl">sessions</div></div>
+      <div class="stat-box" style="background:var(--rose-pale)"><div class="stat-num" style="color:var(--rose)" id="s-tpray">0</div><div class="stat-lbl">prayers logged</div></div>
+      <div class="stat-box" style="background:var(--sage-pale)"><div class="stat-num" style="color:var(--sage)" id="s-ttop">0</div><div class="stat-lbl">topics explored</div></div>
+      <div class="stat-box" style="background:#f0efed"><div class="stat-num" style="color:var(--charcoal)" id="s-tq">0</div><div class="stat-lbl">questions asked</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE -->
+<div id="screen-profile" class="screen" style="display:none">
+  <div style="padding:28px 0 16px">
+    <div class="overline" style="margin-bottom:4px">Your account</div>
+    <div class="display">Profile</div>
+  </div>
+  <div class="card" id="profile-view" style="display:none">
+    <div style="display:flex;gap:12px;margin-bottom:14px;align-items:center" id="pv-avatars"></div>
+    <div class="muted" id="pv-sub"></div>
+    <hr class="divider">
+    <button class="btn btn-outline" onclick="editProf()">Edit Profile</button>
+  </div>
+  <div class="card" id="profile-form">
+    <div class="overline" style="margin-bottom:16px">Tell us about yourselves</div>
+    <div style="margin-bottom:12px">
+      <div class="muted" style="margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">Partner 1</div>
+      <input class="input" id="p1" placeholder="Name">
+    </div>
+    <div style="margin-bottom:12px">
+      <div class="muted" style="margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">Partner 2</div>
+      <input class="input" id="p2" placeholder="Name">
+    </div>
+    <div style="margin-bottom:20px">
+      <div class="muted" style="margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">Anniversary (optional)</div>
+      <input class="input" id="p-ann" type="date">
+    </div>
+    <button class="btn btn-gold btn-full" onclick="saveProf()">Save Profile</button>
+  </div>
+  <div class="card">
+    <div class="overline" style="margin-bottom:14px">Preferences</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+      <div>
+        <div style="font-size:13px;color:var(--charcoal);font-weight:500">Personalize with our names</div>
+        <div class="muted" style="font-size:11px;margin-top:2px">Weaves your names into questions</div>
+      </div>
+      <div class="toggle-wrap" onclick="togglePref('personalize')">
+        <div class="toggle-bg" id="tog-bg" style="background:var(--border)"></div>
+        <div class="toggle-th" id="tog-th"></div>
+      </div>
+    </div>
+    <div style="padding:10px 0">
+      <div style="font-size:13px;color:var(--charcoal);font-weight:500">Export my data</div>
+      <div class="muted" style="font-size:11px;margin-top:2px">Download all sessions &amp; prayers as a backup</div>
+    </div>
+    <button class="btn btn-outline btn-full" style="margin-bottom:4px" onclick="exportData()">Export Backup</button>
+    <hr class="divider">
+    <button class="btn-ghost" style="color:var(--rose);font-size:12px" onclick="confirmReset()">Reset all data</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav" style="display:none">
+  <button class="nav-btn active" id="nav-home" onclick="goTo('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12L12 3l9 9M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="nav-label">Home</span>
+  </button>
+  <button class="nav-btn" id="nav-prayers" onclick="goTo('prayers')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+    <span class="nav-label">Prayers</span>
+  </button>
+  <button class="nav-btn" id="nav-streak" onclick="goTo('streak')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="nav-label">Streak</span>
+  </button>
+  <button class="nav-btn" id="nav-profile" onclick="goTo('profile')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" stroke-linecap="round"/></svg>
+    <span class="nav-label">Profile</span>
+  </button>
+</nav>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-title" id="m-title"></div>
+    <p class="body-text" id="m-body" style="margin-bottom:22px;color:var(--muted)"></p>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-outline btn-full" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-charcoal btn-full" id="m-confirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const RANDOM_PROMPTS=["What's something you've been carrying quietly this week?","Is there something you've wanted to pray about together but haven't yet?","What emotion has been most present for you lately?","What area of your life feels like it needs God's touch right now?","What's been heavy on your heart this season?","What would feel like relief to hand over to God together today?","Where have you been leaning on your own strength instead of His?","What has God been whispering to you that you haven't acted on?","What part of your marriage do you want to bring before Him today?","What dream or worry has been showing up in your mind this week?"];
+
+const DEVOS={finances:{title:"Faithful Stewards Together",verse:"Honor the Lord with your wealth and with the firstfruits of all your produce.",ref:"Proverbs 3:9",body:"Money has a way of revealing what we truly value. For many couples, finances become a place of tension — not because of numbers, but because of different stories, fears, and hopes living beneath every budget conversation.\n\nGod does not call you to financial perfection, but to faithful stewardship — handling what He has given you together with honesty, generosity, and trust. When money becomes a shared mission rather than a scoreboard, it loses its power to divide you.\n\nToday, bring your finances before Him as a team. What would it look like to manage your resources as if they truly belonged to God?",reflect:"What unspoken belief or fear about money did you bring into this marriage, and have you ever fully shared it with each other?",closing:"Keep your life free from love of money and be content with what you have, for He has said, 'I will never leave you nor forsake you.'",closingRef:"Hebrews 13:5"},trust:{title:"The Courage to Be Known",verse:"Trust in the Lord with all your heart, and do not lean on your own understanding.",ref:"Proverbs 3:5",body:"Trust is not built in grand moments — it is built in the small, repeated choice to believe the best about each other. Every time you choose honesty over guardedness, every time you stay when it would be easier to withdraw, trust deepens.\n\nGod modeled this for us in Christ — a love that held nothing back. He invites you both to mirror that in your marriage.\n\nWhere there are cracks in the foundation, He is the God who restores. Bring those places to Him together today.",reflect:"What is one area of your heart you have kept partially closed off, and what has made it hard to fully open?",closing:"Above all, keep loving one another earnestly, since love covers a multitude of sins.",closingRef:"1 Peter 4:8"},communication:{title:"Words That Build and Heal",verse:"Let your speech always be gracious, seasoned with salt.",ref:"Colossians 4:6",body:"Every conversation between you is an opportunity — to build or to wound, to connect or to distance. The tongue is small, but it shapes the entire atmosphere of a home.\n\nGracious communication is not about a conflict-free marriage. It is about learning to fight for each other instead of against each other — choosing curiosity over defensiveness.\n\nAsk God today to guard your mouths and soften your hearts — not just in the hard moments, but in the everyday ones too.",reflect:"When do you find it hardest to communicate well with me — and what do you wish I understood about how you receive words?",closing:"Let no corrupting talk come out of your mouths, but only such as is good for building up.",closingRef:"Ephesians 4:29"},forgiveness:{title:"The Freedom of Letting Go",verse:"Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you.",ref:"Ephesians 4:32",body:"Forgiveness in marriage is not a single event — it is a practice. The daily decision to not let yesterday's wound define today's relationship.\n\nGod's forgiveness toward us is the model and the power source. When we grasp how deeply we have been forgiven, it loosens our grip on the offenses we hold against others.\n\nSome things take time. But the direction matters. Ask Him to give you both the grace to keep moving toward each other.",reflect:"Is there something between us — big or small — that has been forgiven in words but still lingers in how we relate to each other?",closing:"And whenever you stand praying, forgive, if you have anything against anyone.",closingRef:"Mark 11:25"},intimacy:{title:"To Be Fully Known",verse:"Therefore a man shall leave his father and his mother and hold fast to his wife, and they shall become one flesh.",ref:"Genesis 2:24",body:"God designed marriage to be the one human relationship where you are fully seen and fully loved — not despite your flaws, but alongside them.\n\nIn a world constantly competing for your attention, intimacy requires intention. It asks you to put down the phone, slow down, and actually turn toward each other.\n\nAsk God today to show you where you have been turning away — and give you the courage to turn back.",reflect:"What makes you feel most connected to me — not just physically, but emotionally and spiritually — and are we making enough room for that?",closing:"Beloved, let us love one another, for love is from God.",closingRef:"1 John 4:7"},purpose:{title:"A Marriage on Mission",verse:"For we are his workmanship, created in Christ Jesus for good works.",ref:"Ephesians 2:10",body:"God did not bring you together by accident. Your marriage is not just a personal relationship — it is a platform for something larger than yourselves.\n\nSome couples are called to open their home. Others to pour into younger couples, or create something together that only they could build. The shape of your shared mission is uniquely yours.\n\nDo not let the busyness of life crowd out the question: what are we here for, together?",reflect:"What do you think God uniquely created our marriage to do or offer the world — and are we actually doing it?",closing:"Commit your way to the Lord; trust in him, and he will act.",closingRef:"Psalm 37:5"},grief:{title:"Held Together in the Hard",verse:"He heals the brokenhearted and binds up their wounds.",ref:"Psalm 147:3",body:"Grief does not always look like crying. Sometimes it looks like going quiet, pulling away, or staying busy so you do not have to feel it.\n\nGod is not distant from your pain. He is the God who wept at a grave. He placed someone beside you to grieve with you, not just near you.\n\nOne of the most sacred things a couple can do is learn to mourn together — not to fix each other, but to stay.",reflect:"What are you carrying right now that is heavy — and have you let me fully into it, or have you been protecting me from it?",closing:"The Lord is close to the brokenhearted and saves those who are crushed in spirit.",closingRef:"Psalm 34:18"},joy:{title:"Choosing Delight Together",verse:"This is the day that the Lord has made; let us rejoice and be glad in it.",ref:"Psalm 118:24",body:"Joy is one of the most underrated spiritual disciplines in a marriage. In seasons of pressure and responsibility, it is easy to forget to delight in each other.\n\nBut joy is not just an emotion that happens to you. It is a choice — the decision to notice what is good, to celebrate small things.\n\nGod built gladness into the design of marriage from the very beginning. He loves your joy. Ask Him to open your eyes to reasons for it.",reflect:"When was the last time we were truly light and happy together — what were we doing, and how do we make more space for that?",closing:"Rejoice in the Lord always; again I will say, rejoice.",closingRef:"Philippians 4:4"},default:{title:"Drawing Near Together",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Every season of marriage holds something worth bringing before God. Whether you are in abundance or challenge, clarity or confusion, He is the constant — the one who knows both of you fully and loves you completely.\n\nComing to Him together as a couple is one of the most powerful things you can do — bringing your shared life, worries, and hopes to His feet.\n\nToday, whatever brought you here, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you right now that you have not yet brought before God together as a couple?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"}};
+
+const QS={finances:["What did you learn about money growing up that you are still carrying into our home today?","Are there any financial worries you have been holding quietly that I should know about?","What does financial security feel like to you — and do you feel like we have it right now?","How do you think God is calling us to be more generous in this season?","What is one financial habit you want us to build together this year?"],trust:["Is there a moment where I broke your trust that I may not even know about?","What would help you feel safer bringing hard things to me?","Where in our marriage does trust come most naturally, and where is it still being built?","Do you trust that I have your best interest at heart, even when we disagree?","What is one thing I could do that would make you feel more secure in our marriage?"],communication:["Is there a conversation we have been avoiding that we need to finally have?","When do you feel most heard by me — and when do you feel most unheard?","How do you prefer to work through conflict — and am I honoring that?","When you go quiet during an argument, what is usually happening inside you?","Is there something you have been trying to tell me that I have not been fully hearing?"],forgiveness:["Is there something between us that has been forgiven in words but still lingers underneath?","What does it feel like when you are holding onto something — and what helps you let it go?","What do you need most from me when you are in a hard season of forgiving?","Do you feel like we move toward each other or away from each other after conflict?","Is there a past wound that still affects how you receive love from me?"],intimacy:["What makes you feel most desired by me — and do I do that enough?","Is there a part of yourself you still feel you cannot fully show me?","How can I better pursue you — what does that look like to you specifically?","Do you feel like we make enough time for real closeness, or has life crowded it out?","When do you feel most close to me — what are we usually doing?"],purpose:["Do you feel like our marriage has a shared mission? What do you think it is?","What would you attempt together if you knew you could not fail?","Where do you feel most alive, and how can I help protect that in your schedule?","Are there people in our lives we are meant to pour into more intentionally?","What would our marriage look like in 10 years if we were fully living in our purpose?"],grief:["Is there something you are grieving right now that I may not fully know about?","How do you process pain best — and am I helping or getting in the way of that?","What do you need most from me when you are hurting — presence, words, or space?","Do you ever feel like you have to grieve alone to protect me from it?","What would it look like for us to grieve together better?"],joy:["What is something simple that brings you deep joy that we do not make enough room for?","What is one thing we used to do early in our relationship that you miss?","What makes you laugh — really laugh — and do I know that about you well enough?","How do you feel about the ratio of fun to serious in our marriage right now?","What would your dream day together look like — start to finish?"],default:["What is one thing God has been teaching you recently that you have not shared with me yet?","What fear do you carry that you rarely talk about?","In what area of our marriage do you feel God calling us to grow together this season?","When do you feel most connected to me — what are we usually doing?","What is one dream you have for our life together that we have not yet talked about seriously?"]};
+
+const AI_QS={finances:["If money were no object, how would you want us to be generous together?","What financial decision are you most proud of us making as a couple?","What does financial faithfulness look like to you practically, day to day?"],trust:["What small thing do I do consistently that tells you I am trustworthy?","What would it mean to you to feel completely safe with me?","Is there a moment from our marriage you look back on and think — that was us at our best?"],communication:["What is the most loving thing I can do to show you I am really listening?","When you feel most understood by me, what am I usually doing differently?","Is there a way I respond that quietly shuts the conversation down?"],forgiveness:["What has forgiving me taught you about yourself?","How do you know when you have truly released something and moved on?","Is there a pattern in how we hurt each other that we have never named out loud?"],intimacy:["What is one thing about me that still surprises you?","How do you feel most loved by me — in what language does my love land best?","What does a truly connected day together feel like to you?"],purpose:["If our marriage had a mission statement, what would it be?","How do you want people to have been impacted by knowing us as a couple?","Is there something you sense God wants to do through our marriage that feels too big to say out loud?"],grief:["Is there something you wish I had said during a hard season that I never did?","What has loss taught you about what actually matters?","How can I make it easier for you to let me into your pain?"],joy:["What is the most fun we have ever had together?","What small thing do I do that quietly makes your day better?","What would your ideal weekend together look like with no obligations?"],default:["What is a question you have always wanted me to ask you but never have?","What is something about our marriage that you are genuinely grateful for right now?","How has knowing me changed you — for better or worse?"]};
+
+let S={profile:{p1:'',p2:'',ann:''},prefs:{personalize:false},sessions:[],streak:{cur:0,best:0,lastDate:''},totalQ:0};
+function loadS(){try{const d=localStorage.getItem('ct_v2');if(d)S=JSON.parse(d);}catch(e){}}
+function saveS(){try{localStorage.setItem('ct_v2',JSON.stringify(S));}catch(e){}}
+
+let cTopic='',cQs=[],cQIdx=0,inSession=false;
+
+function matchKey(t,obj){const tl=t.toLowerCase();return Object.keys(obj).find(k=>k!=='default'&&tl.includes(k))||null;}
+function getFallbackDevo(t){const k=matchKey(t,DEVOS);return DEVOS[k]||DEVOS.default;}
+function getQs(t){const k=matchKey(t,QS);const pool=[...(QS[k]||QS.default)];return pool.sort(()=>Math.random()-0.5).slice(0,5);}
+function getAIQ(t){const k=matchKey(t,AI_QS);const pool=AI_QS[k]||AI_QS.default;return pool[Math.floor(Math.random()*pool.length)];}
+
+function goTo(name){
+  document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const sc=document.getElementById('screen-'+name);
+  sc.style.display='block';sc.classList.remove('active');void sc.offsetWidth;sc.classList.add('active');
+  const nb=document.getElementById('nav-'+name);if(nb)nb.classList.add('active');
+  if(name==='home')renderHome();
+  if(name==='prayers')renderPrayers();
+  if(name==='streak')renderStreak();
+  if(name==='profile')renderProfile();
+}
+
+function completeSetup(){
+  const p1=document.getElementById('setup-p1').value.trim();
+  const p2=document.getElementById('setup-p2').value.trim();
+  if(!p1||!p2){alert('Please enter both names to begin.');return;}
+  S.profile={p1,p2,ann:''};saveS();
+  document.getElementById('main-nav').style.display='flex';
+  goTo('home');
+}
+
+function setRandomPrompt(){
+  document.getElementById('random-prompt').textContent=RANDOM_PROMPTS[Math.floor(Math.random()*RANDOM_PROMPTS.length)];
+}
+
+function renderHome(){
+  const h=new Date().getHours();
+  document.getElementById('greet-sub').textContent=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  const p=S.profile;
+  if(p.p1&&p.p2){
+    document.getElementById('greet-names').textContent=p.p1+' & '+p.p2;
+    document.getElementById('home-avatars').innerHTML=
+      `<div class="avatar av1" style="width:40px;height:40px;font-size:18px;margin-right:-6px;z-index:2;position:relative;box-shadow:2px 0 6px rgba(0,0,0,0.08)">${p.p1[0].toUpperCase()}</div>`+
+      `<div class="avatar av2" style="width:40px;height:40px;font-size:18px">${p.p2[0].toUpperCase()}</div>`;
+  }
+  document.getElementById('h-streak').textContent=S.streak.cur;
+  document.getElementById('h-sessions').textContent=S.sessions.length;
+  setRandomPrompt();
+  if(S.sessions.length){
+    const last=S.sessions[S.sessions.length-1];
+    document.getElementById('last-card').style.display='block';
+    document.getElementById('last-content').innerHTML=
+      `<div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--charcoal);margin-bottom:4px;text-transform:capitalize">${last.topic}</div>`+
+      `<div class="muted">${new Date(last.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>`+
+      (last.note?`<p class="body-text" style="margin-top:8px;font-style:italic;font-size:13px">"${last.note.slice(0,100)}${last.note.length>100?'...':''}"</p>`:'');
+  }
+  const logged=S.sessions.filter(s=>s.note);
+  if(logged.length){
+    document.getElementById('prayer-preview').style.display='block';
+    document.getElementById('prayer-preview-list').innerHTML=logged.slice(-3).reverse().map(s=>
+      `<div style="padding:8px 0;border-bottom:1px solid var(--border)">`+
+      `<div class="muted">${new Date(s.date).toLocaleDateString()}</div>`+
+      `<div style="font-size:13px;color:var(--charcoal-light);margin-top:3px;font-style:italic">"${s.note.slice(0,80)}${s.note.length>80?'...':''}"</div></div>`
+    ).join('');
+  }
+}
+
+function pickTopic(t){document.getElementById('topicInput').value=t;startSession(t);}
+function handleStart(){const v=document.getElementById('topicInput').value.trim();if(v)startSession(v);}
+
+async function startSession(topic){
+  if(!topic)topic=document.getElementById('topicInput').value.trim();
+  if(!topic)return;
+  cTopic=topic;cQs=getQs(topic);cQIdx=0;inSession=true;
+  document.getElementById('sess-title').textContent=topic;
+  ['step-devo','step-game','step-wrap'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('sess-loading').style.display='block';
+  goTo('session');window.scrollTo(0,0);
+  await generateDevo(topic);
+}
+
+async function generateDevo(topic){
+  const p=S.profile;
+  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
+  const prompt=`You are a warm, pastoral devotional writer for married Christian couples. ${nameCtx}Write a short devotional for the topic: "${topic}".
+
+Respond ONLY with valid JSON, no markdown:
+{"title":"devotional title 5-8 words","verse":"full Bible verse text","ref":"Book Chapter:Verse","body":"2-3 warm paragraphs 120-150 words total, separate with \\n\\n","reflect":"one open-ended intimate reflection question","closing":"short closing blessing verse different from main","closingRef":"Book Chapter:Verse"}`;
+
+  try{
+    const res=await fetch('/api/devotional',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({prompt})
+    });
+    if(!res.ok)throw new Error('Server error '+res.status);
+    const data=await res.json();
+    const raw=data.content[0].text.replace(/```json|```/g,'').trim();
+    renderDevo(JSON.parse(raw));
+  }catch(e){
+    console.error(e);
+    renderDevo(getFallbackDevo(topic));
+  }
+}
+
+function renderDevo(d){
+  document.getElementById('sess-loading').style.display='none';
+  document.getElementById('close-verse').textContent='"'+(d.closing||'May the God of hope fill you with all joy and peace.')+'"';
+  document.getElementById('close-ref').textContent=d.closingRef||'Romans 15:13';
+  const p=S.profile;
+  const badge=S.prefs.personalize&&p.p1&&p.p2?`<div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:12px;letter-spacing:0.04em">✦ For ${p.p1} & ${p.p2}</div>`:'';
+  document.getElementById('devo-inner').innerHTML=
+    badge+
+    `<div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:14px;line-height:1.2">${d.title}</div>`+
+    `<div class="verse-block"><div class="verse-text">"${d.verse}"</div><div class="verse-ref">${d.ref}</div></div>`+
+    `<div class="body-text" style="margin:14px 0">${(d.body||'').replace(/\n\n/g,'</p><p class="body-text" style="margin-top:12px">').replace(/\n/g,'<br>')}</div>`+
+    `<div style="background:var(--sage-pale);border:1px solid var(--sage-border);border-radius:16px;padding:16px 18px">`+
+    `<div class="overline" style="color:var(--sage);margin-bottom:8px">Reflect Together</div>`+
+    `<div style="font-size:15px;font-style:italic;color:#2d4a31;line-height:1.65;font-family:'Cormorant Garamond',serif">${d.reflect}</div></div>`;
+  document.getElementById('step-devo').style.display='block';
+}
+
+function goToGame(){
+  document.getElementById('step-devo').style.display='none';
+  document.getElementById('step-game').style.display='block';
+  document.getElementById('convo-card').innerHTML='<div class="convo-ph">Tap "Next →" to begin</div>';
+  updateQBar();window.scrollTo(0,0);
+}
+function doNextQ(){
+  if(cQIdx>=cQs.length){goToWrap();return;}
+  let q=cQs[cQIdx];
+  if(S.prefs.personalize&&S.profile.p1&&S.profile.p2)
+    q=q.replace(/\bme\b/gi,S.profile.p1).replace(/\byou\b/gi,S.profile.p2);
+  showQ(q);cQIdx++;S.totalQ++;updateQBar();
+}
+function doAIQ(){showQ(getAIQ(cTopic));cQIdx++;S.totalQ++;updateQBar();}
+function showQ(q){
+  const c=document.getElementById('convo-card');
+  c.style.opacity='0';c.style.transform='translateY(10px)';
+  setTimeout(()=>{c.innerHTML='<div class="convo-q">'+q+'</div>';c.style.transition='all 0.28s ease';c.style.opacity='1';c.style.transform='translateY(0)';},220);
+}
+function updateQBar(){
+  document.getElementById('q-bar').style.width=Math.min(100,Math.round((cQIdx/5)*100))+'%';
+  document.getElementById('q-num').textContent=cQIdx+' / 5';
+}
+function goToWrap(){
+  document.getElementById('step-game').style.display='none';
+  document.getElementById('step-wrap').style.display='block';
+  document.getElementById('prayer-text').value='';
+  window.scrollTo(0,0);
+}
+function finishSession(save){
+  const note=save?document.getElementById('prayer-text').value.trim():'';
+  const today=new Date().toISOString().split('T')[0];
+  S.sessions.push({date:new Date().toISOString(),topic:cTopic,note,qCount:cQIdx});
+  const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
+  if(S.streak.lastDate===today){}
+  else if(S.streak.lastDate===yesterday)S.streak.cur++;
+  else S.streak.cur=1;
+  if(S.streak.cur>S.streak.best)S.streak.best=S.streak.cur;
+  S.streak.lastDate=today;
+  saveS();inSession=false;goTo('home');
+}
+
+function renderPrayers(){
+  const logged=S.sessions.filter(s=>s.note).reverse();
+  const el=document.getElementById('prayers-body');
+  if(!logged.length){el.innerHTML=`<div class="empty-state"><div style="font-size:44px;margin-bottom:14px">🙏</div><p style="font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;margin-bottom:8px">No prayers logged yet</p><p class="muted" style="font-size:13px">Finish a session and save your prayer note — it will appear here.</p></div>`;return;}
+  el.innerHTML=logged.map(s=>`<div class="card-sm"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div class="tag tag-gold" style="text-transform:capitalize">${s.topic}</div><div class="muted">${new Date(s.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div></div><div class="body-text" style="font-style:italic;font-size:13px">"${s.note}"</div></div>`).join('');
+}
+
+function renderStreak(){
+  document.getElementById('s-cur').textContent=S.streak.cur;
+  document.getElementById('s-best').textContent=S.streak.best;
+  document.getElementById('s-tsess').textContent=S.sessions.length;
+  document.getElementById('s-tpray').textContent=S.sessions.filter(s=>s.note).length;
+  document.getElementById('s-ttop').textContent=new Set(S.sessions.map(s=>s.topic.toLowerCase())).size;
+  document.getElementById('s-tq').textContent=S.sessions.reduce((a,s)=>a+(s.qCount||0),0);
+  const dates=new Set(S.sessions.map(s=>s.date.split('T')[0]));
+  const today=new Date().toISOString().split('T')[0];
+  let cal='';
+  for(let i=13;i>=0;i--){
+    const d=new Date(Date.now()-i*86400000);
+    const ds=d.toISOString().split('T')[0];
+    cal+=`<div class="day-dot${dates.has(ds)?' done':ds===today?' today':''}">${d.toLocaleDateString('en-US',{weekday:'narrow'})}</div>`;
+  }
+  document.getElementById('s-cal').innerHTML=cal;
+}
+
+function renderProfile(){
+  const p=S.profile;
+  if(p.p1&&p.p2){
+    document.getElementById('profile-form').style.display='none';
+    document.getElementById('profile-view').style.display='block';
+    document.getElementById('pv-sub').textContent=S.sessions.length?'Together since your first session':'No sessions yet — start one on the Home tab!';
+    document.getElementById('pv-avatars').innerHTML=
+      `<div class="avatar av1" style="width:52px;height:52px;font-size:22px">${p.p1[0].toUpperCase()}</div>`+
+      `<div class="avatar av2" style="width:52px;height:52px;font-size:22px;margin-left:-8px">${p.p2[0].toUpperCase()}</div>`+
+      `<div style="margin-left:12px"><div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--charcoal)">${p.p1} & ${p.p2}</div></div>`;
+  }else{
+    document.getElementById('profile-form').style.display='block';
+    document.getElementById('profile-view').style.display='none';
+  }
+  const on=S.prefs.personalize;
+  document.getElementById('tog-bg').style.background=on?'var(--gold)':'var(--border)';
+  document.getElementById('tog-th').style.transform=on?'translateX(22px)':'translateX(0)';
+}
+function editProf(){
+  document.getElementById('p1').value=S.profile.p1;
+  document.getElementById('p2').value=S.profile.p2;
+  document.getElementById('p-ann').value=S.profile.ann||'';
+  document.getElementById('profile-form').style.display='block';
+  document.getElementById('profile-view').style.display='none';
+}
+function saveProf(){
+  const p1=document.getElementById('p1').value.trim();
+  const p2=document.getElementById('p2').value.trim();
+  if(!p1||!p2){alert('Please enter both names.');return;}
+  S.profile={p1,p2,ann:document.getElementById('p-ann').value};
+  saveS();renderProfile();renderHome();
+}
+function togglePref(key){
+  if(key==='personalize'){
+    S.prefs.personalize=!S.prefs.personalize;saveS();
+    const on=S.prefs.personalize;
+    document.getElementById('tog-bg').style.background=on?'var(--gold)':'var(--border)';
+    document.getElementById('tog-th').style.transform=on?'translateX(22px)':'translateX(0)';
+  }
+}
+function exportData(){
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='covenant-two-backup.json';a.click();
+}
+function confirmLeave(){
+  if(!inSession){goTo('home');return;}
+  openModal('Leave session?','Your current session progress will be lost.',()=>{inSession=false;closeModal();goTo('home');});
+}
+function confirmReset(){
+  openModal('Reset all data?','This permanently deletes your profile, sessions, prayers, and streak.',()=>{
+    localStorage.removeItem('ct_v2');
+    S={profile:{p1:'',p2:'',ann:''},prefs:{personalize:false},sessions:[],streak:{cur:0,best:0,lastDate:''},totalQ:0};
+    saveS();closeModal();
+    document.getElementById('main-nav').style.display='none';
+    document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
+    document.getElementById('screen-setup').style.display='block';
+    document.getElementById('screen-setup').classList.add('active');
+  });
+}
+function openModal(title,body,onConfirm){
+  document.getElementById('m-title').textContent=title;
+  document.getElementById('m-body').textContent=body;
+  document.getElementById('m-confirm').onclick=onConfirm;
+  document.getElementById('modal-bg').classList.add('open');
+}
+function closeModal(e){
+  if(e&&e.target!==document.getElementById('modal-bg'))return;
+  document.getElementById('modal-bg').classList.remove('open');
+}
+
+loadS();
+if(S.profile.p1&&S.profile.p2){
+  document.getElementById('screen-setup').style.display='none';
+  document.getElementById('main-nav').style.display='flex';
+  goTo('home');
+}else{
+  document.getElementById('screen-setup').style.display='block';
+  document.getElementById('screen-setup').classList.add('active');
+}
+document.getElementById('topicInput').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();handleStart();}});
+</script>
+</body>
+</html>

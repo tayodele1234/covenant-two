@@ -454,6 +454,22 @@ const COUPLE_TOPICS=[
   {t:'identity in Christ',d:'Who you are in Him together',i:SVG.user},
   {t:'conflict',d:'Fighting for each other',i:SVG.wave},
   {t:'service',d:'Giving back together',i:SVG.heart},
+  {t:'friendship in marriage',d:'Staying best friends',i:SVG.smile},
+  {t:'listening well',d:'Truly hearing each other',i:SVG.chat},
+  {t:'spiritual growth',d:'Growing together in faith',i:SVG.cross},
+  {t:'hope',d:'Holding onto what God promised',i:SVG.star},
+  {t:'boundaries',d:'Protecting your marriage',i:SVG.shield},
+  {t:'fun and laughter',d:'Not taking life too seriously',i:SVG.smile},
+  {t:'legacy',d:'What you want to leave behind',i:SVG.anchor},
+  {t:'in-laws and family',d:'Navigating extended family',i:SVG.people},
+  {t:'dreams and goals',d:'What you are building together',i:SVG.star},
+  {t:'disappointment',d:'When life doesn\'t go as planned',i:SVG.wave},
+  {t:'vulnerability',d:'Opening up fully to each other',i:SVG.heart},
+  {t:'patience',d:'Growing in grace toward each other',i:SVG.moon},
+  {t:'worship together',d:'Encountering God as one',i:SVG.cross},
+  {t:'seasons of change',d:'Navigating big life transitions',i:SVG.clock},
+  {t:'health and wellness',d:'Caring for your bodies together',i:SVG.shield},
+  {t:'comparison and envy',d:'Contentment in your own story',i:SVG.eye},
 ];
 
 const HER_TOPICS=[
@@ -469,6 +485,24 @@ const HER_TOPICS=[
   {t:'rest and peace',d:'Sabbath for your soul',i:SVG.moon},
   {t:'trusting God with my marriage',d:'Surrendering what you can\'t control',i:SVG.anchor},
   {t:'being a godly wife',d:'Grace, strength, and love',i:SVG.heart},
+  {t:'my purpose beyond home',d:'Who God made you to be',i:SVG.star},
+  {t:'friendships and community',d:'You need more than just him',i:SVG.people},
+  {t:'healing from the past',d:'What you carry from before',i:SVG.shield},
+  {t:'comparison and insecurity',d:'Breaking free from measuring yourself',i:SVG.eye},
+  {t:'motherhood',d:'The weight and wonder of it',i:SVG.home},
+  {t:'speaking up',d:'Using your voice with courage',i:SVG.chat},
+  {t:'hope when things are hard',d:'Holding on when it\'s heavy',i:SVG.anchor},
+  {t:'feeling behind in life',d:'God\'s timeline is not the world\'s',i:SVG.clock},
+  {t:'boundaries',d:'Protecting your peace and energy',i:SVG.shield},
+  {t:'my relationship with God',d:'Not just religion — real intimacy',i:SVG.cross},
+  {t:'disappointment with God',d:'When prayers feel unanswered',i:SVG.wave},
+  {t:'self-care without guilt',d:'You can\'t pour from empty',i:SVG.moon},
+  {t:'my body and self-image',d:'Seeing yourself through God\'s eyes',i:SVG.heart},
+  {t:'emotional health',d:'Processing what you feel',i:SVG.smile},
+  {t:'dreams I\'ve put aside',d:'What you stopped believing for',i:SVG.star},
+  {t:'trusting my instincts',d:'God speaks through you too',i:SVG.anchor},
+  {t:'gratitude',d:'Finding beauty in ordinary days',i:SVG.clock},
+  {t:'letting go of control',d:'Resting when you can\'t fix it',i:SVG.shield},
 ];
 
 const HIM_TOPICS=[
@@ -484,6 +518,24 @@ const HIM_TOPICS=[
   {t:'forgiveness',d:'Letting go and moving forward',i:SVG.shield},
   {t:'purpose and calling',d:'Finding your mission from God',i:SVG.star},
   {t:'rest and renewal',d:'Permission to stop and breathe',i:SVG.moon},
+  {t:'friendship and brotherhood',d:'You need more than just her',i:SVG.people},
+  {t:'pride and humility',d:'The hardest battle you fight',i:SVG.anchor},
+  {t:'my relationship with God',d:'Not just religion — real intimacy',i:SVG.cross},
+  {t:'communication with my wife',d:'Saying what actually matters',i:SVG.chat},
+  {t:'legacy and fatherhood',d:'What you want to pass down',i:SVG.anchor},
+  {t:'disappointment',d:'When life didn\'t go as planned',i:SVG.wave},
+  {t:'financial pressure',d:'Stewarding well under stress',i:SVG.coin},
+  {t:'comparison and competition',d:'Freeing yourself from keeping score',i:SVG.eye},
+  {t:'being known',d:'Letting someone see the real you',i:SVG.heart},
+  {t:'spiritual discipline',d:'Building habits that shape you',i:SVG.cross},
+  {t:'dealing with failure',d:'Grace for when you fall short',i:SVG.shield},
+  {t:'physical health',d:'Caring for the body God gave you',i:SVG.star},
+  {t:'my past and how it shapes me',d:'What you carry from before',i:SVG.wave},
+  {t:'generosity',d:'Giving from strength not fear',i:SVG.heart},
+  {t:'loneliness',d:'When no one really knows you',i:SVG.smile},
+  {t:'prayer',d:'Honest conversation with God',i:SVG.cross},
+  {t:'trusting God with my future',d:'Releasing what you can\'t control',i:SVG.anchor},
+  {t:'gratitude',d:'Counting what you\'ve been given',i:SVG.clock},
 ];
 
 const ALL_DEEPER=[
@@ -681,7 +733,7 @@ function switchMode(m){
   if(S.mode===m)return;
   // Remember last solo mode so user can return to it
   if(S.mode==='her'||S.mode==='him')S.lastSoloMode=S.mode;
-  S.mode=m;saveS();renderHome();
+  S.mode=m;shownTopics=[];saveS();renderHome();
 }
 
 function updateToggle(){
@@ -804,9 +856,19 @@ function getTopicPool(){
   });
 }
 
+let shownTopics=[];
+
 function refreshSuggested(){
   const pool=getTopicPool();
-  const shown=[...pool].sort(()=>Math.random()-0.5).slice(0,4);
+  // Filter out recently shown topics, then pick 4 from remainder
+  const unseen=pool.filter(x=>!shownTopics.includes(x.t));
+  // If less than 4 unseen, reset the shown list
+  if(unseen.length<4)shownTopics=[];
+  const available=pool.filter(x=>!shownTopics.includes(x.t));
+  const shuffled=[...available].sort(()=>Math.random()-0.5);
+  const shown=shuffled.slice(0,4);
+  // Track what was shown so next refresh feels fresh
+  shownTopics=[...shownTopics,...shown.map(x=>x.t)];
   const color=modeColor();
   const hoverBg=S.mode==='her'?'var(--lavender-pale)':S.mode==='him'?'var(--steel-pale)':'var(--gold-pale)';
   const hoverBorder=S.mode==='her'?'var(--lavender-border)':S.mode==='him'?'var(--steel-border)':'var(--gold)';

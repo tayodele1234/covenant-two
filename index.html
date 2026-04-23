@@ -238,6 +238,7 @@ textarea.input{resize:none;line-height:1.7}
     </div>
     <div id="suggested-topics" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
   </div>
+  <div id="solo-return-nudge" style="display:none;margin:-8px 0 14px;padding:0 2px"></div>
   <div style="margin-bottom:16px" id="deeper-section">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
       <div class="overline" style="color:var(--rose)">Deeper Waters</div>
@@ -504,6 +505,7 @@ const FALLBACK_QS=["What is one thing God has been teaching you that you haven't
 ============================================================ */
 let S={
   mode:'couple',
+  lastSoloMode:null,
   profile:{p1:'',p2:'',herName:'',himName:''},
   quiz:{couple:{},her:{},him:{}},
   prefs:{personalize:false},
@@ -562,13 +564,29 @@ function renderCQ(){
   const q=CQ[cqIdx];
   document.getElementById('cq-label').textContent=`Question ${cqIdx+1} of ${CQ.length}`;
   document.getElementById('cq-q').textContent=q.q;
-  document.getElementById('cq-hint').textContent=q.hint||'';
+  document.getElementById('cq-hint').textContent=q.hint||(q.multi?`Select up to ${q.max||'all that apply'}`:'');
   document.getElementById('cq-dots').innerHTML=CQ.map((_,i)=>`<div class="quiz-dot" style="background:${i<=cqIdx?'var(--gold)':'var(--border)'}"></div>`).join('');
   const cur=cqAns[q.key]||(q.multi?[]:'');
+  const atMax=q.multi&&q.max&&cur.length>=q.max;
   document.getElementById('cq-opts').innerHTML=q.opts.map(o=>{
     const sel=q.multi?cur.includes(o):cur===o;
-    return `<button class="quiz-option${sel?' sel-couple':''}" onclick="cqSel('${o.replace(/'/g,"\\'")}')"><div class="quiz-check" style="${sel?'background:var(--gold);border-color:var(--gold)':''}">${sel?chk():''}</div>${o}</button>`;
+    const disabled=q.multi&&atMax&&!sel;
+    return `<button class="quiz-option${sel?' sel-couple':''}" onclick="cqSel('${o.replace(/'/g,"\\'")}') " style="${disabled?'opacity:0.4;cursor:not-allowed':''}">
+      <div class="quiz-check" style="${sel?'background:var(--gold);border-color:var(--gold)':''}${q.multi&&!sel?';border-radius:4px':''}">
+        ${sel?(q.multi?chk():chk()):''}
+      </div>
+      <span style="flex:1">${o}</span>
+      ${q.multi&&sel?`<span style="font-size:11px;color:var(--gold);font-weight:700">✓</span>`:''}
+    </button>`;
   }).join('');
+  if(q.multi&&q.max){
+    const remaining=q.max-cur.length;
+    const counter=document.createElement('div');
+    counter.style.cssText='font-size:12px;font-weight:600;color:var(--muted);text-align:right;margin-top:-4px;margin-bottom:8px';
+    counter.textContent=remaining>0?`${remaining} more to go`:`${q.max} selected ✓`;
+    const opts=document.getElementById('cq-opts');
+    opts.insertAdjacentElement('afterbegin',counter);
+  }
   document.getElementById('cq-back').style.visibility=cqIdx===0?'hidden':'visible';
 }
 function cqSel(val){const q=CQ[cqIdx];if(q.multi){if(!cqAns[q.key])cqAns[q.key]=[];const a=cqAns[q.key];const i=a.indexOf(val);if(i>-1)a.splice(i,1);else if(!q.max||a.length<q.max)a.push(val);}else cqAns[q.key]=val;renderCQ();}
@@ -607,14 +625,30 @@ function renderSQ(){
   document.getElementById('sq-label').textContent=`Question ${sqIdx+1} of ${qs.length}`;
   document.getElementById('sq-label').style.color=color;
   document.getElementById('sq-q').textContent=q.q;
-  document.getElementById('sq-hint').textContent=q.hint||'';
+  document.getElementById('sq-hint').textContent=q.hint||(q.multi?`Select up to ${q.max||'all that apply'}`:'');
   document.getElementById('sq-dots').innerHTML=qs.map((_,i)=>`<div class="quiz-dot" style="background:${i<=sqIdx?color:'var(--border)'}"></div>`).join('');
   document.getElementById('sq-next-btn').className='btn btn-full '+(sqGender==='her'?'btn-lavender':'btn-steel');
   const cur=sqAns[q.key]||(q.multi?[]:'');
+  const atMax=q.multi&&q.max&&cur.length>=q.max;
   document.getElementById('sq-opts').innerHTML=q.opts.map(o=>{
     const sel=q.multi?cur.includes(o):cur===o;
-    return `<button class="quiz-option${sel?' '+selClass:''}" onclick="sqSel('${o.replace(/'/g,"\\'")}')"><div class="quiz-check" style="${sel?`background:${selColor};border-color:${selColor}`:''}">${sel?chk():''}</div>${o}</button>`;
+    const disabled=q.multi&&atMax&&!sel;
+    return `<button class="quiz-option${sel?' '+selClass:''}" onclick="sqSel('${o.replace(/'/g,"\\'")}') " style="${disabled?'opacity:0.4;cursor:not-allowed':''}">
+      <div class="quiz-check" style="${sel?`background:${selColor};border-color:${selColor}`:''}${q.multi&&!sel?';border-radius:4px':''}">
+        ${sel?chk():''}
+      </div>
+      <span style="flex:1">${o}</span>
+      ${q.multi&&sel?`<span style="font-size:11px;color:${selColor};font-weight:700">✓</span>`:''}
+    </button>`;
   }).join('');
+  if(q.multi&&q.max){
+    const remaining=q.max-cur.length;
+    const counter=document.createElement('div');
+    counter.style.cssText='font-size:12px;font-weight:600;color:var(--muted);text-align:right;margin-top:-4px;margin-bottom:8px';
+    counter.textContent=remaining>0?`${remaining} more to go`:`${q.max} selected ✓`;
+    const opts=document.getElementById('sq-opts');
+    opts.insertAdjacentElement('afterbegin',counter);
+  }
 }
 function sqSel(val){const qs=sqGender==='her'?SQ_HER:SQ_HIM;const q=qs[sqIdx];if(q.multi){if(!sqAns[q.key])sqAns[q.key]=[];const a=sqAns[q.key];const i=a.indexOf(val);if(i>-1)a.splice(i,1);else if(!q.max||a.length<q.max)a.push(val);}else sqAns[q.key]=val;renderSQ();}
 function sqBack(){if(sqIdx>0){sqIdx--;renderSQ();}}
@@ -644,6 +678,10 @@ function switchMode(m){
   if(m==='couple'&&!S.onboarded.couple){beginCouple();return;}
   if(m==='her'&&!S.onboarded.her){beginSolo('her');return;}
   if(m==='him'&&!S.onboarded.him){beginSolo('him');return;}
+  // If already on this mode, do nothing
+  if(S.mode===m)return;
+  // Remember last solo mode so user can return to it
+  if(S.mode==='her'||S.mode==='him')S.lastSoloMode=S.mode;
   S.mode=m;saveS();renderHome();
 }
 
@@ -723,6 +761,18 @@ function renderHome(){
 
   // Deeper Waters — couple only
   document.getElementById('deeper-section').style.display=isSolo?'none':'block';
+  const soloExists=S.onboarded.her||S.onboarded.him;
+  const lastSolo=S.lastSoloMode||(S.onboarded.her?'her':S.onboarded.him?'him':null);
+  const nudgeEl=document.getElementById('solo-return-nudge');
+  if(m==='couple'&&soloExists&&lastSolo){
+    nudgeEl.style.display='block';
+    nudgeEl.innerHTML=`<button onclick="switchMode('${lastSolo}')" style="background:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:${lastSolo==='her'?'var(--lavender)':'var(--steel)'};display:flex;align-items:center;gap:6px;padding:0">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+      Switch back to ${lastSolo==='her'?'She & God':'He & God'} →
+    </button>`;
+  }else{
+    nudgeEl.style.display='none';
+  }
 
   refreshSuggested();
   if(!isSolo)renderDeeper();

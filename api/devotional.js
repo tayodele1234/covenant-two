@@ -7,7 +7,7 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) return res.status(500).json({ error: 'API key not configured' });
+  if (!apiKey) return res.status(500).json({ error: 'NO API KEY FOUND IN ENVIRONMENT' });
 
   try {
     const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': apiKey,
+        'x-api-key': apiKey.trim(),
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
@@ -28,11 +28,15 @@ export default async function handler(req, res) {
       }),
     });
 
-    const data = await response.json();
-    if (!response.ok) return res.status(response.status).json({ error: data });
-    return res.status(200).json(data);
+    const text = await response.text();
+    console.log('Anthropic response status:', response.status);
+    console.log('Anthropic response body:', text);
+
+    if (!response.ok) return res.status(response.status).json({ error: text });
+    return res.status(200).json(JSON.parse(text));
 
   } catch (error) {
+    console.log('Caught error:', error.message);
     return res.status(500).json({ error: error.message });
   }
 }

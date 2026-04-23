@@ -389,22 +389,22 @@ textarea.input{resize:none;min-height:110px;line-height:1.7}
 
 <script>
 const ALL_TOPICS=[
-  {topic:'trust',icon:'🤝',desc:'Building safety with each other'},
-  {topic:'communication',icon:'💬',desc:'Speaking and listening well'},
-  {topic:'forgiveness',icon:'🕊️',desc:'Releasing what you carry'},
-  {topic:'finances',icon:'💛',desc:'Stewarding what God gave you'},
-  {topic:'intimacy',icon:'❤️',desc:'Being fully known and loved'},
-  {topic:'purpose',icon:'🌿',desc:'Your shared mission together'},
-  {topic:'grief',icon:'🙏',desc:'Holding pain side by side'},
-  {topic:'joy',icon:'✨',desc:'Choosing delight together'},
-  {topic:'parenting',icon:'👨‍👩‍👧',desc:'Raising children in faith'},
-  {topic:'anxiety',icon:'🌊',desc:'Releasing worry to God'},
-  {topic:'prayer',icon:'✝️',desc:'Deepening your prayer life'},
-  {topic:'service',icon:'🤲',desc:'Giving back together'},
-  {topic:'identity',icon:'👑',desc:'Who you are in Christ'},
-  {topic:'conflict',icon:'🔥',desc:'Fighting for each other'},
-  {topic:'rest',icon:'🌙',desc:'Sabbath and renewal'},
-  {topic:'gratitude',icon:'🌻',desc:'Counting your blessings'},
+  {topic:'trust',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,desc:'Building safety with each other'},
+  {topic:'communication',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,desc:'Speaking and listening well'},
+  {topic:'forgiveness',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,desc:'Releasing what you carry'},
+  {topic:'finances',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v2M12 16v2M9 9h4.5a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3H15"/></svg>`,desc:'Stewarding what God gave you'},
+  {topic:'intimacy',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>`,desc:'Being fully known and loved'},
+  {topic:'purpose',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,desc:'Your shared mission together'},
+  {topic:'grief',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>`,desc:'Holding pain side by side'},
+  {topic:'joy',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>`,desc:'Choosing delight together'},
+  {topic:'parenting',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><circle cx="19" cy="5" r="3"/></svg>`,desc:'Raising children in faith'},
+  {topic:'anxiety',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>`,desc:'Releasing worry to God'},
+  {topic:'prayer',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>`,desc:'Deepening your prayer life'},
+  {topic:'service',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/><path d="M12 8v8M8 12h8"/></svg>`,desc:'Giving back together'},
+  {topic:'identity',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M3 21v-2a9 9 0 0118 0v2"/></svg>`,desc:'Who you are in Christ'},
+  {topic:'conflict',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`,desc:'Fighting for each other'},
+  {topic:'rest',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`,desc:'Sabbath and renewal'},
+  {topic:'gratitude',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,desc:'Counting your blessings'},
 ];
 
 let shownTopics=[];
@@ -412,8 +412,8 @@ function refreshSuggested(){
   const shuffled=[...ALL_TOPICS].sort(()=>Math.random()-0.5);
   shownTopics=shuffled.slice(0,4);
   document.getElementById('suggested-topics').innerHTML=shownTopics.map(t=>`
-    <button onclick="pickTopic('${t.topic}')" style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px 14px;text-align:left;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:6px" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
-      <span style="font-size:26px">${t.icon}</span>
+    <button onclick="pickTopic('${t.topic}')" style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:18px 16px;text-align:left;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:8px" onmouseover="this.style.borderColor='var(--gold)';this.style.background='var(--gold-pale)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--card)'">
+      <div style="color:var(--gold);display:flex">${t.icon}</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--charcoal);text-transform:capitalize">${t.topic}</div>
       <div style="font-size:13px;color:var(--muted);line-height:1.4;font-weight:500">${t.desc}</div>
     </button>`).join('');

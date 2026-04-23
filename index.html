@@ -193,6 +193,17 @@ textarea.input{resize:none;min-height:100px;line-height:1.7}
         Spark — Devotional
       </div>
       <div id="devo-inner"></div>
+      <button class="btn btn-charcoal btn-full" style="margin-top:22px" onclick="goToPrayer()">Continue to Prayer Points →</button>
+    </div>
+  </div>
+
+  <div id="step-prayer" style="display:none">
+    <div class="card">
+      <div class="tag tag-sage" style="margin-bottom:16px">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor" stroke="none"/></svg>
+        Pray Together
+      </div>
+      <div id="prayer-points-inner"></div>
       <button class="btn btn-charcoal btn-full" style="margin-top:22px" onclick="goToGame()">Continue to Connect Game →</button>
     </div>
   </div>
@@ -439,7 +450,7 @@ async function startSession(topic){
   if(!topic)return;
   cTopic=topic;cQs=[];cQIdx=0;inSession=true;
   document.getElementById('sess-title').textContent=topic;
-  ['step-devo','step-game','step-wrap'].forEach(id=>document.getElementById(id).style.display='none');
+  ['step-devo','step-prayer','step-game','step-wrap'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('loading-text').textContent='Preparing your devotional...';
   document.getElementById('sess-loading').style.display='block';
   goTo('session');window.scrollTo(0,0);
@@ -481,8 +492,60 @@ function renderDevo(d){
   document.getElementById('step-devo').style.display='block';
 }
 
-async function goToGame(){
+async function goToPrayer(){
   document.getElementById('step-devo').style.display='none';
+  document.getElementById('loading-text').textContent='Preparing your prayer points...';
+  document.getElementById('sess-loading').style.display='block';
+  await generatePrayerPoints(cTopic);
+  document.getElementById('sess-loading').style.display='none';
+  document.getElementById('step-prayer').style.display='block';
+  window.scrollTo(0,0);
+}
+
+async function generatePrayerPoints(topic){
+  const p=S.profile;
+  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
+  const prompt=`You are a pastoral prayer guide for married Christian couples. ${nameCtx}Generate 3 specific prayer points for a couple to pray together about the topic: "${topic}".
+
+Each prayer point should be a short, specific thing to pray about, with an applicable Bible verse.
+
+Respond ONLY with valid JSON, no markdown:
+{"points":[{"title":"short prayer focus (4-6 words)","prayer":"1-2 sentence prayer prompt starting with 'Lord...' or 'Father...'","verse":"short applicable Bible verse","ref":"Book Chapter:Verse"},{"title":"...","prayer":"...","verse":"...","ref":"..."},{"title":"...","prayer":"...","verse":"...","ref":"..."}]}`;
+
+  try{
+    const raw=await callAI(prompt);
+    const parsed=JSON.parse(raw);
+    renderPrayerPoints(parsed.points);
+  }catch(e){
+    console.error('Prayer points error:',e);
+    renderPrayerPoints([
+      {title:"Open hearts to each other",prayer:"Lord, give us the courage to be fully honest and vulnerable with one another in this season.",verse:"Therefore confess your sins to each other and pray for each other so that you may be healed.",ref:"James 5:16"},
+      {title:"Wisdom and guidance",prayer:"Father, grant us your wisdom as we navigate this together. Let your Word be a lamp to our feet.",verse:"If any of you lacks wisdom, let him ask God, who gives generously to all.",ref:"James 1:5"},
+      {title:"Unity in your Spirit",prayer:"Lord, bind our hearts together in Your love. May we reflect Your grace toward each other.",verse:"And above all these put on love, which binds everything together in perfect harmony.",ref:"Colossians 3:14"}
+    ]);
+  }
+}
+
+function renderPrayerPoints(points){
+  document.getElementById('prayer-points-inner').innerHTML=
+    `<div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal);margin-bottom:6px">Pray Over This Together</div>`+
+    `<p class="muted" style="margin-bottom:18px;font-size:13px">Take turns praying through each point aloud.</p>`+
+    points.map((pt,i)=>`
+      <div style="background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:16px;padding:18px;margin-bottom:12px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+          <div style="width:26px;height:26px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0">${i+1}</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--charcoal)">${pt.title}</div>
+        </div>
+        <p style="font-size:14px;color:var(--charcoal-light);line-height:1.7;font-style:italic;margin-bottom:12px">${pt.prayer}</p>
+        <div style="background:rgba(255,255,255,0.6);border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:10px 12px">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--warm-brown,#6b4c35);line-height:1.5">"${pt.verse}"</div>
+          <div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px">${pt.ref}</div>
+        </div>
+      </div>`).join('');
+}
+
+async function goToGame(){
+  document.getElementById('step-prayer').style.display='none';
   document.getElementById('loading-text').textContent='Crafting questions for you...';
   document.getElementById('sess-loading').style.display='block';
   await generateQuestions(cTopic);

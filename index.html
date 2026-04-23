@@ -163,9 +163,9 @@ textarea.input{resize:none;min-height:110px;line-height:1.7}
   <div class="card">
     <div class="overline" style="margin-bottom:4px">What's on your hearts today?</div>
     <div id="random-prompt" class="body-text" style="font-style:italic;color:var(--muted);font-size:13px;margin-bottom:14px"></div>
-    <div style="display:flex;gap:8px">
-      <input class="input" id="topicInput" placeholder="Type any topic..." maxlength="60" style="flex:1">
-      <button class="btn btn-gold" style="padding:13px 18px;flex-shrink:0" onclick="handleStart()">
+    <div style="display:flex;gap:8px;align-items:flex-end">
+      <textarea class="input" id="topicInput" placeholder="Share what's on your hearts — a word, a feeling, or a full situation..." style="flex:1;min-height:56px;max-height:140px;resize:none;overflow-y:auto;line-height:1.5;padding:14px 16px"></textarea>
+      <button class="btn btn-gold" style="padding:13px 18px;flex-shrink:0;height:56px" onclick="handleStart()">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round"/></svg>
       </button>
     </div>
@@ -249,21 +249,21 @@ textarea.input{resize:none;min-height:110px;line-height:1.7}
   </div>
   <div id="step-wrap" style="display:none">
     <div class="card" style="text-align:center">
-      <div style="font-size:40px;margin-bottom:14px">✝</div>
-      <div class="heading" style="margin-bottom:12px">Close in Prayer</div>
+      <div style="font-size:44px;margin-bottom:16px">✝</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--charcoal);margin-bottom:12px">Close in Prayer</div>
       <div class="verse-block" style="text-align:left">
         <div class="verse-text" id="close-verse">"May the God of hope fill you with all joy and peace as you trust in Him."</div>
         <div class="verse-ref" id="close-ref">Romans 15:13</div>
       </div>
-      <p class="body-text" style="margin:14px 0 0;color:var(--muted)">Take a moment together. Let one of you pray aloud over what came up today.</p>
+      <p style="font-size:16px;font-weight:500;line-height:1.7;margin:14px 0 0;color:var(--muted)">Take a moment together. Let one of you pray aloud over what came up today.</p>
     </div>
     <div class="card">
-      <div class="overline" style="margin-bottom:10px">Prayer Log</div>
-      <p class="muted" style="margin-bottom:10px;font-size:13px">What did you pray for together today?</p>
-      <textarea class="input" id="prayer-text" placeholder="Write what God put on your hearts — anything you want to remember..."></textarea>
-      <div style="display:flex;gap:10px;margin-top:14px;align-items:center">
-        <button class="btn-ghost" onclick="finishSession(false)">Skip</button>
-        <button class="btn btn-gold btn-full" onclick="finishSession(true)">Save &amp; Finish</button>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:6px">Prayer Log</div>
+      <p style="font-size:15px;font-weight:500;color:var(--muted);margin-bottom:14px">What did you pray for together today? Write it down — you'll treasure it later.</p>
+      <textarea class="input" id="prayer-text" placeholder="Write what God put on your hearts — a prayer, a breakthrough, something you want to remember..." style="min-height:130px;font-size:16px;font-weight:500;line-height:1.7"></textarea>
+      <div style="display:flex;gap:10px;margin-top:16px;align-items:center">
+        <button class="btn-ghost" onclick="finishSession(false)" style="font-size:14px;font-weight:600">Skip</button>
+        <button class="btn btn-gold btn-full" style="font-size:15px;font-weight:700" onclick="finishSession(true)">Save &amp; Finish</button>
       </div>
     </div>
   </div>
@@ -786,7 +786,9 @@ if(S.profile.p1&&S.profile.p2){
   document.getElementById('screen-setup').style.display='block';
   document.getElementById('screen-setup').classList.add('active');
 }
-document.getElementById('topicInput').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();handleStart();}});
+document.getElementById('topicInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();handleStart();}
+});
 </script>
 </body>
 </html>

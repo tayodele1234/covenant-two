@@ -497,7 +497,7 @@ const ALL_DEEPER=[
   {t:'grief and loss',l:'Grief & Loss',d:'Walking through deep pain together',bg:'linear-gradient(135deg,#1a1010,#2d1818)',ac:'#d08080',tags:['grief'],seasons:['surviving','rebuilding','struggling']},
 ];
 
-const FALLBACK_QS=["What is one thing God has been teaching you that you haven't shared yet?","What fear do you carry that you rarely talk about?","In what area do you feel God calling you to grow this season?","When do you feel most connected — what are you usually doing?","What is one dream you haven't talked about seriously yet?"];
+const FALLBACK_QS=["What are you most afraid to say out loud?","Where do you feel God pulling you right now?","What do you need more of from each other?","When did you last feel truly seen?","What would change if you fully trusted God here?"];
 
 /* ============================================================
    STORE
@@ -978,7 +978,9 @@ async function goToGame(){
   document.getElementById('loading-text').textContent=isSolo?'Preparing your reflections...':'Crafting questions for you...';
   document.getElementById('sess-loading').style.display='block';
   const type=m==='her'?'personal reflection questions for a Christian wife alone with God':m==='him'?'personal reflection questions for a Christian husband alone with God':'deep conversation starters for a married couple';
-  const prompt=`5 ${type} on: "${cTopic}". ${buildCtx()}Open-ended, faith-adjacent, emotionally meaningful. ONLY JSON: {"questions":["q1","q2","q3","q4","q5"]}`;
+  const prompt=`Generate exactly 5 ${type} on: "${cTopic}". ${buildCtx()}
+Rules: Each question must be SHORT (under 12 words), direct, and emotionally punchy. No long setups. No "In what ways..." or "How would you describe...". Think: "What are you most afraid to say out loud?" not "Can you describe what emotions come up when you think about this topic?".
+ONLY JSON: {"questions":["q1","q2","q3","q4","q5"]}`;
   try{cQs=JSON.parse(await callAI(prompt)).questions;}
   catch(e){cQs=[...FALLBACK_QS].sort(()=>Math.random()-0.5);}
   document.getElementById('sess-loading').style.display='none';

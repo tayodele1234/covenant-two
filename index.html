@@ -85,9 +85,6 @@ textarea.input{resize:none;min-height:100px;line-height:1.7}
 @keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:var(--charcoal);margin-bottom:10px}
 .empty-state{text-align:center;padding:44px 20px;color:var(--muted)}
-
-/* Logo SVG styles */
-.logo-svg{display:block}
 </style>
 </head>
 <body>
@@ -185,7 +182,7 @@ textarea.input{resize:none;min-height:100px;line-height:1.7}
   <div id="sess-loading" style="display:none">
     <div class="loading-state">
       <span class="loading-cross">✝</span>
-      <div class="loading-text">Preparing your devotional...</div>
+      <div class="loading-text" id="loading-text">Preparing your devotional...</div>
       <div class="loading-sub">Writing something just for you two</div>
     </div>
   </div>
@@ -360,22 +357,22 @@ textarea.input{resize:none;min-height:100px;line-height:1.7}
 <script>
 const RANDOM_PROMPTS=["What's something you've been carrying quietly this week?","Is there something you've wanted to pray about together but haven't yet?","What emotion has been most present for you lately?","What area of your life feels like it needs God's touch right now?","What's been heavy on your heart this season?","What would feel like relief to hand over to God together today?","Where have you been leaning on your own strength instead of His?","What has God been whispering to you that you haven't acted on?","What part of your marriage do you want to bring before Him today?","What dream or worry has been showing up in your mind this week?"];
 
-const DEVOS={finances:{title:"Faithful Stewards Together",verse:"Honor the Lord with your wealth and with the firstfruits of all your produce.",ref:"Proverbs 3:9",body:"Money has a way of revealing what we truly value. For many couples, finances become a place of tension — not because of numbers, but because of different stories, fears, and hopes living beneath every budget conversation.\n\nGod does not call you to financial perfection, but to faithful stewardship — handling what He has given you together with honesty, generosity, and trust. When money becomes a shared mission rather than a scoreboard, it loses its power to divide you.\n\nToday, bring your finances before Him as a team. What would it look like to manage your resources as if they truly belonged to God?",reflect:"What unspoken belief or fear about money did you bring into this marriage, and have you ever fully shared it with each other?",closing:"Keep your life free from love of money and be content with what you have, for He has said, 'I will never leave you nor forsake you.'",closingRef:"Hebrews 13:5"},trust:{title:"The Courage to Be Known",verse:"Trust in the Lord with all your heart, and do not lean on your own understanding.",ref:"Proverbs 3:5",body:"Trust is not built in grand moments — it is built in the small, repeated choice to believe the best about each other. Every time you choose honesty over guardedness, every time you stay when it would be easier to withdraw, trust deepens.\n\nGod modeled this for us in Christ — a love that held nothing back. He invites you both to mirror that in your marriage.\n\nWhere there are cracks in the foundation, He is the God who restores. Bring those places to Him together today.",reflect:"What is one area of your heart you have kept partially closed off, and what has made it hard to fully open?",closing:"Above all, keep loving one another earnestly, since love covers a multitude of sins.",closingRef:"1 Peter 4:8"},communication:{title:"Words That Build and Heal",verse:"Let your speech always be gracious, seasoned with salt.",ref:"Colossians 4:6",body:"Every conversation between you is an opportunity — to build or to wound, to connect or to distance. The tongue is small, but it shapes the entire atmosphere of a home.\n\nGracious communication is not about a conflict-free marriage. It is about learning to fight for each other instead of against each other — choosing curiosity over defensiveness.\n\nAsk God today to guard your mouths and soften your hearts — not just in the hard moments, but in the everyday ones too.",reflect:"When do you find it hardest to communicate well with me — and what do you wish I understood about how you receive words?",closing:"Let no corrupting talk come out of your mouths, but only such as is good for building up.",closingRef:"Ephesians 4:29"},forgiveness:{title:"The Freedom of Letting Go",verse:"Be kind to one another, tenderhearted, forgiving one another, as God in Christ forgave you.",ref:"Ephesians 4:32",body:"Forgiveness in marriage is not a single event — it is a practice. The daily decision to not let yesterday's wound define today's relationship.\n\nGod's forgiveness toward us is the model and the power source. When we grasp how deeply we have been forgiven, it loosens our grip on the offenses we hold against others.\n\nSome things take time. But the direction matters. Ask Him to give you both the grace to keep moving toward each other.",reflect:"Is there something between us — big or small — that has been forgiven in words but still lingers in how we relate to each other?",closing:"And whenever you stand praying, forgive, if you have anything against anyone.",closingRef:"Mark 11:25"},intimacy:{title:"To Be Fully Known",verse:"Therefore a man shall leave his father and his mother and hold fast to his wife, and they shall become one flesh.",ref:"Genesis 2:24",body:"God designed marriage to be the one human relationship where you are fully seen and fully loved — not despite your flaws, but alongside them.\n\nIn a world constantly competing for your attention, intimacy requires intention. It asks you to put down the phone, slow down, and actually turn toward each other.\n\nAsk God today to show you where you have been turning away — and give you the courage to turn back.",reflect:"What makes you feel most connected to me — not just physically, but emotionally and spiritually — and are we making enough room for that?",closing:"Beloved, let us love one another, for love is from God.",closingRef:"1 John 4:7"},purpose:{title:"A Marriage on Mission",verse:"For we are his workmanship, created in Christ Jesus for good works.",ref:"Ephesians 2:10",body:"God did not bring you together by accident. Your marriage is not just a personal relationship — it is a platform for something larger than yourselves.\n\nSome couples are called to open their home. Others to pour into younger couples, or create something together that only they could build. The shape of your shared mission is uniquely yours.\n\nDo not let the busyness of life crowd out the question: what are we here for, together?",reflect:"What do you think God uniquely created our marriage to do or offer the world — and are we actually doing it?",closing:"Commit your way to the Lord; trust in him, and he will act.",closingRef:"Psalm 37:5"},grief:{title:"Held Together in the Hard",verse:"He heals the brokenhearted and binds up their wounds.",ref:"Psalm 147:3",body:"Grief does not always look like crying. Sometimes it looks like going quiet, pulling away, or staying busy so you do not have to feel it.\n\nGod is not distant from your pain. He is the God who wept at a grave. He placed someone beside you to grieve with you, not just near you.\n\nOne of the most sacred things a couple can do is learn to mourn together — not to fix each other, but to stay.",reflect:"What are you carrying right now that is heavy — and have you let me fully into it, or have you been protecting me from it?",closing:"The Lord is close to the brokenhearted and saves those who are crushed in spirit.",closingRef:"Psalm 34:18"},joy:{title:"Choosing Delight Together",verse:"This is the day that the Lord has made; let us rejoice and be glad in it.",ref:"Psalm 118:24",body:"Joy is one of the most underrated spiritual disciplines in a marriage. In seasons of pressure and responsibility, it is easy to forget to delight in each other.\n\nBut joy is not just an emotion that happens to you. It is a choice — the decision to notice what is good, to celebrate small things.\n\nGod built gladness into the design of marriage from the very beginning. He loves your joy. Ask Him to open your eyes to reasons for it.",reflect:"When was the last time we were truly light and happy together — what were we doing, and how do we make more space for that?",closing:"Rejoice in the Lord always; again I will say, rejoice.",closingRef:"Philippians 4:4"},default:{title:"Drawing Near Together",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Every season of marriage holds something worth bringing before God. Whether you are in abundance or challenge, clarity or confusion, He is the constant — the one who knows both of you fully and loves you completely.\n\nComing to Him together as a couple is one of the most powerful things you can do — bringing your shared life, worries, and hopes to His feet.\n\nToday, whatever brought you here, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you right now that you have not yet brought before God together as a couple?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"}};
+const FALLBACK_DEVOS={finances:{title:"Faithful Stewards Together",verse:"Honor the Lord with your wealth and with the firstfruits of all your produce.",ref:"Proverbs 3:9",body:"Money has a way of revealing what we truly value. For many couples, finances become a place of tension — not because of numbers, but because of different stories, fears, and hopes living beneath every budget conversation.\n\nGod does not call you to financial perfection, but to faithful stewardship. When money becomes a shared mission rather than a scoreboard, it loses its power to divide you.\n\nToday, bring your finances before Him as a team.",reflect:"What unspoken belief or fear about money did you bring into this marriage, and have you ever fully shared it with each other?",closing:"Keep your life free from love of money and be content with what you have.",closingRef:"Hebrews 13:5"},default:{title:"Drawing Near Together",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Every season of marriage holds something worth bringing before God. Whether you are in abundance or challenge, clarity or confusion, He is the constant — the one who knows both of you fully and loves you completely.\n\nComing to Him together as a couple is one of the most powerful things you can do.\n\nToday, whatever brought you here, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you right now that you have not yet brought before God together as a couple?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"}};
 
-const QS={finances:["What did you learn about money growing up that you are still carrying into our home today?","Are there any financial worries you have been holding quietly that I should know about?","What does financial security feel like to you — and do you feel like we have it right now?","How do you think God is calling us to be more generous in this season?","What is one financial habit you want us to build together this year?"],trust:["Is there a moment where I broke your trust that I may not even know about?","What would help you feel safer bringing hard things to me?","Where in our marriage does trust come most naturally, and where is it still being built?","Do you trust that I have your best interest at heart, even when we disagree?","What is one thing I could do that would make you feel more secure in our marriage?"],communication:["Is there a conversation we have been avoiding that we need to finally have?","When do you feel most heard by me — and when do you feel most unheard?","How do you prefer to work through conflict — and am I honoring that?","When you go quiet during an argument, what is usually happening inside you?","Is there something you have been trying to tell me that I have not been fully hearing?"],forgiveness:["Is there something between us that has been forgiven in words but still lingers underneath?","What does it feel like when you are holding onto something — and what helps you let it go?","What do you need most from me when you are in a hard season of forgiving?","Do you feel like we move toward each other or away from each other after conflict?","Is there a past wound that still affects how you receive love from me?"],intimacy:["What makes you feel most desired by me — and do I do that enough?","Is there a part of yourself you still feel you cannot fully show me?","How can I better pursue you — what does that look like to you specifically?","Do you feel like we make enough time for real closeness, or has life crowded it out?","When do you feel most close to me — what are we usually doing?"],purpose:["Do you feel like our marriage has a shared mission? What do you think it is?","What would you attempt together if you knew you could not fail?","Where do you feel most alive, and how can I help protect that in your schedule?","Are there people in our lives we are meant to pour into more intentionally?","What would our marriage look like in 10 years if we were fully living in our purpose?"],grief:["Is there something you are grieving right now that I may not fully know about?","How do you process pain best — and am I helping or getting in the way of that?","What do you need most from me when you are hurting — presence, words, or space?","Do you ever feel like you have to grieve alone to protect me from it?","What would it look like for us to grieve together better?"],joy:["What is something simple that brings you deep joy that we do not make enough room for?","What is one thing we used to do early in our relationship that you miss?","What makes you laugh — really laugh — and do I know that about you well enough?","How do you feel about the ratio of fun to serious in our marriage right now?","What would your dream day together look like — start to finish?"],default:["What is one thing God has been teaching you recently that you have not shared with me yet?","What fear do you carry that you rarely talk about?","In what area of our marriage do you feel God calling us to grow together this season?","When do you feel most connected to me — what are we usually doing?","What is one dream you have for our life together that we have not yet talked about seriously?"]};
-
-const AI_QS={finances:["If money were no object, how would you want us to be generous together?","What financial decision are you most proud of us making as a couple?","What does financial faithfulness look like to you practically, day to day?"],trust:["What small thing do I do consistently that tells you I am trustworthy?","What would it mean to you to feel completely safe with me?","Is there a moment from our marriage you look back on and think — that was us at our best?"],communication:["What is the most loving thing I can do to show you I am really listening?","When you feel most understood by me, what am I usually doing differently?","Is there a way I respond that quietly shuts the conversation down?"],forgiveness:["What has forgiving me taught you about yourself?","How do you know when you have truly released something and moved on?","Is there a pattern in how we hurt each other that we have never named out loud?"],intimacy:["What is one thing about me that still surprises you?","How do you feel most loved by me — in what language does my love land best?","What does a truly connected day together feel like to you?"],purpose:["If our marriage had a mission statement, what would it be?","How do you want people to have been impacted by knowing us as a couple?","Is there something you sense God wants to do through our marriage that feels too big to say out loud?"],grief:["Is there something you wish I had said during a hard season that I never did?","What has loss taught you about what actually matters?","How can I make it easier for you to let me into your pain?"],joy:["What is the most fun we have ever had together?","What small thing do I do that quietly makes your day better?","What would your ideal weekend together look like with no obligations?"],default:["What is a question you have always wanted me to ask you but never have?","What is something about our marriage that you are genuinely grateful for right now?","How has knowing me changed you — for better or worse?"]};
+const FALLBACK_QS=["What is one thing God has been teaching you recently that you have not shared with me yet?","What fear do you carry that you rarely talk about?","In what area of our marriage do you feel God calling us to grow together this season?","When do you feel most connected to me — what are we usually doing?","What is one dream you have for our life together that we have not yet talked about seriously?"];
 
 let S={profile:{p1:'',p2:'',ann:''},prefs:{personalize:false},sessions:[],streak:{cur:0,best:0,lastDate:''},totalQ:0};
-function loadS(){try{const d=localStorage.getItem('ct_v2');if(d)S=JSON.parse(d);}catch(e){}}
-function saveS(){try{localStorage.setItem('ct_v2',JSON.stringify(S));}catch(e){}}
+function loadS(){try{const d=localStorage.getItem('ct_v3');if(d)S=JSON.parse(d);}catch(e){}}
+function saveS(){try{localStorage.setItem('ct_v3',JSON.stringify(S));}catch(e){}}
 
 let cTopic='',cQs=[],cQIdx=0,inSession=false;
 
-function matchKey(t,obj){const tl=t.toLowerCase();return Object.keys(obj).find(k=>k!=='default'&&tl.includes(k))||null;}
-function getFallbackDevo(t){const k=matchKey(t,DEVOS);return DEVOS[k]||DEVOS.default;}
-function getQs(t){const k=matchKey(t,QS);const pool=[...(QS[k]||QS.default)];return pool.sort(()=>Math.random()-0.5).slice(0,5);}
-function getAIQ(t){const k=matchKey(t,AI_QS);const pool=AI_QS[k]||AI_QS.default;return pool[Math.floor(Math.random()*pool.length)];}
+async function callAI(prompt){
+  const res=await fetch('/api/devotional',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
+  if(!res.ok)throw new Error('API error '+res.status);
+  const data=await res.json();
+  return data.content[0].text.replace(/```json|```/g,'').trim();
+}
 
 function goTo(name){
   document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
@@ -440,9 +437,10 @@ function handleStart(){const v=document.getElementById('topicInput').value.trim(
 async function startSession(topic){
   if(!topic)topic=document.getElementById('topicInput').value.trim();
   if(!topic)return;
-  cTopic=topic;cQs=getQs(topic);cQIdx=0;inSession=true;
+  cTopic=topic;cQs=[];cQIdx=0;inSession=true;
   document.getElementById('sess-title').textContent=topic;
   ['step-devo','step-game','step-wrap'].forEach(id=>document.getElementById(id).style.display='none');
+  document.getElementById('loading-text').textContent='Preparing your devotional...';
   document.getElementById('sess-loading').style.display='block';
   goTo('session');window.scrollTo(0,0);
   await generateDevo(topic);
@@ -457,18 +455,12 @@ Respond ONLY with valid JSON, no markdown:
 {"title":"devotional title 5-8 words","verse":"full Bible verse text","ref":"Book Chapter:Verse","body":"2-3 warm paragraphs 120-150 words total, separate with \\n\\n","reflect":"one open-ended intimate reflection question","closing":"short closing blessing verse different from main","closingRef":"Book Chapter:Verse"}`;
 
   try{
-    const res=await fetch('/api/devotional',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({prompt})
-    });
-    if(!res.ok)throw new Error('Server error '+res.status);
-    const data=await res.json();
-    const raw=data.content[0].text.replace(/```json|```/g,'').trim();
+    const raw=await callAI(prompt);
     renderDevo(JSON.parse(raw));
   }catch(e){
-    console.error(e);
-    renderDevo(getFallbackDevo(topic));
+    console.error('Devo error:',e);
+    const k=Object.keys(FALLBACK_DEVOS).find(k=>k!=='default'&&topic.toLowerCase().includes(k));
+    renderDevo(FALLBACK_DEVOS[k]||FALLBACK_DEVOS.default);
   }
 }
 
@@ -489,12 +481,50 @@ function renderDevo(d){
   document.getElementById('step-devo').style.display='block';
 }
 
-function goToGame(){
+async function goToGame(){
   document.getElementById('step-devo').style.display='none';
+  document.getElementById('loading-text').textContent='Crafting questions for you...';
+  document.getElementById('sess-loading').style.display='block';
+  await generateQuestions(cTopic);
+  document.getElementById('sess-loading').style.display='none';
   document.getElementById('step-game').style.display='block';
   document.getElementById('convo-card').innerHTML='<div class="convo-ph">Tap "Next →" to begin</div>';
   updateQBar();window.scrollTo(0,0);
 }
+
+async function generateQuestions(topic){
+  const p=S.profile;
+  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
+  const prompt=`You are writing deep, intimate conversation starter questions for a married Christian couple. ${nameCtx}The topic of their session today is: "${topic}".
+
+Generate exactly 5 questions that are emotionally meaningful, specific to this topic, and help the couple know each other more deeply. Make them open-ended and faith-adjacent but not preachy.
+
+Respond ONLY with valid JSON, no markdown:
+{"questions":["question 1","question 2","question 3","question 4","question 5"]}`;
+
+  try{
+    const raw=await callAI(prompt);
+    const parsed=JSON.parse(raw);
+    cQs=parsed.questions;
+  }catch(e){
+    console.error('Questions error:',e);
+    cQs=[...FALLBACK_QS].sort(()=>Math.random()-0.5);
+  }
+}
+
+async function doAIQ(){
+  const p=S.profile;
+  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
+  const prompt=`Generate ONE deep, intimate conversation starter question for a married Christian couple. ${nameCtx}Topic: "${cTopic}". Make it emotionally meaningful and specific. Respond with ONLY the question text, nothing else.`;
+  try{
+    const q=await callAI(prompt);
+    showQ(q.replace(/^"|"$/g,''));
+  }catch(e){
+    showQ(FALLBACK_QS[Math.floor(Math.random()*FALLBACK_QS.length)]);
+  }
+  cQIdx++;S.totalQ++;updateQBar();
+}
+
 function doNextQ(){
   if(cQIdx>=cQs.length){goToWrap();return;}
   let q=cQs[cQIdx];
@@ -502,22 +532,26 @@ function doNextQ(){
     q=q.replace(/\bme\b/gi,S.profile.p1).replace(/\byou\b/gi,S.profile.p2);
   showQ(q);cQIdx++;S.totalQ++;updateQBar();
 }
-function doAIQ(){showQ(getAIQ(cTopic));cQIdx++;S.totalQ++;updateQBar();}
+
 function showQ(q){
   const c=document.getElementById('convo-card');
   c.style.opacity='0';c.style.transform='translateY(10px)';
   setTimeout(()=>{c.innerHTML='<div class="convo-q">'+q+'</div>';c.style.transition='all 0.28s ease';c.style.opacity='1';c.style.transform='translateY(0)';},220);
 }
+
 function updateQBar(){
-  document.getElementById('q-bar').style.width=Math.min(100,Math.round((cQIdx/5)*100))+'%';
-  document.getElementById('q-num').textContent=cQIdx+' / 5';
+  const total=Math.max(cQs.length,5);
+  document.getElementById('q-bar').style.width=Math.min(100,Math.round((cQIdx/total)*100))+'%';
+  document.getElementById('q-num').textContent=cQIdx+' / '+total;
 }
+
 function goToWrap(){
   document.getElementById('step-game').style.display='none';
   document.getElementById('step-wrap').style.display='block';
   document.getElementById('prayer-text').value='';
   window.scrollTo(0,0);
 }
+
 function finishSession(save){
   const note=save?document.getElementById('prayer-text').value.trim():'';
   const today=new Date().toISOString().split('T')[0];
@@ -606,7 +640,7 @@ function confirmLeave(){
 }
 function confirmReset(){
   openModal('Reset all data?','This permanently deletes your profile, sessions, prayers, and streak.',()=>{
-    localStorage.removeItem('ct_v2');
+    localStorage.removeItem('ct_v3');
     S={profile:{p1:'',p2:'',ann:''},prefs:{personalize:false},sessions:[],streak:{cur:0,best:0,lastDate:''},totalQ:0};
     saveS();closeModal();
     document.getElementById('main-nav').style.display='none';

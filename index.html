@@ -15,66 +15,66 @@
   --rose:#b86b5a;--rose-pale:#f5ebe8;--rose-border:#ddb8b0;
   --nav-h:68px;
 }
-body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav-h) + 16px)}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav-h) + 16px);font-size:16px}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 45% at 85% 0%,rgba(184,147,90,0.09) 0%,transparent 65%),radial-gradient(ellipse 50% 60% at 5% 90%,rgba(184,147,90,0.06) 0%,transparent 60%);pointer-events:none;z-index:0}
 .nav{position:fixed;bottom:0;left:0;right:0;background:rgba(247,242,235,0.97);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;height:var(--nav-h);z-index:100;padding-bottom:env(safe-area-inset-bottom,0)}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:8px 4px;color:var(--hint);transition:color 0.2s;font-family:'Montserrat',sans-serif}
 .nav-btn.active{color:var(--gold)}
-.nav-btn svg{width:22px;height:22px;stroke-width:1.8}
-.nav-label{font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase}
+.nav-btn svg{width:24px;height:24px;stroke-width:1.8}
+.nav-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
 .screen{display:none;max-width:520px;margin:0 auto;padding:0 16px 24px;position:relative;z-index:1}
 .screen.active{display:block;animation:fadeUp 0.3s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 .card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:24px;margin-bottom:14px;box-shadow:0 2px 18px rgba(45,45,45,0.06)}
 .card-sm{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:10px;box-shadow:0 1px 8px rgba(45,45,45,0.04)}
-.display{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal);letter-spacing:0.01em;line-height:1.2}
-.heading{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal)}
-.overline{font-size:9px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-weight:600}
-.body-text{font-size:14px;line-height:1.8;color:var(--charcoal-light)}
-.muted{color:var(--muted);font-size:12px;font-weight:400}
-.btn{border:none;border-radius:14px;padding:14px 20px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.03em}
+.display{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--charcoal);letter-spacing:0.01em;line-height:1.2}
+.heading{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--charcoal)}
+.overline{font-size:11px;text-transform:uppercase;letter-spacing:0.15em;color:var(--muted);font-weight:600}
+.body-text{font-size:16px;line-height:1.8;color:var(--charcoal-light);font-weight:500}
+.muted{color:var(--muted);font-size:14px;font-weight:500}
+.btn{border:none;border-radius:14px;padding:15px 20px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.03em}
 .btn-gold{background:var(--gold);color:#fff}.btn-gold:active{background:#9a7a48;transform:scale(0.98)}
 .btn-charcoal{background:var(--charcoal);color:#fff}.btn-charcoal:active{background:#1a1a1a;transform:scale(0.98)}
 .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--charcoal)}.btn-outline:active{background:var(--gold-pale)}
-.btn-ghost{background:transparent;border:none;color:var(--muted);font-size:12px;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;letter-spacing:0.03em;padding:4px 0}
+.btn-ghost{background:transparent;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;letter-spacing:0.03em;padding:4px 0}
 .btn-full{width:100%}
-.input{width:100%;background:var(--cream);border:1.5px solid var(--border);border-radius:13px;padding:13px 16px;font-family:'Montserrat',sans-serif;font-size:14px;color:var(--charcoal);outline:none;transition:border-color 0.2s;-webkit-appearance:none;font-weight:400}
+.input{width:100%;background:var(--cream);border:1.5px solid var(--border);border-radius:13px;padding:14px 16px;font-family:'Montserrat',sans-serif;font-size:16px;color:var(--charcoal);outline:none;transition:border-color 0.2s;-webkit-appearance:none;font-weight:500}
 .input:focus{border-color:var(--gold);background:#fff}
 .input::placeholder{color:var(--hint)}
-textarea.input{resize:none;min-height:100px;line-height:1.7}
-.tag{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:4px 12px;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
+textarea.input{resize:none;min-height:110px;line-height:1.7}
+.tag{display:inline-flex;align-items:center;gap:5px;border-radius:20px;padding:5px 14px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
 .tag-gold{background:var(--gold-pale);border:1px solid var(--gold-border);color:var(--gold)}
 .tag-charcoal{background:#f0efed;border:1px solid #d5d0c8;color:var(--charcoal)}
 .tag-sage{background:var(--sage-pale);border:1px solid var(--sage-border);color:#4a7a4e}
-.verse-block{background:linear-gradient(135deg,var(--gold-pale),#f0e4c8);border-left:3px solid var(--gold);border-radius:0 14px 14px 0;padding:16px 18px;margin:16px 0}
-.verse-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:var(--charcoal);line-height:1.65}
-.verse-ref{font-size:11px;color:var(--gold);margin-top:6px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.verse-block{background:linear-gradient(135deg,var(--gold-pale),#f0e4c8);border-left:3px solid var(--gold);border-radius:0 14px 14px 0;padding:18px 20px;margin:16px 0}
+.verse-text{font-family:'Cormorant Garamond',serif;font-size:21px;font-style:italic;font-weight:600;color:var(--charcoal);line-height:1.65}
+.verse-ref{font-size:13px;color:var(--gold);margin-top:6px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
 .streak-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:var(--gold);line-height:1}
-.streak-lbl{font-size:11px;color:var(--muted);font-weight:500;margin-top:2px;letter-spacing:0.05em}
-.day-dot{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:var(--hint)}
+.streak-lbl{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;letter-spacing:0.05em}
+.day-dot{width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--hint)}
 .day-dot.done{background:var(--gold);border-color:var(--gold);color:#fff}
 .day-dot.today{border-color:var(--gold);color:var(--gold)}
-.convo-card{background:linear-gradient(150deg,var(--gold-pale),#efe3cc);border:1.5px solid var(--gold-border);border-radius:20px;padding:30px 24px;text-align:center;min-height:160px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:opacity 0.25s,transform 0.25s;position:relative;overflow:hidden}
-.convo-card::before{content:'✦';position:absolute;top:14px;right:18px;font-size:12px;color:var(--gold-light);opacity:0.5}
-.convo-card::after{content:'✦';position:absolute;bottom:14px;left:18px;font-size:8px;color:var(--gold-light);opacity:0.35}
-.convo-q{font-family:'Cormorant Garamond',serif;font-size:22px;line-height:1.5;color:var(--charcoal);font-style:italic;position:relative;z-index:1}
-.convo-ph{font-size:13px;color:var(--muted);font-style:italic;font-weight:400}
-.prog-wrap{background:var(--cream-dark);border-radius:10px;height:4px;margin:8px 0}
-.prog-bar{background:linear-gradient(90deg,var(--gold),var(--gold-light));height:4px;border-radius:10px;transition:width 0.4s ease}
+.convo-card{background:linear-gradient(150deg,var(--gold-pale),#efe3cc);border:1.5px solid var(--gold-border);border-radius:20px;padding:32px 26px;text-align:center;min-height:180px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;transition:opacity 0.25s,transform 0.25s;position:relative;overflow:hidden}
+.convo-card::before{content:'✦';position:absolute;top:14px;right:18px;font-size:14px;color:var(--gold-light);opacity:0.5}
+.convo-card::after{content:'✦';position:absolute;bottom:14px;left:18px;font-size:10px;color:var(--gold-light);opacity:0.35}
+.convo-q{font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.5;color:var(--charcoal);font-style:italic;font-weight:600;position:relative;z-index:1}
+.convo-ph{font-size:15px;color:var(--muted);font-style:italic;font-weight:500}
+.prog-wrap{background:var(--cream-dark);border-radius:10px;height:5px;margin:8px 0}
+.prog-bar{background:linear-gradient(90deg,var(--gold),var(--gold-light));height:5px;border-radius:10px;transition:width 0.4s ease}
 .avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;border:2px solid var(--border)}
 .av1{background:var(--gold-pale);color:var(--gold)}.av2{background:#f0efed;color:var(--charcoal)}
 .quick-topics{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-.qt{background:transparent;border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:11px;color:var(--muted);cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.2s}
+.qt{background:transparent;border:1px solid var(--border);border-radius:20px;padding:7px 16px;font-size:13px;color:var(--muted);cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:500;transition:all 0.2s}
 .qt:active{background:var(--gold-pale);border-color:var(--gold);color:var(--gold)}
 .divider{border:none;border-top:1px solid var(--border);margin:18px 0}
 .loading-state{text-align:center;padding:56px 20px}
-.loading-cross{font-size:40px;animation:breathe 1.8s ease-in-out infinite;display:block;margin-bottom:18px}
+.loading-cross{font-size:44px;animation:breathe 1.8s ease-in-out infinite;display:block;margin-bottom:18px}
 @keyframes breathe{0%,100%{opacity:0.3;transform:scale(0.9)}50%{opacity:1;transform:scale(1.08)}}
-.loading-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--muted)}
-.loading-sub{font-size:12px;color:var(--hint);margin-top:8px;font-weight:500;letter-spacing:0.04em}
+.loading-text{font-family:'Cormorant Garamond',serif;font-size:24px;font-style:italic;font-weight:600;color:var(--muted)}
+.loading-sub{font-size:14px;color:var(--hint);margin-top:8px;font-weight:600;letter-spacing:0.04em}
 .stat-box{text-align:center;padding:16px 10px;border-radius:16px}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;line-height:1}
-.stat-lbl{font-size:11px;color:var(--muted);font-weight:500;margin-top:4px;letter-spacing:0.04em}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;line-height:1}
+.stat-lbl{font-size:13px;color:var(--muted);font-weight:600;margin-top:4px;letter-spacing:0.04em}
 .toggle-wrap{position:relative;width:48px;height:26px;cursor:pointer;flex-shrink:0}
 .toggle-bg{position:absolute;inset:0;border-radius:13px;transition:background 0.25s}
 .toggle-th{position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform 0.25s;box-shadow:0 1px 4px rgba(0,0,0,0.18)}
@@ -118,26 +118,50 @@ textarea.input{resize:none;min-height:100px;line-height:1.7}
 </div>
 
 <!-- HOME -->
-<div id="screen-home" class="screen" style="display:none">
-  <div style="padding:28px 0 16px;display:flex;align-items:center;justify-content:space-between">
-    <div>
-      <div class="overline" style="margin-bottom:4px" id="greet-sub">Good morning</div>
-      <div class="display" id="greet-names">Covenant Two</div>
+<div id="screen-home" class="screen" style="display:none;padding-top:0">
+
+  <!-- Hero Banner -->
+  <div style="background:var(--charcoal);border-radius:0 0 28px 28px;padding:28px 24px 32px;margin:0 -16px 20px;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 80% 0%,rgba(184,147,90,0.25) 0%,transparent 65%);pointer-events:none"></div>
+    <div style="position:absolute;bottom:-20px;left:-20px;width:120px;height:120px;background:radial-gradient(circle,rgba(184,147,90,0.1),transparent);border-radius:50%;pointer-events:none"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;position:relative">
+      <div style="display:flex;align-items:center;gap:12px">
+        <svg width="38" height="38" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="border-radius:10px;flex-shrink:0">
+          <rect width="200" height="200" rx="40" fill="#f7f2eb"/>
+          <path d="M62,100 A38,38 0 1,1 100,138" fill="none" stroke="#2d2d2d" stroke-width="13" stroke-linecap="round"/>
+          <path d="M100,138 A38,38 0 1,1 138,100 L138,118 Q138,135 124,145 L108,157 Q104,160 100,157 L84,145 Q70,135 70,118 L70,100" fill="none" stroke="#b8935a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="100" y1="76" x2="100" y2="108" stroke="#b8935a" stroke-width="8" stroke-linecap="round"/>
+          <line x1="86" y1="92" x2="114" y2="92" stroke="#b8935a" stroke-width="8" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <div style="font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-light);font-weight:600;margin-bottom:1px" id="greet-sub">Good morning</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#fff;letter-spacing:0.02em;line-height:1.1" id="greet-names">Covenant Two</div>
+        </div>
+      </div>
+      <div id="home-avatars" style="display:flex"></div>
     </div>
-    <div id="home-avatars" style="display:flex"></div>
+    <!-- Streak row -->
+    <div style="display:flex;gap:10px;position:relative">
+      <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:24px">🔥</span>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--gold);line-height:1" id="h-streak">0</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:500;letter-spacing:0.05em;margin-top:1px">day streak</div>
+        </div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:16px;padding:14px 16px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:24px">✝</span>
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#fff;line-height:1" id="h-sessions">0</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.5);font-weight:500;letter-spacing:0.05em;margin-top:1px">sessions</div>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="card" style="display:flex;align-items:center;justify-content:space-between;padding:18px 22px">
-    <div style="display:flex;align-items:center;gap:14px">
-      <span style="font-size:30px">🔥</span>
-      <div><div class="streak-num" id="h-streak">0</div><div class="streak-lbl">day streak</div></div>
-    </div>
-    <div style="text-align:right">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal)" id="h-sessions">0</div>
-      <div class="streak-lbl">sessions together</div>
-    </div>
-  </div>
+
+  <!-- Topic input -->
   <div class="card">
-    <div class="overline" style="margin-bottom:6px">What's on your hearts today?</div>
+    <div class="overline" style="margin-bottom:4px">What's on your hearts today?</div>
     <div id="random-prompt" class="body-text" style="font-style:italic;color:var(--muted);font-size:13px;margin-bottom:14px"></div>
     <div style="display:flex;gap:8px">
       <input class="input" id="topicInput" placeholder="Type any topic..." maxlength="60" style="flex:1">
@@ -145,19 +169,17 @@ textarea.input{resize:none;min-height:100px;line-height:1.7}
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round"/></svg>
       </button>
     </div>
-    <div class="quick-topics">
-      <button class="qt" onclick="pickTopic('finances')">Finances</button>
-      <button class="qt" onclick="pickTopic('trust')">Trust</button>
-      <button class="qt" onclick="pickTopic('communication')">Communication</button>
-      <button class="qt" onclick="pickTopic('forgiveness')">Forgiveness</button>
-      <button class="qt" onclick="pickTopic('intimacy')">Intimacy</button>
-      <button class="qt" onclick="pickTopic('purpose')">Purpose</button>
-      <button class="qt" onclick="pickTopic('grief')">Grief</button>
-      <button class="qt" onclick="pickTopic('joy')">Joy</button>
-      <button class="qt" onclick="pickTopic('parenting')">Parenting</button>
-      <button class="qt" onclick="pickTopic('anxiety')">Anxiety</button>
-    </div>
   </div>
+
+  <!-- Suggested Topics -->
+  <div style="margin-bottom:14px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <div class="overline">Suggested for you</div>
+      <button class="btn-ghost" style="font-size:11px;color:var(--gold)" onclick="refreshSuggested()">Refresh ↻</button>
+    </div>
+    <div id="suggested-topics" style="display:grid;grid-template-columns:1fr 1fr;gap:10px"></div>
+  </div>
+
   <div class="card" id="last-card" style="display:none">
     <div class="overline" style="margin-bottom:10px">Last session</div>
     <div id="last-content"></div>
@@ -366,6 +388,37 @@ textarea.input{resize:none;min-height:100px;line-height:1.7}
 </div>
 
 <script>
+const ALL_TOPICS=[
+  {topic:'trust',icon:'🤝',desc:'Building safety with each other'},
+  {topic:'communication',icon:'💬',desc:'Speaking and listening well'},
+  {topic:'forgiveness',icon:'🕊️',desc:'Releasing what you carry'},
+  {topic:'finances',icon:'💛',desc:'Stewarding what God gave you'},
+  {topic:'intimacy',icon:'❤️',desc:'Being fully known and loved'},
+  {topic:'purpose',icon:'🌿',desc:'Your shared mission together'},
+  {topic:'grief',icon:'🙏',desc:'Holding pain side by side'},
+  {topic:'joy',icon:'✨',desc:'Choosing delight together'},
+  {topic:'parenting',icon:'👨‍👩‍👧',desc:'Raising children in faith'},
+  {topic:'anxiety',icon:'🌊',desc:'Releasing worry to God'},
+  {topic:'prayer',icon:'✝️',desc:'Deepening your prayer life'},
+  {topic:'service',icon:'🤲',desc:'Giving back together'},
+  {topic:'identity',icon:'👑',desc:'Who you are in Christ'},
+  {topic:'conflict',icon:'🔥',desc:'Fighting for each other'},
+  {topic:'rest',icon:'🌙',desc:'Sabbath and renewal'},
+  {topic:'gratitude',icon:'🌻',desc:'Counting your blessings'},
+];
+
+let shownTopics=[];
+function refreshSuggested(){
+  const shuffled=[...ALL_TOPICS].sort(()=>Math.random()-0.5);
+  shownTopics=shuffled.slice(0,4);
+  document.getElementById('suggested-topics').innerHTML=shownTopics.map(t=>`
+    <button onclick="pickTopic('${t.topic}')" style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px 14px;text-align:left;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:6px" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+      <span style="font-size:26px">${t.icon}</span>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--charcoal);text-transform:capitalize">${t.topic}</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.4;font-weight:500">${t.desc}</div>
+    </button>`).join('');
+}
+
 const RANDOM_PROMPTS=["What's something you've been carrying quietly this week?","Is there something you've wanted to pray about together but haven't yet?","What emotion has been most present for you lately?","What area of your life feels like it needs God's touch right now?","What's been heavy on your heart this season?","What would feel like relief to hand over to God together today?","Where have you been leaning on your own strength instead of His?","What has God been whispering to you that you haven't acted on?","What part of your marriage do you want to bring before Him today?","What dream or worry has been showing up in your mind this week?"];
 
 const FALLBACK_DEVOS={finances:{title:"Faithful Stewards Together",verse:"Honor the Lord with your wealth and with the firstfruits of all your produce.",ref:"Proverbs 3:9",body:"Money has a way of revealing what we truly value. For many couples, finances become a place of tension — not because of numbers, but because of different stories, fears, and hopes living beneath every budget conversation.\n\nGod does not call you to financial perfection, but to faithful stewardship. When money becomes a shared mission rather than a scoreboard, it loses its power to divide you.\n\nToday, bring your finances before Him as a team.",reflect:"What unspoken belief or fear about money did you bring into this marriage, and have you ever fully shared it with each other?",closing:"Keep your life free from love of money and be content with what you have.",closingRef:"Hebrews 13:5"},default:{title:"Drawing Near Together",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Every season of marriage holds something worth bringing before God. Whether you are in abundance or challenge, clarity or confusion, He is the constant — the one who knows both of you fully and loves you completely.\n\nComing to Him together as a couple is one of the most powerful things you can do.\n\nToday, whatever brought you here, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you right now that you have not yet brought before God together as a couple?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"}};
@@ -417,12 +470,13 @@ function renderHome(){
   if(p.p1&&p.p2){
     document.getElementById('greet-names').textContent=p.p1+' & '+p.p2;
     document.getElementById('home-avatars').innerHTML=
-      `<div class="avatar av1" style="width:40px;height:40px;font-size:18px;margin-right:-6px;z-index:2;position:relative;box-shadow:2px 0 6px rgba(0,0,0,0.08)">${p.p1[0].toUpperCase()}</div>`+
-      `<div class="avatar av2" style="width:40px;height:40px;font-size:18px">${p.p2[0].toUpperCase()}</div>`;
+      `<div class="avatar av1" style="width:36px;height:36px;font-size:16px;margin-right:-6px;z-index:2;position:relative;border-color:rgba(255,255,255,0.2)">${p.p1[0].toUpperCase()}</div>`+
+      `<div class="avatar av2" style="width:36px;height:36px;font-size:16px;border-color:rgba(255,255,255,0.2)">${p.p2[0].toUpperCase()}</div>`;
   }
   document.getElementById('h-streak').textContent=S.streak.cur;
   document.getElementById('h-sessions').textContent=S.sessions.length;
   setRandomPrompt();
+  refreshSuggested();
   if(S.sessions.length){
     const last=S.sessions[S.sessions.length-1];
     document.getElementById('last-card').style.display='block';

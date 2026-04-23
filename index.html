@@ -4,222 +4,248 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Covenant Two</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
   --cream:#faf6ef;--cream-dark:#ede5d4;--charcoal:#1a1410;--charcoal-light:#3d2f22;
   --gold:#c49a3c;--gold-light:#e0bc6a;--gold-pale:#fdf3dc;--gold-border:#e8cc80;
-  --white:#fffdf7;--card:#fffef9;--border:#e8d9bc;--muted:#7a6248;--hint:#b09870;
+  --card:#fffef9;--border:#e8d9bc;--muted:#7a6248;--hint:#b09870;
   --sage:#5a8a5e;--sage-pale:#edf6ee;--sage-border:#a8cfa8;
   --rose:#a8463a;--rose-pale:#fdf0ee;--rose-border:#e0a89e;
-  --deep-red:#8b2020;--deep-red-pale:#fdf0f0;
-  --navy:#1e3a5f;--navy-pale:#eef3fa;--navy-border:#9ab8d8;
-  --purple:#5b3a8a;--purple-pale:#f4effe;--purple-border:#c0a0e8;
+  --lavender:#7c5cbf;--lavender-pale:#f5f0ff;--lavender-border:#c4aff0;
+  --steel:#3a5a7a;--steel-pale:#eef3f8;--steel-border:#9ab8d4;
   --nav-h:72px;
 }
-body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav-h) + 16px);font-size:16px}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 90% 0%,rgba(196,154,60,0.12) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 0% 100%,rgba(90,138,94,0.08) 0%,transparent 55%);pointer-events:none;z-index:0}
-
-/* NAV */
-.nav{position:fixed;bottom:0;left:0;right:0;background:var(--charcoal);border-top:2px solid var(--gold);display:flex;justify-content:space-around;align-items:center;height:var(--nav-h);z-index:100;padding-bottom:env(safe-area-inset-bottom,0);max-width:520px;margin:0 auto;left:50%;transform:translateX(-50%);width:100%}
-.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(255,255,255,0.4);transition:color 0.2s;font-family:'Montserrat',sans-serif}
+body{font-family:'Montserrat',sans-serif;background:var(--cream);color:var(--charcoal);min-height:100vh;overflow-x:hidden;padding-bottom:calc(var(--nav-h)+20px);font-size:16px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 90% 0%,rgba(196,154,60,0.1) 0%,transparent 60%),radial-gradient(ellipse 40% 50% at 0% 100%,rgba(90,138,94,0.07) 0%,transparent 55%);pointer-events:none;z-index:0}
+.nav{position:fixed;bottom:0;background:var(--charcoal);border-top:2px solid var(--gold);display:flex;justify-content:space-around;align-items:center;height:var(--nav-h);z-index:100;padding-bottom:env(safe-area-inset-bottom,0);width:100%;max-width:520px;left:50%;transform:translateX(-50%)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;cursor:pointer;padding:8px 4px;color:rgba(255,255,255,0.35);transition:color 0.2s;font-family:'Montserrat',sans-serif}
 .nav-btn.active{color:var(--gold)}
-.nav-btn svg{width:26px;height:26px;stroke-width:2.5}
+.nav-btn svg{width:24px;height:24px;stroke-width:2.5}
 .nav-label{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
-
 .screen{display:none;max-width:520px;margin:0 auto;padding:0 16px 24px;position:relative;z-index:1}
 .screen.active{display:block;animation:fadeUp 0.3s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-
-/* CARDS */
-.card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:24px;margin-bottom:16px;box-shadow:0 4px 24px rgba(26,20,10,0.08)}
-.card-sm{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px;box-shadow:0 2px 12px rgba(26,20,10,0.06)}
-
-/* TYPOGRAPHY */
-.display{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--charcoal);letter-spacing:0.01em;line-height:1.1}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:24px;padding:24px;margin-bottom:16px;box-shadow:0 4px 24px rgba(26,20,10,0.07)}
+.card-sm{background:var(--card);border:1.5px solid var(--border);border-radius:18px;padding:18px;margin-bottom:12px}
+.display{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--charcoal);line-height:1.1}
 .heading{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--charcoal)}
 .overline{font-size:11px;text-transform:uppercase;letter-spacing:0.18em;color:var(--muted);font-weight:700}
 .body-text{font-size:16px;line-height:1.85;color:var(--charcoal-light);font-weight:500}
 .muted{color:var(--muted);font-size:14px;font-weight:500}
-
-/* BUTTONS */
 .btn{border:none;border-radius:16px;padding:16px 22px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px;letter-spacing:0.04em}
-.btn-gold{background:linear-gradient(135deg,var(--gold),#a8812e);color:#fff;box-shadow:0 4px 16px rgba(196,154,60,0.35)}.btn-gold:active{transform:scale(0.97)}
-.btn-charcoal{background:var(--charcoal);color:#fff;box-shadow:0 4px 16px rgba(26,20,10,0.25)}.btn-charcoal:active{transform:scale(0.97)}
+.btn-gold{background:linear-gradient(135deg,#d4a840,#a8782a);color:#fff;box-shadow:0 4px 16px rgba(196,154,60,0.3)}.btn-gold:active{transform:scale(0.97)}
+.btn-charcoal{background:var(--charcoal);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,0.2)}.btn-charcoal:active{transform:scale(0.97)}
+.btn-lavender{background:linear-gradient(135deg,#8b6ad4,#6040a8);color:#fff;box-shadow:0 4px 16px rgba(124,92,191,0.3)}.btn-lavender:active{transform:scale(0.97)}
+.btn-steel{background:linear-gradient(135deg,#4a6e90,#2a4a60);color:#fff;box-shadow:0 4px 16px rgba(58,90,122,0.3)}.btn-steel:active{transform:scale(0.97)}
 .btn-outline{background:transparent;border:2px solid var(--border);color:var(--charcoal);font-weight:700}.btn-outline:active{background:var(--gold-pale)}
-.btn-ghost{background:transparent;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:0.03em;padding:4px 0}
+.btn-ghost{background:transparent;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:'Montserrat',sans-serif;font-weight:600;padding:4px 0}
 .btn-full{width:100%}
-
-/* INPUTS */
-.input{width:100%;background:var(--cream);border:2px solid var(--border);border-radius:14px;padding:14px 18px;font-family:'Montserrat',sans-serif;font-size:16px;color:var(--charcoal);outline:none;transition:all 0.2s;-webkit-appearance:none;font-weight:500}
+.input{width:100%;background:var(--cream);border:2px solid var(--border);border-radius:14px;padding:14px 18px;font-family:'Montserrat',sans-serif;font-size:16px;color:var(--charcoal);outline:none;transition:all 0.2s;font-weight:500}
 .input:focus{border-color:var(--gold);background:#fff;box-shadow:0 0 0 4px rgba(196,154,60,0.1)}
 .input::placeholder{color:var(--hint)}
-textarea.input{resize:none;min-height:110px;line-height:1.7}
-
-/* TAGS */
+textarea.input{resize:none;line-height:1.7}
 .tag{display:inline-flex;align-items:center;gap:6px;border-radius:20px;padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
 .tag-gold{background:var(--gold-pale);border:1.5px solid var(--gold-border);color:#8a6520}
 .tag-charcoal{background:#f0ece6;border:1.5px solid #d0c8ba;color:var(--charcoal)}
 .tag-sage{background:var(--sage-pale);border:1.5px solid var(--sage-border);color:#2d5a30}
-
-/* VERSE */
-.verse-block{background:linear-gradient(135deg,#fdf8e8,#f8edcc);border-left:4px solid var(--gold);border-radius:0 16px 16px 0;padding:18px 20px;margin:18px 0;box-shadow:0 2px 12px rgba(196,154,60,0.12)}
+.tag-lavender{background:var(--lavender-pale);border:1.5px solid var(--lavender-border);color:#4a2a90}
+.tag-steel{background:var(--steel-pale);border:1.5px solid var(--steel-border);color:#1a3a5a}
+.verse-block{background:linear-gradient(135deg,#fdf8e8,#f8edcc);border-left:4px solid var(--gold);border-radius:0 16px 16px 0;padding:18px 20px;margin:18px 0;box-shadow:0 2px 12px rgba(196,154,60,0.1)}
 .verse-text{font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;font-weight:600;color:var(--charcoal);line-height:1.6}
 .verse-ref{font-size:13px;color:var(--gold);margin-top:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase}
-
-/* STREAK */
-.streak-num{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;color:var(--gold);line-height:1}
-.streak-lbl{font-size:12px;color:var(--muted);font-weight:700;margin-top:3px;letter-spacing:0.06em;text-transform:uppercase}
-.day-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--hint)}
-.day-dot.done{background:var(--gold);border-color:var(--gold);color:#fff;box-shadow:0 2px 8px rgba(196,154,60,0.4)}
-.day-dot.today{border-color:var(--gold);color:var(--gold);background:var(--gold-pale)}
-
-/* CONVO CARD */
-.convo-card{background:linear-gradient(145deg,#fdf8e8,#f5e8c0);border:2px solid var(--gold-border);border-radius:22px;padding:34px 28px;text-align:center;min-height:190px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(196,154,60,0.15)}
-.convo-card::before{content:'✦';position:absolute;top:16px;right:20px;font-size:16px;color:var(--gold-light);opacity:0.6}
-.convo-card::after{content:'✦';position:absolute;bottom:16px;left:20px;font-size:10px;color:var(--gold-light);opacity:0.4}
-.convo-q{font-family:'Cormorant Garamond',serif;font-size:27px;line-height:1.5;color:var(--charcoal);font-style:italic;font-weight:600;position:relative;z-index:1}
+.convo-card{background:linear-gradient(145deg,#fdf8e8,#f5e8c0);border:2px solid var(--gold-border);border-radius:22px;padding:34px 28px;text-align:center;min-height:190px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(196,154,60,0.12)}
+.convo-card::before{content:'✦';position:absolute;top:16px;right:20px;font-size:16px;color:var(--gold-light);opacity:0.5}
+.convo-card::after{content:'✦';position:absolute;bottom:16px;left:20px;font-size:10px;color:var(--gold-light);opacity:0.35}
+.convo-q{font-family:'Cormorant Garamond',serif;font-size:26px;line-height:1.5;color:var(--charcoal);font-style:italic;font-weight:600;position:relative;z-index:1}
 .convo-ph{font-size:15px;color:var(--muted);font-style:italic;font-weight:600}
-
-/* PROGRESS */
 .prog-wrap{background:var(--cream-dark);border-radius:10px;height:6px;margin:10px 0}
-.prog-bar{background:linear-gradient(90deg,var(--gold),var(--gold-light));height:6px;border-radius:10px;transition:width 0.4s ease;box-shadow:0 1px 6px rgba(196,154,60,0.4)}
-
-/* AVATAR */
-.avatar{border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;border:2px solid var(--border)}
-.av1{background:var(--gold-pale);color:var(--gold)}.av2{background:#ede8e0;color:var(--charcoal)}
-
-/* MISC */
+.prog-bar{background:linear-gradient(90deg,var(--gold),var(--gold-light));height:6px;border-radius:10px;transition:width 0.4s ease}
 .divider{border:none;border-top:1.5px solid var(--border);margin:20px 0}
 .loading-state{text-align:center;padding:64px 20px}
 .loading-cross{font-size:48px;animation:breathe 1.8s ease-in-out infinite;display:block;margin-bottom:20px}
-@keyframes breathe{0%,100%{opacity:0.25;transform:scale(0.88)}50%{opacity:1;transform:scale(1.1)}}
+@keyframes breathe{0%,100%{opacity:0.2;transform:scale(0.88)}50%{opacity:1;transform:scale(1.1)}}
 .loading-text{font-family:'Cormorant Garamond',serif;font-size:26px;font-style:italic;font-weight:600;color:var(--charcoal)}
-.loading-sub{font-size:14px;color:var(--muted);margin-top:10px;font-weight:600;letter-spacing:0.05em}
+.loading-sub{font-size:14px;color:var(--muted);margin-top:10px;font-weight:600}
 .stat-box{text-align:center;padding:18px 10px;border-radius:18px}
 .stat-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;line-height:1}
-.stat-lbl{font-size:13px;color:var(--muted);font-weight:700;margin-top:6px;letter-spacing:0.06em;text-transform:uppercase}
+.stat-lbl{font-size:12px;color:var(--muted);font-weight:700;margin-top:6px;letter-spacing:0.08em;text-transform:uppercase}
 .toggle-wrap{position:relative;width:52px;height:28px;cursor:pointer;flex-shrink:0}
 .toggle-bg{position:absolute;inset:0;border-radius:14px;transition:background 0.25s}
 .toggle-th{position:absolute;top:3px;left:3px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform 0.25s;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
-.setup-screen{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:520px;margin:0 auto}
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(10,8,4,0.65);z-index:200;align-items:flex-end;justify-content:center}
 .modal-bg.open{display:flex}
 .modal{background:var(--cream);border-radius:28px 28px 0 0;padding:32px 22px 48px;width:100%;max-width:520px;animation:slideUp 0.3s ease;border-top:2px solid var(--gold)}
 @keyframes slideUp{from{transform:translateY(60px);opacity:0}to{transform:translateY(0);opacity:1}}
 .modal-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--charcoal);margin-bottom:12px}
-.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
-
-/* DEEPER WATERS */
-.deeper-card{border-radius:20px;padding:20px;margin-bottom:12px;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;border:2px solid transparent}
-.deeper-card:active{transform:scale(0.98)}
-.deeper-card-inner{position:relative;z-index:1}
-.deeper-disclaimer{background:linear-gradient(135deg,#1a1410,#2d1f10);border-radius:20px;padding:20px;margin-bottom:16px;border:1.5px solid rgba(196,154,60,0.3)}
+.day-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--hint)}
+.day-dot.done{background:var(--gold);border-color:var(--gold);color:#fff}
+.day-dot.today{border-color:var(--gold);color:var(--gold);background:var(--gold-pale)}
+/* QUIZ */
+.quiz-screen{min-height:100vh;display:flex;flex-direction:column;max-width:520px;margin:0 auto;padding:0 20px 40px;position:relative;z-index:1}
+.quiz-option{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:16px 18px;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;color:var(--charcoal);text-align:left;width:100%;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.quiz-option.sel-couple{background:var(--gold-pale);border-color:var(--gold)}
+.quiz-option.sel-her{background:var(--lavender-pale);border-color:var(--lavender-border)}
+.quiz-option.sel-him{background:var(--steel-pale);border-color:var(--steel-border)}
+.quiz-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.quiz-progress{display:flex;gap:6px;margin-bottom:28px}
+.quiz-dot{flex:1;height:4px;border-radius:4px;background:var(--border);transition:background 0.3s}
+/* MODE TOGGLE — 3 pills */
+.mode-toggle{display:flex;background:#f0ece4;border-radius:20px;padding:4px;margin-bottom:20px;border:1.5px solid var(--border);gap:3px}
+.mode-btn{flex:1;padding:9px 6px;border:none;border-radius:16px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;cursor:pointer;transition:all 0.25s;letter-spacing:0.03em;background:transparent;color:var(--muted);display:flex;align-items:center;justify-content:center;gap:4px}
+.mode-btn.act-couple{background:var(--charcoal);color:var(--gold);box-shadow:0 2px 10px rgba(0,0,0,0.2)}
+.mode-btn.act-her{background:linear-gradient(135deg,#8b6ad4,#6040a8);color:#fff;box-shadow:0 2px 10px rgba(124,92,191,0.3)}
+.mode-btn.act-him{background:linear-gradient(135deg,#4a6e90,#2a4a60);color:#fff;box-shadow:0 2px 10px rgba(58,90,122,0.3)}
 </style>
 </head>
 <body>
 
-<!-- SETUP -->
-<div id="screen-setup" class="screen" style="padding:0">
-  <div class="setup-screen">
-    <svg width="100" height="100" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:24px;border-radius:28px">
-      <rect width="200" height="200" rx="40" fill="#f7f2eb"/>
-      <path d="M62,100 A38,38 0 1,1 100,138" fill="none" stroke="#2d2d2d" stroke-width="13" stroke-linecap="round"/>
-      <path d="M100,138 A38,38 0 1,1 138,100 L138,118 Q138,135 124,145 L108,157 Q104,160 100,157 L84,145 Q70,135 70,118 L70,100" fill="none" stroke="#b8935a" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
-      <line x1="100" y1="76" x2="100" y2="108" stroke="#b8935a" stroke-width="8" stroke-linecap="round"/>
-      <line x1="86" y1="92" x2="114" y2="92" stroke="#b8935a" stroke-width="8" stroke-linecap="round"/>
+<!-- SPLASH -->
+<div id="screen-splash" class="screen" style="padding:0">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:520px;margin:0 auto">
+    <svg width="110" height="110" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:28px;border-radius:32px;box-shadow:0 8px 32px rgba(0,0,0,0.15)">
+      <rect width="200" height="200" rx="40" fill="#faf6ef"/>
+      <path d="M62,100 A38,38 0 1,1 100,138" fill="none" stroke="#1a1410" stroke-width="13" stroke-linecap="round"/>
+      <path d="M100,138 A38,38 0 1,1 138,100 L138,118 Q138,135 124,145 L108,157 Q104,160 100,157 L84,145 Q70,135 70,118 L70,100" fill="none" stroke="#c49a3c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="100" y1="76" x2="100" y2="108" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/>
+      <line x1="86" y1="92" x2="114" y2="92" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/>
     </svg>
-    <div style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:8px">Welcome to</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--charcoal);letter-spacing:0.06em;line-height:1">COVENANT</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:400;color:var(--gold);letter-spacing:0.14em;margin-top:-4px">TWO</div>
-    <p class="body-text" style="margin:18px 0 32px;max-width:300px;color:var(--muted);text-align:center">Grow closer to God and each other — one session at a time.</p>
-    <div style="width:100%;max-width:360px">
-      <div style="margin-bottom:12px">
-        <div class="muted" style="text-align:left;margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.1em;text-transform:uppercase">Partner 1</div>
-        <input class="input" id="setup-p1" placeholder="First name">
-      </div>
-      <div style="margin-bottom:24px">
-        <div class="muted" style="text-align:left;margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.1em;text-transform:uppercase">Partner 2</div>
-        <input class="input" id="setup-p2" placeholder="First name">
-      </div>
-      <button class="btn btn-charcoal btn-full" style="font-size:13px;letter-spacing:0.08em;padding:16px" onclick="completeSetup()">Begin Together →</button>
+    <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">Welcome to</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:var(--charcoal);letter-spacing:0.06em;line-height:1">COVENANT</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:400;color:var(--gold);letter-spacing:0.16em;margin-top:-6px">TWO</div>
+    <p style="font-size:16px;font-weight:500;color:var(--muted);margin:20px 0 40px;max-width:280px;line-height:1.7">Grow closer to God and each other — one session at a time.</p>
+    <div style="width:100%;max-width:360px;display:flex;flex-direction:column;gap:14px">
+      <button class="btn btn-charcoal btn-full" style="font-size:16px;padding:18px" onclick="beginCouple()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        We're setting this up together
+      </button>
+      <button class="btn btn-lavender btn-full" style="font-size:16px;padding:18px" onclick="beginSolo('her')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+        Just me — She &amp; God
+      </button>
+      <button class="btn btn-steel btn-full" style="font-size:16px;padding:18px" onclick="beginSolo('him')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+        Just me — He &amp; God
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- COUPLE NAME ENTRY -->
+<div id="screen-couple-onboard" class="screen" style="padding:0">
+  <div class="quiz-screen">
+    <div style="padding:48px 0 28px">
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">Together</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--charcoal);line-height:1.2">Tell us your names</div>
+      <p style="font-size:15px;color:var(--muted);font-weight:500;margin-top:10px;line-height:1.6">We'll use these to personalize your sessions.</p>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px">Partner 1</div>
+      <input class="input" id="co-p1" placeholder="First name">
+    </div>
+    <div style="margin-bottom:32px">
+      <div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:8px">Partner 2</div>
+      <input class="input" id="co-p2" placeholder="First name">
+    </div>
+    <button class="btn btn-charcoal btn-full" style="font-size:15px;padding:17px" onclick="startCoupleQuiz()">Continue →</button>
+    <button class="btn-ghost" style="text-align:center;width:100%;margin-top:16px" onclick="showSplash()">← Back</button>
+  </div>
+</div>
+
+<!-- COUPLE QUIZ -->
+<div id="screen-couple-quiz" class="screen" style="padding:0">
+  <div class="quiz-screen">
+    <div style="padding:48px 0 20px">
+      <div class="quiz-progress" id="cq-dots"></div>
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:12px" id="cq-label"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--charcoal);line-height:1.3;margin-bottom:8px" id="cq-q"></div>
+      <p style="font-size:14px;color:var(--muted);font-weight:500;margin-bottom:24px" id="cq-hint"></p>
+    </div>
+    <div id="cq-opts"></div>
+    <div style="display:flex;gap:12px;margin-top:20px">
+      <button class="btn btn-outline" style="flex:1;visibility:hidden" id="cq-back" onclick="cqBack()">← Back</button>
+      <button class="btn btn-charcoal" style="flex:2" onclick="cqNext()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOLO NAME ENTRY -->
+<div id="screen-solo-onboard" class="screen" style="padding:0">
+  <div class="quiz-screen">
+    <div style="padding:48px 0 28px">
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;margin-bottom:10px" id="solo-onboard-label">She &amp; God</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--charcoal);line-height:1.2">What's your name?</div>
+      <p style="font-size:15px;color:var(--muted);font-weight:500;margin-top:10px;line-height:1.6">This is your personal space — just you and God.</p>
+    </div>
+    <div style="margin-bottom:32px">
+      <input class="input" id="solo-name" placeholder="Your first name" id="solo-name-input">
+    </div>
+    <button class="btn btn-full" id="solo-onboard-btn" style="font-size:15px;padding:17px" onclick="startSoloQuiz()">Continue →</button>
+    <button class="btn-ghost" style="text-align:center;width:100%;margin-top:16px" onclick="showSplash()">← Back</button>
+  </div>
+</div>
+
+<!-- SOLO QUIZ -->
+<div id="screen-solo-quiz" class="screen" style="padding:0">
+  <div class="quiz-screen">
+    <div style="padding:48px 0 20px">
+      <div class="quiz-progress" id="sq-dots"></div>
+      <div style="font-size:10px;letter-spacing:0.2em;text-transform:uppercase;font-weight:700;margin-bottom:12px" id="sq-label"></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--charcoal);line-height:1.3;margin-bottom:8px" id="sq-q"></div>
+      <p style="font-size:14px;color:var(--muted);font-weight:500;margin-bottom:24px" id="sq-hint"></p>
+    </div>
+    <div id="sq-opts"></div>
+    <div style="display:flex;gap:12px;margin-top:20px">
+      <button class="btn btn-outline" style="flex:1" onclick="sqBack()">← Back</button>
+      <button class="btn btn-full" id="sq-next-btn" style="flex:2" onclick="sqNext()">Continue →</button>
     </div>
   </div>
 </div>
 
 <!-- HOME -->
 <div id="screen-home" class="screen" style="display:none;padding-top:0">
-
-  <!-- Hero Banner -->
-  <div style="background:linear-gradient(160deg,#1a1410 0%,#2d1f10 60%,#1e2a1a 100%);border-radius:0 0 32px 32px;padding:30px 24px 34px;margin:0 -16px 22px;position:relative;overflow:hidden">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 90% -10%,rgba(196,154,60,0.3) 0%,transparent 60%);pointer-events:none"></div>
-    <div style="position:absolute;bottom:-30px;left:-30px;width:160px;height:160px;background:radial-gradient(circle,rgba(90,138,94,0.15),transparent);border-radius:50%;pointer-events:none"></div>
-    <div style="position:absolute;top:0;right:0;width:2px;height:100%;background:linear-gradient(180deg,var(--gold),transparent);opacity:0.4"></div>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;position:relative">
-      <div style="display:flex;align-items:center;gap:14px">
-        <svg width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="border-radius:12px;flex-shrink:0;box-shadow:0 4px 16px rgba(0,0,0,0.3)">
-          <rect width="200" height="200" rx="40" fill="#faf6ef"/>
-          <path d="M62,100 A38,38 0 1,1 100,138" fill="none" stroke="#1a1410" stroke-width="13" stroke-linecap="round"/>
-          <path d="M100,138 A38,38 0 1,1 138,100 L138,118 Q138,135 124,145 L108,157 Q104,160 100,157 L84,145 Q70,135 70,118 L70,100" fill="none" stroke="#c49a3c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
-          <line x1="100" y1="76" x2="100" y2="108" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/>
-          <line x1="86" y1="92" x2="114" y2="92" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/>
-        </svg>
-        <div>
-          <div style="font-size:9px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-light);font-weight:700;margin-bottom:2px" id="greet-sub">Good morning</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#fff;letter-spacing:0.02em;line-height:1.1" id="greet-names">Covenant Two</div>
-        </div>
-      </div>
-      <div id="home-avatars" style="display:flex"></div>
-    </div>
-    <div style="display:flex;gap:12px;position:relative">
-      <div style="flex:1;background:rgba(255,255,255,0.06);border:1.5px solid rgba(196,154,60,0.3);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:12px">
-        <span style="font-size:26px">🔥</span>
-        <div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--gold);line-height:1" id="h-streak">0</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px">Day Streak</div>
-        </div>
-      </div>
-      <div style="flex:1;background:rgba(255,255,255,0.06);border:1.5px solid rgba(196,154,60,0.3);border-radius:18px;padding:16px 18px;display:flex;align-items:center;gap:12px">
-        <span style="font-size:26px">✝</span>
-        <div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:#fff;line-height:1" id="h-sessions">0</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px">Sessions</div>
-        </div>
-      </div>
-    </div>
+  <div id="home-hero" style="border-radius:0 0 32px 32px;padding:28px 24px 32px;margin:0 -16px 20px;position:relative;overflow:hidden"></div>
+  <!-- 3-way mode toggle — always visible -->
+  <div class="mode-toggle">
+    <button class="mode-btn" id="mb-couple" onclick="switchMode('couple')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      Together
+    </button>
+    <button class="mode-btn" id="mb-her" onclick="switchMode('her')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+      She &amp; God
+    </button>
+    <button class="mode-btn" id="mb-him" onclick="switchMode('him')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+      He &amp; God
+    </button>
   </div>
-
-  <!-- Topic input -->
-  <div class="card" style="border-color:var(--gold-border);background:linear-gradient(135deg,#fffef9,#fdf8ed)">
-    <div class="overline" style="margin-bottom:12px;color:var(--gold)">What's on your hearts today?</div>
+  <div class="card" id="topic-card" style="border-color:var(--gold-border);background:linear-gradient(135deg,#fffef9,#fdf8ed)">
+    <div class="overline" style="margin-bottom:10px" id="home-topic-label">What's on your hearts today?</div>
     <div style="display:flex;gap:10px;align-items:flex-end">
-      <textarea class="input" id="topicInput" placeholder="Share what's on your hearts — a word, a feeling, or a full situation..." style="flex:1;min-height:58px;max-height:140px;resize:none;overflow-y:auto;line-height:1.5;padding:14px 16px"></textarea>
-      <button class="btn btn-gold" style="padding:14px 18px;flex-shrink:0;height:58px;border-radius:14px" onclick="handleStart()">
+      <textarea class="input" id="topicInput" placeholder="Share what's on your hearts..." style="flex:1;min-height:58px;max-height:140px;resize:none;overflow-y:auto;line-height:1.5"></textarea>
+      <button class="btn btn-gold" id="start-btn" style="padding:14px 18px;flex-shrink:0;height:58px;border-radius:14px" onclick="handleStart()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round"/></svg>
       </button>
     </div>
   </div>
-
-  <!-- Suggested Topics -->
   <div style="margin-bottom:16px">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
-      <div class="overline">Suggested for you</div>
-      <button class="btn-ghost" style="font-size:12px;color:var(--gold);font-weight:700" onclick="refreshSuggested()">Refresh ↻</button>
+      <div class="overline" id="sug-label">Suggested for you</div>
+      <button class="btn-ghost" style="font-size:12px;font-weight:700" id="refresh-btn" onclick="refreshSuggested()">Refresh ↻</button>
     </div>
     <div id="suggested-topics" style="display:grid;grid-template-columns:1fr 1fr;gap:12px"></div>
   </div>
-
-  <!-- Deeper Waters -->
-  <div style="margin-bottom:16px">
+  <div style="margin-bottom:16px" id="deeper-section">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
       <div class="overline" style="color:var(--rose)">Deeper Waters</div>
       <div style="flex:1;height:1.5px;background:linear-gradient(90deg,var(--rose-border),transparent)"></div>
     </div>
-    <p style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:14px;line-height:1.5">Harder topics that deserve more space. Approach with grace and patience.</p>
+    <p style="font-size:13px;font-weight:600;color:var(--muted);margin-bottom:14px;line-height:1.5">Harder topics that deserve more space. Approach with grace.</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px" id="deeper-topics"></div>
   </div>
-
   <div class="card" id="last-card" style="display:none">
     <div class="overline" style="margin-bottom:10px">Last session</div>
     <div id="last-content"></div>
@@ -236,74 +262,54 @@ textarea.input{resize:none;min-height:110px;line-height:1.7}
 <!-- SESSION -->
 <div id="screen-session" class="screen" style="display:none">
   <div style="display:flex;align-items:center;gap:10px;padding:24px 0 18px">
-    <button class="btn-ghost" onclick="confirmLeave()" style="display:flex;align-items:center">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="heading" id="sess-title" style="text-transform:capitalize">Session</div>
+    <button class="btn-ghost" onclick="confirmLeave()" style="display:flex;align-items:center"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <div class="heading" id="sess-title" style="text-transform:capitalize;flex:1">Session</div>
+    <div class="tag" id="sess-tag"></div>
   </div>
-  <div id="sess-loading" style="display:none">
-    <div class="loading-state">
-      <span class="loading-cross">✝</span>
-      <div class="loading-text" id="loading-text">Preparing your devotional...</div>
-      <div class="loading-sub">Writing something just for you two</div>
-    </div>
-  </div>
+  <div id="sess-loading" style="display:none"><div class="loading-state"><span class="loading-cross">✝</span><div class="loading-text" id="loading-text">Preparing your devotional...</div><div class="loading-sub">Writing something just for you</div></div></div>
   <div id="step-devo" style="display:none">
     <div class="card">
-      <div class="tag tag-gold" style="margin-bottom:16px">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M2 12h20" stroke-linecap="round"/></svg>
-        Spark — Devotional
-      </div>
+      <div class="tag tag-gold" style="margin-bottom:16px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M12 2v20M2 12h20" stroke-linecap="round"/></svg> Spark — Devotional</div>
       <div id="devo-inner"></div>
-      <button class="btn btn-charcoal btn-full" style="margin-top:22px" onclick="goToPrayer()">Continue to Prayer Points →</button>
+      <button class="btn btn-full" id="devo-next-btn" style="margin-top:22px" onclick="goToPrayer()">Continue to Prayer →</button>
     </div>
   </div>
-
   <div id="step-prayer" style="display:none">
     <div class="card">
-      <div class="tag tag-sage" style="margin-bottom:16px">
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z" fill="currentColor" stroke="none"/></svg>
-        Pray Together
-      </div>
-      <div id="prayer-points-inner"></div>
-      <button class="btn btn-charcoal btn-full" style="margin-top:22px" onclick="goToGame()">Continue to Connect Game →</button>
+      <div class="tag tag-sage" style="margin-bottom:16px">🙏 &nbsp;Pray</div>
+      <div id="prayer-inner"></div>
+      <button class="btn btn-full" id="prayer-next-btn" style="margin-top:22px" onclick="goToGame()">Continue →</button>
     </div>
   </div>
   <div id="step-game" style="display:none">
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-        <div class="tag tag-charcoal">Connect — Game</div>
+        <div class="tag tag-charcoal" id="game-tag">Connect</div>
         <div id="q-num" class="muted">0 / 5</div>
       </div>
       <div class="prog-wrap"><div class="prog-bar" id="q-bar" style="width:0%"></div></div>
       <div class="convo-card" id="convo-card"><div class="convo-ph">Tap "Next →" to begin</div></div>
       <div style="display:flex;gap:10px;margin-bottom:10px">
-        <button class="btn btn-gold" style="flex:1" onclick="doAIQ()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg>
-          AI Question
-        </button>
+        <button class="btn btn-gold" style="flex:1" onclick="doAIQ()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3"/></svg>AI Question</button>
         <button class="btn btn-charcoal" style="flex:1" onclick="doNextQ()">Next →</button>
       </div>
-      <button class="btn btn-outline btn-full" onclick="goToWrap()">Finish &amp; Pray Together</button>
+      <button class="btn btn-outline btn-full" onclick="goToWrap()">Finish &amp; Close in Prayer</button>
     </div>
   </div>
   <div id="step-wrap" style="display:none">
     <div class="card" style="text-align:center">
       <div style="font-size:44px;margin-bottom:16px">✝</div>
       <div style="font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--charcoal);margin-bottom:12px">Close in Prayer</div>
-      <div class="verse-block" style="text-align:left">
-        <div class="verse-text" id="close-verse">"May the God of hope fill you with all joy and peace as you trust in Him."</div>
-        <div class="verse-ref" id="close-ref">Romans 15:13</div>
-      </div>
-      <p style="font-size:16px;font-weight:500;line-height:1.7;margin:14px 0 0;color:var(--muted)">Take a moment together. Let one of you pray aloud over what came up today.</p>
+      <div class="verse-block" style="text-align:left"><div class="verse-text" id="close-verse">"May the God of hope fill you with all joy and peace as you trust in Him."</div><div class="verse-ref" id="close-ref">Romans 15:13</div></div>
+      <p style="font-size:16px;font-weight:500;line-height:1.7;margin:14px 0 0;color:var(--muted)" id="wrap-instruction">Take a moment together. Let one of you pray aloud.</p>
     </div>
     <div class="card">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:6px">Prayer Log</div>
-      <p style="font-size:15px;font-weight:500;color:var(--muted);margin-bottom:14px">What did you pray for together today? Write it down — you'll treasure it later.</p>
-      <textarea class="input" id="prayer-text" placeholder="Write what God put on your hearts — a prayer, a breakthrough, something you want to remember..." style="min-height:130px;font-size:16px;font-weight:500;line-height:1.7"></textarea>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--charcoal);margin-bottom:6px">Prayer Log</div>
+      <p style="font-size:15px;font-weight:500;color:var(--muted);margin-bottom:14px" id="prayer-log-sub">Write it down — you'll treasure it later.</p>
+      <textarea class="input" id="prayer-text" placeholder="Write what God put on your heart..." style="min-height:130px;font-size:16px;font-weight:500;line-height:1.7"></textarea>
       <div style="display:flex;gap:10px;margin-top:16px;align-items:center">
-        <button class="btn-ghost" onclick="finishSession(false)" style="font-size:14px;font-weight:600">Skip</button>
-        <button class="btn btn-gold btn-full" style="font-size:15px;font-weight:700" onclick="finishSession(true)">Save &amp; Finish</button>
+        <button class="btn-ghost" onclick="finishSession(false)">Skip</button>
+        <button class="btn btn-gold btn-full" onclick="finishSession(true)">Save &amp; Finish</button>
       </div>
     </div>
   </div>
@@ -311,25 +317,19 @@ textarea.input{resize:none;min-height:110px;line-height:1.7}
 
 <!-- PRAYERS -->
 <div id="screen-prayers" class="screen" style="display:none">
-  <div style="padding:28px 0 16px">
-    <div class="overline" style="margin-bottom:4px">Your history</div>
-    <div class="display">Prayer Log</div>
-  </div>
+  <div style="padding:28px 0 16px"><div class="overline" style="margin-bottom:4px">Your history</div><div class="display">Prayer Log</div></div>
   <div id="prayers-body"></div>
 </div>
 
 <!-- STREAK -->
 <div id="screen-streak" class="screen" style="display:none">
-  <div style="padding:28px 0 16px">
-    <div class="overline" style="margin-bottom:4px">Your consistency</div>
-    <div class="display">Streak &amp; Stats</div>
-  </div>
+  <div style="padding:28px 0 16px"><div class="overline" style="margin-bottom:4px">Your consistency</div><div class="display">Streak &amp; Stats</div></div>
   <div class="card">
     <div style="display:flex;align-items:center;gap:22px">
       <span style="font-size:38px">🔥</span>
-      <div><div class="streak-num" id="s-cur">0</div><div class="streak-lbl">current streak</div></div>
-      <div style="width:1px;background:var(--border);height:52px"></div>
-      <div><div style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:var(--sage)" id="s-best">0</div><div class="streak-lbl">best streak</div></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;color:var(--gold);line-height:1" id="s-cur">0</div><div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-top:3px">current streak</div></div>
+      <div style="width:1.5px;background:var(--border);height:52px"></div>
+      <div><div style="font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;color:var(--sage);line-height:1" id="s-best">0</div><div style="font-size:11px;color:var(--muted);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-top:3px">best streak</div></div>
     </div>
     <hr class="divider">
     <div class="overline" style="margin-bottom:12px">Last 14 days</div>
@@ -338,81 +338,40 @@ textarea.input{resize:none;min-height:110px;line-height:1.7}
   <div class="card">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
       <div class="stat-box" style="background:var(--gold-pale)"><div class="stat-num" style="color:var(--gold)" id="s-tsess">0</div><div class="stat-lbl">sessions</div></div>
-      <div class="stat-box" style="background:var(--rose-pale)"><div class="stat-num" style="color:var(--rose)" id="s-tpray">0</div><div class="stat-lbl">prayers logged</div></div>
-      <div class="stat-box" style="background:var(--sage-pale)"><div class="stat-num" style="color:var(--sage)" id="s-ttop">0</div><div class="stat-lbl">topics explored</div></div>
-      <div class="stat-box" style="background:#f0efed"><div class="stat-num" style="color:var(--charcoal)" id="s-tq">0</div><div class="stat-lbl">questions asked</div></div>
+      <div class="stat-box" style="background:var(--rose-pale)"><div class="stat-num" style="color:var(--rose)" id="s-tpray">0</div><div class="stat-lbl">prayers</div></div>
+      <div class="stat-box" style="background:var(--sage-pale)"><div class="stat-num" style="color:var(--sage)" id="s-ttop">0</div><div class="stat-lbl">topics</div></div>
+      <div class="stat-box" style="background:var(--lavender-pale)"><div class="stat-num" style="color:var(--lavender)" id="s-tq">0</div><div class="stat-lbl">questions</div></div>
     </div>
   </div>
 </div>
 
 <!-- PROFILE -->
 <div id="screen-profile" class="screen" style="display:none">
-  <div style="padding:28px 0 16px">
-    <div class="overline" style="margin-bottom:4px">Your account</div>
-    <div class="display">Profile</div>
-  </div>
-  <div class="card" id="profile-view" style="display:none">
-    <div style="display:flex;gap:12px;margin-bottom:14px;align-items:center" id="pv-avatars"></div>
-    <div class="muted" id="pv-sub"></div>
+  <div style="padding:28px 0 16px"><div class="overline" style="margin-bottom:4px">Your account</div><div class="display">Profile</div></div>
+  <div class="card" id="profile-names-card" style="display:none">
+    <div id="pv-content"></div>
     <hr class="divider">
-    <button class="btn btn-outline" onclick="editProf()">Edit Profile</button>
-  </div>
-  <div class="card" id="profile-form">
-    <div class="overline" style="margin-bottom:16px">Tell us about yourselves</div>
-    <div style="margin-bottom:12px">
-      <div class="muted" style="margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">Partner 1</div>
-      <input class="input" id="p1" placeholder="Name">
-    </div>
-    <div style="margin-bottom:12px">
-      <div class="muted" style="margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">Partner 2</div>
-      <input class="input" id="p2" placeholder="Name">
-    </div>
-    <div style="margin-bottom:20px">
-      <div class="muted" style="margin-bottom:6px;font-weight:600;font-size:10px;letter-spacing:0.08em;text-transform:uppercase">Anniversary (optional)</div>
-      <input class="input" id="p-ann" type="date">
-    </div>
-    <button class="btn btn-gold btn-full" onclick="saveProf()">Save Profile</button>
+    <button class="btn btn-outline btn-full" onclick="retakeQuiz()">Update My Answers</button>
   </div>
   <div class="card">
     <div class="overline" style="margin-bottom:14px">Preferences</div>
     <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
-      <div>
-        <div style="font-size:13px;color:var(--charcoal);font-weight:500">Personalize with our names</div>
-        <div class="muted" style="font-size:11px;margin-top:2px">Weaves your names into questions</div>
-      </div>
-      <div class="toggle-wrap" onclick="togglePref('personalize')">
-        <div class="toggle-bg" id="tog-bg" style="background:var(--border)"></div>
-        <div class="toggle-th" id="tog-th"></div>
-      </div>
+      <div><div style="font-size:14px;color:var(--charcoal);font-weight:600">Personalize with names</div><div class="muted" style="font-size:12px;margin-top:2px">Weaves names into questions</div></div>
+      <div class="toggle-wrap" onclick="togglePref()"><div class="toggle-bg" id="tog-bg" style="background:var(--border)"></div><div class="toggle-th" id="tog-th"></div></div>
     </div>
-    <div style="padding:10px 0">
-      <div style="font-size:13px;color:var(--charcoal);font-weight:500">Export my data</div>
-      <div class="muted" style="font-size:11px;margin-top:2px">Download all sessions &amp; prayers as a backup</div>
-    </div>
+    <div style="padding:10px 0"><div style="font-size:14px;color:var(--charcoal);font-weight:600">Export my data</div><div class="muted" style="font-size:12px;margin-top:2px">Download everything as a backup</div></div>
     <button class="btn btn-outline btn-full" style="margin-bottom:4px" onclick="exportData()">Export Backup</button>
     <hr class="divider">
-    <button class="btn-ghost" style="color:var(--rose);font-size:12px" onclick="confirmReset()">Reset all data</button>
+    <button class="btn-ghost" style="color:var(--rose);font-size:13px" onclick="confirmReset()">Reset all data</button>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="nav" id="main-nav" style="display:none">
-  <button class="nav-btn active" id="nav-home" onclick="goTo('home')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12L12 3l9 9M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="nav-label">Home</span>
-  </button>
-  <button class="nav-btn" id="nav-prayers" onclick="goTo('prayers')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
-    <span class="nav-label">Prayers</span>
-  </button>
-  <button class="nav-btn" id="nav-streak" onclick="goTo('streak')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span class="nav-label">Streak</span>
-  </button>
-  <button class="nav-btn" id="nav-profile" onclick="goTo('profile')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" stroke-linecap="round"/></svg>
-    <span class="nav-label">Profile</span>
-  </button>
+  <button class="nav-btn active" id="nav-home" onclick="goTo('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12L12 3l9 9M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Home</span></button>
+  <button class="nav-btn" id="nav-prayers" onclick="goTo('prayers')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg><span class="nav-label">Prayers</span></button>
+  <button class="nav-btn" id="nav-streak" onclick="goTo('streak')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-label">Streak</span></button>
+  <button class="nav-btn" id="nav-profile" onclick="goTo('profile')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7" stroke-linecap="round"/></svg><span class="nav-label">Profile</span></button>
 </nav>
 
 <!-- MODAL -->
@@ -428,79 +387,159 @@ textarea.input{resize:none;min-height:110px;line-height:1.7}
 </div>
 
 <script>
-const DEEPER_TOPICS=[
-  {topic:'infidelity',label:'Infidelity',icon:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18.364 5.636a9 9 0 010 12.728M5.636 5.636a9 9 0 000 12.728M12 12v.01M9 10l3 2 3-2"/></svg>`,desc:'Betrayal & rebuilding trust',bg:'linear-gradient(135deg,#2d0a0a,#4a1010)',accent:'#e05050'},
-  {topic:'resentment',label:'Resentment',icon:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s-8-4-8-10a8 8 0 0116 0c0 6-8 10-8 10z"/><path d="M12 8v4M12 16h.01"/></svg>`,desc:'Releasing built-up bitterness',bg:'linear-gradient(135deg,#1e1a2e,#2d2050)',accent:'#9b8fd4'},
-  {topic:'sexual satisfaction',label:'Intimacy Struggles',icon:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,desc:'Physical & emotional closeness',bg:'linear-gradient(135deg,#2d1a0e,#4a2a10)',accent:'#e09050'},
-  {topic:'long distance',label:'Long Distance',icon:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>`,desc:'Staying connected apart',bg:'linear-gradient(135deg,#0a1e2d,#102840)',accent:'#50a0d4'},
-  {topic:'parenting styles',label:'Parenting Conflict',icon:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><circle cx="19" cy="5" r="3"/></svg>`,desc:'Aligning on raising children',bg:'linear-gradient(135deg,#0e2d1a,#154024)',accent:'#50c878'},
-  {topic:'financial stress',label:'Financial Crisis',icon:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,desc:'Debt, loss & financial fear',bg:'linear-gradient(135deg,#1e1a0a,#2d2810)',accent:'#c4a030'},
+/* ============================================================
+   QUIZ DATA
+============================================================ */
+const CQ=[
+  {q:'How long have you been married?',hint:'',multi:false,opts:['Less than 1 year','1–3 years','4–7 years','8–15 years','15+ years'],key:'duration'},
+  {q:'What season best describes your marriage right now?',hint:'Be honest — this shapes your whole experience.',multi:false,opts:['Thriving — we\'re in a great place','Growing — things are good, we want more','Struggling — we\'re in a hard season','Rebuilding — recovering from something difficult','Surviving — just getting through right now'],key:'season'},
+  {q:'What are your biggest areas of tension right now?',hint:'Pick up to 3.',multi:true,max:3,opts:['Communication','Trust','Finances','Intimacy','Parenting','Purpose / Direction','Conflict & Arguments','Emotional Distance','Faith & Spirituality','Time & Priorities'],key:'tensions'},
+  {q:'How do you typically handle conflict?',hint:'',multi:false,opts:['We talk it out openly','We go quiet and need space','We tend to avoid it','One of us shuts down','We\'re still figuring it out'],key:'conflict'},
+  {q:'What does your spiritual life look like together?',hint:'',multi:false,opts:['We pray & read together regularly','We try but it\'s inconsistent','We\'re just getting started','It\'s mostly individual right now','We don\'t yet but want to'],key:'spiritual'},
+  {q:'What brought you here today?',hint:'',multi:false,opts:['We want to grow closer','We\'re going through something hard','We want a new routine together','Someone recommended this to us','Just exploring'],key:'reason'},
 ];
 
-function renderDeeper(){
-  document.getElementById('deeper-topics').innerHTML=DEEPER_TOPICS.map(t=>`
-    <button onclick="pickTopic('${t.topic}')" style="background:${t.bg};border:1.5px solid rgba(255,255,255,0.08);border-radius:20px;padding:18px 16px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:all 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.3)" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(0,0,0,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)'">
-      <div style="color:${t.accent};display:flex">${t.icon}</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#fff;line-height:1.2">${t.label}</div>
-      <div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.4;font-weight:600">${t.desc}</div>
-    </button>`).join('');
-}
-
-const ALL_TOPICS=[
-  {topic:'trust',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,desc:'Building safety with each other'},
-  {topic:'communication',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,desc:'Speaking and listening well'},
-  {topic:'forgiveness',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,desc:'Releasing what you carry'},
-  {topic:'finances',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v2M12 16v2M9 9h4.5a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3H15"/></svg>`,desc:'Stewarding what God gave you'},
-  {topic:'intimacy',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>`,desc:'Being fully known and loved'},
-  {topic:'purpose',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,desc:'Your shared mission together'},
-  {topic:'grief',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>`,desc:'Holding pain side by side'},
-  {topic:'joy',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>`,desc:'Choosing delight together'},
-  {topic:'parenting',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><circle cx="19" cy="5" r="3"/></svg>`,desc:'Raising children in faith'},
-  {topic:'anxiety',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>`,desc:'Releasing worry to God'},
-  {topic:'prayer',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>`,desc:'Deepening your prayer life'},
-  {topic:'service',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/><path d="M12 8v8M8 12h8"/></svg>`,desc:'Giving back together'},
-  {topic:'identity',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M3 21v-2a9 9 0 0118 0v2"/></svg>`,desc:'Who you are in Christ'},
-  {topic:'conflict',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>`,desc:'Fighting for each other'},
-  {topic:'rest',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`,desc:'Sabbath and renewal'},
-  {topic:'gratitude',icon:`<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,desc:'Counting your blessings'},
+const SQ_HER=[
+  {q:'What season best describes where you are right now?',hint:'Be honest with yourself.',multi:false,opts:['Thriving — I\'m in a good place','Growing — I want to go deeper','Struggling — things are hard','Healing — recovering from pain','Surviving — just getting through'],key:'season'},
+  {q:'What role do you carry most in your home?',hint:'',multi:false,opts:['The Initiator — I start hard conversations','The Supporter — I hold everyone up','The Peacekeeper — I smooth things over','The Caregiver — I put others first','A mix of all of these'],key:'role'},
+  {q:'What does your personal quiet time look like?',hint:'',multi:false,opts:['Daily — it\'s a regular practice','A few times a week','Occasionally when I need it','Rarely — I want to be more consistent','Never yet'],key:'quietTime'},
+  {q:'What do you most need from God right now?',hint:'Pick up to 2.',multi:true,max:2,opts:['Peace — my heart is anxious','Strength — I\'m running on empty','Wisdom — I don\'t know what to do','Healing — I\'m carrying pain','Direction — I need clarity','Courage — I\'m afraid to act'],key:'needs'},
+  {q:'What brought you here today?',hint:'',multi:false,opts:['I want to grow in my faith','I want to be a better wife','I need a quiet space with God','I\'m going through something hard','I just want to feel less alone'],key:'reason'},
 ];
 
-let shownTopics=[];
-function refreshSuggested(){
-  const shuffled=[...ALL_TOPICS].sort(()=>Math.random()-0.5);
-  shownTopics=shuffled.slice(0,4);
-  document.getElementById('suggested-topics').innerHTML=shownTopics.map(t=>`
-    <button onclick="pickTopic('${t.topic}')" style="background:var(--card);border:2px solid var(--border);border-radius:20px;padding:18px 16px;text-align:left;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 12px rgba(26,20,10,0.06)" onmouseover="this.style.borderColor='var(--gold)';this.style.background='var(--gold-pale)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--card)';this.style.transform=''">
-      <div style="color:var(--gold);display:flex">${t.icon}</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--charcoal);text-transform:capitalize">${t.topic}</div>
-      <div style="font-size:13px;color:var(--muted);line-height:1.4;font-weight:600">${t.desc}</div>
-    </button>`).join('');
-}
+const SQ_HIM=[
+  {q:'What season best describes where you are right now?',hint:'Be honest — God already knows.',multi:false,opts:['Thriving — I\'m in a solid place','Growing — I want to go deeper','Struggling — things are heavy','Rebuilding — starting fresh after a setback','Surviving — just keeping it together'],key:'season'},
+  {q:'What does your leadership at home look like right now?',hint:'',multi:false,opts:['I lead actively and intentionally','I try but feel inconsistent','I hold back — not sure how to lead','I\'m learning what it even means','My wife leads more than I do'],key:'leadership'},
+  {q:'What does your time alone with God look like?',hint:'',multi:false,opts:['Daily — it\'s a discipline I keep','A few times a week','When I really need it','Rarely — I want to change that','I don\'t have one yet'],key:'quietTime'},
+  {q:'What do you most need from God right now?',hint:'Pick up to 2.',multi:true,max:2,opts:['Strength — I\'m carrying a lot','Wisdom — I need direction','Peace — my mind won\'t stop','Courage — I keep holding back','Identity — I\'m not sure who I am anymore','Purpose — I\'ve lost my sense of mission'],key:'needs'},
+  {q:'What brought you here today?',hint:'',multi:false,opts:['I want to grow spiritually','I want to be a better husband','I need honest time with God','I\'m going through something hard','Someone encouraged me to try this'],key:'reason'},
+];
 
-const RANDOM_PROMPTS=["What's something you've been carrying quietly this week?","Is there something you've wanted to pray about together but haven't yet?","What emotion has been most present for you lately?","What area of your life feels like it needs God's touch right now?","What's been heavy on your heart this season?","What would feel like relief to hand over to God together today?","Where have you been leaning on your own strength instead of His?","What has God been whispering to you that you haven't acted on?","What part of your marriage do you want to bring before Him today?","What dream or worry has been showing up in your mind this week?"];
+/* ============================================================
+   TOPIC POOLS
+============================================================ */
+const SVG={
+  heart:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>`,
+  chat:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>`,
+  shield:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  coin:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v2M12 16v2M9 9h4.5a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3H15"/></svg>`,
+  people:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>`,
+  star:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  smile:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M8 13s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>`,
+  cross:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v20M2 12h20"/></svg>`,
+  moon:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`,
+  clock:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>`,
+  user:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="8" r="6"/><path d="M3 21v-2a9 9 0 0118 0v2"/></svg>`,
+  eye:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19M1 1l22 22"/></svg>`,
+  home:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>`,
+  wave:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>`,
+  anchor:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 12H2a10 10 0 0020 0h-3"/></svg>`,
+  flame:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 14a4 4 0 110-8 4 4 0 010 8z"/></svg>`,
+};
 
-const FALLBACK_DEVOS={finances:{title:"Faithful Stewards Together",verse:"Honor the Lord with your wealth and with the firstfruits of all your produce.",ref:"Proverbs 3:9",body:"Money has a way of revealing what we truly value. For many couples, finances become a place of tension — not because of numbers, but because of different stories, fears, and hopes living beneath every budget conversation.\n\nGod does not call you to financial perfection, but to faithful stewardship. When money becomes a shared mission rather than a scoreboard, it loses its power to divide you.\n\nToday, bring your finances before Him as a team.",reflect:"What unspoken belief or fear about money did you bring into this marriage, and have you ever fully shared it with each other?",closing:"Keep your life free from love of money and be content with what you have.",closingRef:"Hebrews 13:5"},default:{title:"Drawing Near Together",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Every season of marriage holds something worth bringing before God. Whether you are in abundance or challenge, clarity or confusion, He is the constant — the one who knows both of you fully and loves you completely.\n\nComing to Him together as a couple is one of the most powerful things you can do.\n\nToday, whatever brought you here, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you right now that you have not yet brought before God together as a couple?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"}};
+const COUPLE_TOPICS=[
+  {t:'trust',d:'Building safety with each other',i:SVG.heart},
+  {t:'communication',d:'Speaking and listening well',i:SVG.chat},
+  {t:'forgiveness',d:'Releasing what you carry',i:SVG.shield},
+  {t:'finances',d:'Stewarding what God gave you',i:SVG.coin},
+  {t:'intimacy',d:'Being fully known and loved',i:SVG.people},
+  {t:'purpose',d:'Your shared mission together',i:SVG.star},
+  {t:'grief',d:'Holding pain side by side',i:SVG.smile},
+  {t:'joy',d:'Choosing delight together',i:SVG.smile},
+  {t:'parenting',d:'Raising children in faith',i:SVG.people},
+  {t:'anxiety',d:'Releasing worry to God',i:SVG.wave},
+  {t:'prayer life',d:'Deepening how you pray together',i:SVG.cross},
+  {t:'rest',d:'Sabbath and renewal',i:SVG.moon},
+  {t:'gratitude',d:'Counting your blessings',i:SVG.clock},
+  {t:'identity in Christ',d:'Who you are in Him together',i:SVG.user},
+  {t:'conflict',d:'Fighting for each other',i:SVG.wave},
+  {t:'service',d:'Giving back together',i:SVG.heart},
+];
 
-const FALLBACK_QS=["What is one thing God has been teaching you recently that you have not shared with me yet?","What fear do you carry that you rarely talk about?","In what area of our marriage do you feel God calling us to grow together this season?","When do you feel most connected to me — what are we usually doing?","What is one dream you have for our life together that we have not yet talked about seriously?"];
+const HER_TOPICS=[
+  {t:'feeling unseen',d:'When you feel overlooked',i:SVG.eye},
+  {t:'praying for my husband',d:'Interceding for your spouse',i:SVG.cross},
+  {t:'emotional exhaustion',d:'Running on empty',i:SVG.wave},
+  {t:'carrying the household',d:'When the weight feels unequal',i:SVG.home},
+  {t:'my worth in Christ',d:'Your identity and value',i:SVG.star},
+  {t:'anxiety and fear',d:'Releasing worry to God',i:SVG.wave},
+  {t:'loneliness in marriage',d:'When you feel alone together',i:SVG.smile},
+  {t:'forgiveness',d:'Letting go and healing',i:SVG.shield},
+  {t:'joy and gratitude',d:'Finding light in today',i:SVG.smile},
+  {t:'rest and peace',d:'Sabbath for your soul',i:SVG.moon},
+  {t:'trusting God with my marriage',d:'Surrendering what you can\'t control',i:SVG.anchor},
+  {t:'being a godly wife',d:'Grace, strength, and love',i:SVG.heart},
+];
 
-let S={profile:{p1:'',p2:'',ann:''},prefs:{personalize:false},sessions:[],streak:{cur:0,best:0,lastDate:''},totalQ:0};
-function loadS(){try{const d=localStorage.getItem('ct_v3');if(d)S=JSON.parse(d);}catch(e){}}
-function saveS(){try{localStorage.setItem('ct_v3',JSON.stringify(S));}catch(e){}}
+const HIM_TOPICS=[
+  {t:'leading my family well',d:'What godly leadership looks like',i:SVG.anchor},
+  {t:'pressure to provide',d:'When the weight feels crushing',i:SVG.home},
+  {t:'anger and self-control',d:'Taming the fire within',i:SVG.flame},
+  {t:'being emotionally present',d:'Showing up fully for your family',i:SVG.people},
+  {t:'praying for my wife',d:'Interceding for your spouse',i:SVG.cross},
+  {t:'purity and temptation',d:'Standing firm in a distracted world',i:SVG.shield},
+  {t:'identity beyond work',d:'Who you are when work stops',i:SVG.user},
+  {t:'being a present father',d:'Fathering with intention',i:SVG.people},
+  {t:'fear and anxiety',d:'When strength runs out',i:SVG.wave},
+  {t:'forgiveness',d:'Letting go and moving forward',i:SVG.shield},
+  {t:'purpose and calling',d:'Finding your mission from God',i:SVG.star},
+  {t:'rest and renewal',d:'Permission to stop and breathe',i:SVG.moon},
+];
 
+const ALL_DEEPER=[
+  {t:'infidelity',l:'Infidelity',d:'Betrayal & rebuilding trust',bg:'linear-gradient(135deg,#2d0a0a,#4a1010)',ac:'#e05050',tags:['trust'],seasons:['struggling','rebuilding','surviving']},
+  {t:'resentment',l:'Resentment',d:'Releasing built-up bitterness',bg:'linear-gradient(135deg,#1e1a2e,#2d2050)',ac:'#9b8fd4',tags:['forgiveness'],seasons:['struggling','surviving','growing']},
+  {t:'sexual satisfaction',l:'Intimacy Struggles',d:'Physical & emotional closeness',bg:'linear-gradient(135deg,#2d1a0e,#4a2a10)',ac:'#e09050',tags:['intimacy'],seasons:['growing','thriving','struggling']},
+  {t:'long distance marriage',l:'Long Distance',d:'Staying connected apart',bg:'linear-gradient(135deg,#0a1e2d,#102840)',ac:'#50a0d4',tags:['emotional distance'],seasons:['surviving','struggling']},
+  {t:'parenting conflict',l:'Parenting Conflict',d:'Aligning on raising children',bg:'linear-gradient(135deg,#0e2d1a,#154024)',ac:'#50c878',tags:['parenting','conflict'],seasons:['struggling','growing','surviving']},
+  {t:'financial crisis',l:'Financial Crisis',d:'Debt, loss & financial fear',bg:'linear-gradient(135deg,#1e1a0a,#2d2810)',ac:'#c4a030',tags:['finances'],seasons:['struggling','surviving','rebuilding']},
+  {t:'emotional distance',l:'Emotional Distance',d:'Closing the gap between you',bg:'linear-gradient(135deg,#1a1020,#2a1840)',ac:'#c088e8',tags:['emotional distance','intimacy'],seasons:['struggling','surviving','rebuilding']},
+  {t:'grief and loss',l:'Grief & Loss',d:'Walking through deep pain together',bg:'linear-gradient(135deg,#1a1010,#2d1818)',ac:'#d08080',tags:['grief'],seasons:['surviving','rebuilding','struggling']},
+];
+
+const FALLBACK_QS=["What is one thing God has been teaching you that you haven't shared yet?","What fear do you carry that you rarely talk about?","In what area do you feel God calling you to grow this season?","When do you feel most connected — what are you usually doing?","What is one dream you haven't talked about seriously yet?"];
+
+/* ============================================================
+   STORE
+============================================================ */
+let S={
+  mode:'couple',
+  profile:{p1:'',p2:'',herName:'',himName:''},
+  quiz:{couple:{},her:{},him:{}},
+  prefs:{personalize:false},
+  sessions:[],
+  streak:{cur:0,best:0,lastDate:''},
+  onboarded:{couple:false,her:false,him:false}
+};
+function loadS(){try{const d=localStorage.getItem('ct_v5');if(d)S=JSON.parse(d);}catch(e){}}
+function saveS(){try{localStorage.setItem('ct_v5',JSON.stringify(S));}catch(e){}}
+
+/* ============================================================
+   QUIZ STATE
+============================================================ */
+let cqIdx=0,cqAns={},sqIdx=0,sqAns={},sqGender='her';
+
+/* ============================================================
+   SESSION STATE
+============================================================ */
 let cTopic='',cQs=[],cQIdx=0,inSession=false;
 
-async function callAI(prompt){
-  const res=await fetch('/api/devotional',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
-  if(!res.ok)throw new Error('API error '+res.status);
-  const data=await res.json();
-  return data.content[0].text.replace(/```json|```/g,'').trim();
+/* ============================================================
+   NAVIGATION
+============================================================ */
+function showSplash(){
+  document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
+  const s=document.getElementById('screen-splash');s.style.display='block';s.classList.add('active');
+  document.getElementById('main-nav').style.display='none';
 }
-
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
+  const s=document.getElementById(id);s.style.display='block';s.classList.add('active');
+}
 function goTo(name){
   document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  const sc=document.getElementById('screen-'+name);
-  sc.style.display='block';sc.classList.remove('active');void sc.offsetWidth;sc.classList.add('active');
+  const sc=document.getElementById('screen-'+name);sc.style.display='block';sc.classList.remove('active');void sc.offsetWidth;sc.classList.add('active');
   const nb=document.getElementById('nav-'+name);if(nb)nb.classList.add('active');
   if(name==='home')renderHome();
   if(name==='prayers')renderPrayers();
@@ -508,344 +547,490 @@ function goTo(name){
   if(name==='profile')renderProfile();
 }
 
-function completeSetup(){
-  const p1=document.getElementById('setup-p1').value.trim();
-  const p2=document.getElementById('setup-p2').value.trim();
-  if(!p1||!p2){alert('Please enter both names to begin.');return;}
-  S.profile={p1,p2,ann:''};saveS();
+/* ============================================================
+   ONBOARDING — COUPLE
+============================================================ */
+function beginCouple(){showScreen('screen-couple-onboard');}
+
+function startCoupleQuiz(){
+  const p1=document.getElementById('co-p1').value.trim(),p2=document.getElementById('co-p2').value.trim();
+  if(!p1||!p2){alert('Please enter both names.');return;}
+  S.profile.p1=p1;S.profile.p2=p2;cqIdx=0;cqAns={};renderCQ();showScreen('screen-couple-quiz');
+}
+
+function renderCQ(){
+  const q=CQ[cqIdx];
+  document.getElementById('cq-label').textContent=`Question ${cqIdx+1} of ${CQ.length}`;
+  document.getElementById('cq-q').textContent=q.q;
+  document.getElementById('cq-hint').textContent=q.hint||'';
+  document.getElementById('cq-dots').innerHTML=CQ.map((_,i)=>`<div class="quiz-dot" style="background:${i<=cqIdx?'var(--gold)':'var(--border)'}"></div>`).join('');
+  const cur=cqAns[q.key]||(q.multi?[]:'');
+  document.getElementById('cq-opts').innerHTML=q.opts.map(o=>{
+    const sel=q.multi?cur.includes(o):cur===o;
+    return `<button class="quiz-option${sel?' sel-couple':''}" onclick="cqSel('${o.replace(/'/g,"\\'")}')"><div class="quiz-check" style="${sel?'background:var(--gold);border-color:var(--gold)':''}">${sel?chk():''}</div>${o}</button>`;
+  }).join('');
+  document.getElementById('cq-back').style.visibility=cqIdx===0?'hidden':'visible';
+}
+function cqSel(val){const q=CQ[cqIdx];if(q.multi){if(!cqAns[q.key])cqAns[q.key]=[];const a=cqAns[q.key];const i=a.indexOf(val);if(i>-1)a.splice(i,1);else if(!q.max||a.length<q.max)a.push(val);}else cqAns[q.key]=val;renderCQ();}
+function cqBack(){if(cqIdx>0){cqIdx--;renderCQ();}}
+function cqNext(){
+  const q=CQ[cqIdx];const a=cqAns[q.key];if(!a||(Array.isArray(a)&&!a.length)){alert('Please select an option.');return;}
+  if(cqIdx<CQ.length-1){cqIdx++;renderCQ();}else{S.quiz.couple={...cqAns};S.onboarded.couple=true;S.mode='couple';saveS();launchApp();}
+}
+
+/* ============================================================
+   ONBOARDING — SOLO
+============================================================ */
+function beginSolo(gender){
+  sqGender=gender;
+  const label=document.getElementById('solo-onboard-label');
+  const btn=document.getElementById('solo-onboard-btn');
+  label.textContent=gender==='her'?'She & God':'He & God';
+  label.style.color=gender==='her'?'var(--lavender)':'var(--steel)';
+  btn.className='btn btn-full '+(gender==='her'?'btn-lavender':'btn-steel');
+  document.getElementById('solo-name').placeholder=gender==='her'?'Your first name':'Your first name';
+  showScreen('screen-solo-onboard');
+}
+
+function startSoloQuiz(){
+  const name=document.getElementById('solo-name').value.trim();if(!name){alert('Please enter your name.');return;}
+  if(sqGender==='her')S.profile.herName=name;else S.profile.himName=name;
+  sqIdx=0;sqAns={};renderSQ();showScreen('screen-solo-quiz');
+}
+
+function renderSQ(){
+  const qs=sqGender==='her'?SQ_HER:SQ_HIM;
+  const color=sqGender==='her'?'var(--lavender)':'var(--steel)';
+  const selClass=sqGender==='her'?'sel-her':'sel-him';
+  const selColor=sqGender==='her'?'var(--lavender)':'var(--steel)';
+  const q=qs[sqIdx];
+  document.getElementById('sq-label').textContent=`Question ${sqIdx+1} of ${qs.length}`;
+  document.getElementById('sq-label').style.color=color;
+  document.getElementById('sq-q').textContent=q.q;
+  document.getElementById('sq-hint').textContent=q.hint||'';
+  document.getElementById('sq-dots').innerHTML=qs.map((_,i)=>`<div class="quiz-dot" style="background:${i<=sqIdx?color:'var(--border)'}"></div>`).join('');
+  document.getElementById('sq-next-btn').className='btn btn-full '+(sqGender==='her'?'btn-lavender':'btn-steel');
+  const cur=sqAns[q.key]||(q.multi?[]:'');
+  document.getElementById('sq-opts').innerHTML=q.opts.map(o=>{
+    const sel=q.multi?cur.includes(o):cur===o;
+    return `<button class="quiz-option${sel?' '+selClass:''}" onclick="sqSel('${o.replace(/'/g,"\\'")}')"><div class="quiz-check" style="${sel?`background:${selColor};border-color:${selColor}`:''}">${sel?chk():''}</div>${o}</button>`;
+  }).join('');
+}
+function sqSel(val){const qs=sqGender==='her'?SQ_HER:SQ_HIM;const q=qs[sqIdx];if(q.multi){if(!sqAns[q.key])sqAns[q.key]=[];const a=sqAns[q.key];const i=a.indexOf(val);if(i>-1)a.splice(i,1);else if(!q.max||a.length<q.max)a.push(val);}else sqAns[q.key]=val;renderSQ();}
+function sqBack(){if(sqIdx>0){sqIdx--;renderSQ();}}
+function sqNext(){
+  const qs=sqGender==='her'?SQ_HER:SQ_HIM;const q=qs[sqIdx];const a=sqAns[q.key];
+  if(!a||(Array.isArray(a)&&!a.length)){alert('Please select an option.');return;}
+  if(sqIdx<qs.length-1){sqIdx++;renderSQ();}
+  else{
+    if(sqGender==='her'){S.quiz.her={...sqAns};S.onboarded.her=true;S.mode='her';}
+    else{S.quiz.him={...sqAns};S.onboarded.him=true;S.mode='him';}
+    saveS();launchApp();
+  }
+}
+
+function chk(){return'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>';}
+
+function launchApp(){
   document.getElementById('main-nav').style.display='flex';
   goTo('home');
 }
 
+/* ============================================================
+   MODE SWITCHING
+============================================================ */
+function switchMode(m){
+  // If profile not set up for this mode, run onboarding first
+  if(m==='couple'&&!S.onboarded.couple){beginCouple();return;}
+  if(m==='her'&&!S.onboarded.her){beginSolo('her');return;}
+  if(m==='him'&&!S.onboarded.him){beginSolo('him');return;}
+  S.mode=m;saveS();renderHome();
+}
+
+function updateToggle(){
+  const m=S.mode;
+  document.getElementById('mb-couple').className='mode-btn'+(m==='couple'?' act-couple':'');
+  document.getElementById('mb-her').className='mode-btn'+(m==='her'?' act-her':'');
+  document.getElementById('mb-him').className='mode-btn'+(m==='him'?' act-him':'');
+}
+
+/* ============================================================
+   HOME
+============================================================ */
+function modeColor(){return S.mode==='her'?'var(--lavender)':S.mode==='him'?'var(--steel)':'var(--gold)';}
+function modeAccent(){return S.mode==='her'?'rgba(140,100,220,0.3)':S.mode==='him'?'rgba(58,90,122,0.3)':'rgba(196,154,60,0.28)';}
+function modeBtnClass(){return S.mode==='her'?'btn-lavender':S.mode==='him'?'btn-steel':'btn-gold';}
+function modeTagClass(){return S.mode==='her'?'tag-lavender':S.mode==='him'?'tag-steel':'tag-gold';}
+function modeLabel(){return S.mode==='her'?'She & God':S.mode==='him'?'He & God':'Together';}
+function modeName(){
+  if(S.mode==='her')return S.profile.herName||'Friend';
+  if(S.mode==='him')return S.profile.himName||'Friend';
+  const p=S.profile;return p.p1&&p.p2?p.p1+' & '+p.p2:'Covenant Two';
+}
+function modeHeroBg(){
+  if(S.mode==='her')return'linear-gradient(160deg,#1a1028 0%,#2d1850 60%,#1a1028 100%)';
+  if(S.mode==='him')return'linear-gradient(160deg,#0e1a28 0%,#1a2d40 60%,#0e1a28 100%)';
+  return'linear-gradient(160deg,#1a1410 0%,#2d1f10 60%,#1e2a1a 100%)';
+}
+
 function renderHome(){
+  updateToggle();
+  const m=S.mode;const isSolo=m!=='couple';
   const h=new Date().getHours();
-  document.getElementById('greet-sub').textContent=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  const greet=h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  const name=modeName();
+  const color=modeColor();
+  const accent=modeAccent();
+
+  // HERO
+  const hero=document.getElementById('home-hero');
+  hero.style.background=modeHeroBg();
   const p=S.profile;
-  if(p.p1&&p.p2){
-    document.getElementById('greet-names').textContent=p.p1+' & '+p.p2;
-    document.getElementById('home-avatars').innerHTML=
-      `<div class="avatar av1" style="width:36px;height:36px;font-size:16px;margin-right:-6px;z-index:2;position:relative;border-color:rgba(255,255,255,0.2)">${p.p1[0].toUpperCase()}</div>`+
-      `<div class="avatar av2" style="width:36px;height:36px;font-size:16px;border-color:rgba(255,255,255,0.2)">${p.p2[0].toUpperCase()}</div>`;
-  }
-  document.getElementById('h-streak').textContent=S.streak.cur;
-  document.getElementById('h-sessions').textContent=S.sessions.length;
+  const avatarHtml=isSolo
+    ?`<div style="width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,0.1);border:2px solid ${accent.replace('0.3','0.5')};display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:${color}">${name[0].toUpperCase()}</div>`
+    :`<div style="display:flex">${p.p1?`<div style="width:38px;height:38px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--gold);border:2px solid rgba(255,255,255,0.2);margin-right:-6px;z-index:2">${p.p1[0].toUpperCase()}</div>`:''
+    }${p.p2?`<div style="width:38px;height:38px;border-radius:50%;background:#ede8e0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:700;color:var(--charcoal);border:2px solid rgba(255,255,255,0.2)">${p.p2[0].toUpperCase()}</div>`:''}</div>`;
+
+  hero.innerHTML=`
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 90% -10%,${accent.replace('0.3','0.3')} 0%,transparent 60%);pointer-events:none"></div>
+    <div style="position:relative;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:14px">
+        <svg width="42" height="42" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3);flex-shrink:0"><rect width="200" height="200" rx="40" fill="#faf6ef"/><path d="M62,100 A38,38 0 1,1 100,138" fill="none" stroke="#1a1410" stroke-width="13" stroke-linecap="round"/><path d="M100,138 A38,38 0 1,1 138,100 L138,118 Q138,135 124,145 L108,157 Q104,160 100,157 L84,145 Q70,135 70,118 L70,100" fill="none" stroke="#c49a3c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><line x1="100" y1="76" x2="100" y2="108" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/><line x1="86" y1="92" x2="114" y2="92" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/></svg>
+        <div>
+          <div style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:${color};font-weight:700;opacity:0.85;margin-bottom:2px">${greet}</div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#fff;line-height:1.1">${name}</div>
+        </div>
+      </div>
+      ${avatarHtml}
+    </div>
+    <div style="display:flex;gap:12px">
+      <div style="flex:1;background:rgba(255,255,255,0.06);border:1.5px solid ${accent};border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:24px">🔥</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:${color};line-height:1">${S.streak.cur}</div><div style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px">Day Streak</div></div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.06);border:1.5px solid ${accent};border-radius:18px;padding:14px 16px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:24px">✝</span>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:#fff;line-height:1">${S.sessions.length}</div><div style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:2px">Sessions</div></div>
+      </div>
+    </div>`;
+
+  // Topic card
+  document.getElementById('home-topic-label').textContent=isSolo?'What\'s on your heart today?':'What\'s on your hearts today?';
+  document.getElementById('home-topic-label').style.color=color;
+  document.getElementById('topicInput').placeholder=isSolo?'Share what\'s on your heart...':'Share what\'s on your hearts...';
+  const sb=document.getElementById('start-btn');sb.className='btn '+modeBtnClass();sb.style.cssText='padding:14px 18px;flex-shrink:0;height:58px;border-radius:14px';
+  document.getElementById('refresh-btn').style.color=color;
+
+  // Deeper Waters — couple only
+  document.getElementById('deeper-section').style.display=isSolo?'none':'block';
+
   refreshSuggested();
-  renderDeeper();
+  if(!isSolo)renderDeeper();
+
+  // Last session
   if(S.sessions.length){
     const last=S.sessions[S.sessions.length-1];
     document.getElementById('last-card').style.display='block';
-    document.getElementById('last-content').innerHTML=
-      `<div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--charcoal);margin-bottom:4px;text-transform:capitalize">${last.topic}</div>`+
-      `<div class="muted">${new Date(last.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>`+
-      (last.note?`<p class="body-text" style="margin-top:8px;font-style:italic;font-size:13px">"${last.note.slice(0,100)}${last.note.length>100?'...':''}"</p>`:'');
+    document.getElementById('last-content').innerHTML=`<div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--charcoal);margin-bottom:4px;text-transform:capitalize">${last.topic}</div><div class="muted">${new Date(last.date).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</div>${last.note?`<p class="body-text" style="margin-top:8px;font-style:italic;font-size:13px">"${last.note.slice(0,100)}..."</p>`:''}`;
   }
   const logged=S.sessions.filter(s=>s.note);
   if(logged.length){
     document.getElementById('prayer-preview').style.display='block';
-    document.getElementById('prayer-preview-list').innerHTML=logged.slice(-3).reverse().map(s=>
-      `<div style="padding:8px 0;border-bottom:1px solid var(--border)">`+
-      `<div class="muted">${new Date(s.date).toLocaleDateString()}</div>`+
-      `<div style="font-size:13px;color:var(--charcoal-light);margin-top:3px;font-style:italic">"${s.note.slice(0,80)}${s.note.length>80?'...':''}"</div></div>`
-    ).join('');
+    document.getElementById('prayer-preview-list').innerHTML=logged.slice(-3).reverse().map(s=>`<div style="padding:8px 0;border-bottom:1px solid var(--border)"><div class="muted">${new Date(s.date).toLocaleDateString()}</div><div style="font-size:14px;color:var(--charcoal-light);margin-top:3px;font-style:italic">"${s.note.slice(0,80)}..."</div></div>`).join('');
   }
 }
 
+/* ============================================================
+   SUGGESTED TOPICS
+============================================================ */
+function getTopicPool(){
+  const m=S.mode;
+  if(m==='her')return HER_TOPICS;
+  if(m==='him')return HIM_TOPICS;
+  const tens=(S.quiz.couple.tensions||[]).map(t=>t.toLowerCase());
+  return[...COUPLE_TOPICS].sort((a,b)=>{
+    const sa=tens.some(t=>a.t.includes(t.split(' ')[0])||t.includes(a.t.split(' ')[0]))?1:0;
+    const sb=tens.some(t=>b.t.includes(t.split(' ')[0])||t.includes(b.t.split(' ')[0]))?1:0;
+    return sb-sa+(Math.random()-0.5)*0.4;
+  });
+}
+
+function refreshSuggested(){
+  const pool=getTopicPool();
+  const shown=[...pool].sort(()=>Math.random()-0.5).slice(0,4);
+  const color=modeColor();
+  const hoverBg=S.mode==='her'?'var(--lavender-pale)':S.mode==='him'?'var(--steel-pale)':'var(--gold-pale)';
+  const hoverBorder=S.mode==='her'?'var(--lavender-border)':S.mode==='him'?'var(--steel-border)':'var(--gold)';
+  document.getElementById('suggested-topics').innerHTML=shown.map(x=>`
+    <button onclick="pickTopic('${x.t}')" style="background:var(--card);border:2px solid var(--border);border-radius:20px;padding:18px 16px;text-align:left;cursor:pointer;transition:all 0.2s;display:flex;flex-direction:column;gap:8px;box-shadow:0 2px 12px rgba(26,20,10,0.06)" onmouseover="this.style.borderColor='${hoverBorder}';this.style.background='${hoverBg}';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--card)';this.style.transform=''">
+      <div style="color:${color};display:flex">${x.i}</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--charcoal);text-transform:capitalize">${x.t}</div>
+      <div style="font-size:13px;color:var(--muted);line-height:1.4;font-weight:600">${x.d}</div>
+    </button>`).join('');
+}
+
+/* ============================================================
+   DEEPER WATERS
+============================================================ */
+function renderDeeper(){
+  const q=S.quiz.couple;
+  const season=(q.season||'').toLowerCase();
+  const tens=(q.tensions||[]).map(t=>t.toLowerCase());
+  const hist=S.sessions.map(s=>s.topic.toLowerCase());
+  const scored=ALL_DEEPER.map(d=>{
+    let sc=Math.random()*2;
+    if(d.seasons.some(s=>season.includes(s.split(' ')[0])))sc+=4;
+    if(d.tags.some(tag=>tens.some(t=>t.includes(tag)||tag.includes(t.split(' ')[0]))))sc+=3;
+    if(hist.some(h=>d.tags.some(tag=>h.includes(tag.split(' ')[0]))))sc+=2;
+    sc-=hist.filter(h=>h.includes(d.t.split(' ')[0])).length*1.5;
+    return{...d,sc};
+  }).sort((a,b)=>b.sc-a.sc);
+  const top3=scored.slice(0,3);
+  const rest=scored.slice(3);
+  const rand=rest[Math.floor(Math.random()*Math.max(1,rest.length))];
+  const show=rand?[...top3,rand]:top3;
+  document.getElementById('deeper-topics').innerHTML=show.map(d=>`
+    <button onclick="pickTopic('${d.t}')" style="background:${d.bg};border:1.5px solid rgba(255,255,255,0.08);border-radius:20px;padding:18px 16px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:8px;transition:all 0.2s;box-shadow:0 4px 20px rgba(0,0,0,0.25)" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 30px rgba(0,0,0,0.4)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.25)'">
+      <div style="color:${d.ac};display:flex"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 22s-8-4-8-10a8 8 0 0116 0c0 6-8 10-8 10z"/><path d="M12 8v4M12 16h.01"/></svg></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#fff;line-height:1.2">${d.l}</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.4;font-weight:600">${d.d}</div>
+    </button>`).join('');
+}
+
+/* ============================================================
+   AI
+============================================================ */
+async function callAI(p){
+  const r=await fetch('/api/devotional',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:p})});
+  if(!r.ok)throw new Error('API '+r.status);
+  return(await r.json()).content[0].text.replace(/```json|```/g,'').trim();
+}
+
+function buildCtx(){
+  const m=S.mode,p=S.profile,q=S.quiz;let c='';
+  if(m==='her'){
+    const n=p.herName||'her';const qh=q.her||{};
+    c+=`This devotional is for a Christian wife named ${n}, alone with God — not a couple session. Speak directly to her as a woman. `;
+    if(qh.season)c+=`Her season: ${qh.season}. `;
+    if(qh.role)c+=`Her home role: ${qh.role}. `;
+    if(qh.needs&&qh.needs.length)c+=`She needs from God: ${qh.needs.join(', ')}. `;
+    c+='Be warm, nurturing, deeply personal. Speak to her heart as a woman, wife, and daughter of God. ';
+  }else if(m==='him'){
+    const n=p.himName||'him';const qm=q.him||{};
+    c+=`This devotional is for a Christian husband named ${n}, alone with God — not a couple session. Speak directly to him as a man. `;
+    if(qm.season)c+=`His season: ${qm.season}. `;
+    if(qm.leadership)c+=`His leadership style: ${qm.leadership}. `;
+    if(qm.needs&&qm.needs.length)c+=`He needs from God: ${qm.needs.join(', ')}. `;
+    c+='Be direct, honest, challenge-oriented. Speak to him as a man, husband, and son of God. Use language that resonates with men — strength, mission, character, accountability. ';
+  }else{
+    const qc=q.couple||{};
+    if(p.p1&&p.p2&&S.prefs.personalize)c+=`Names: ${p.p1} and ${p.p2}. `;
+    if(qc.season)c+=`Marriage season: ${qc.season}. `;
+    if(qc.tensions&&qc.tensions.length)c+=`Tension areas: ${qc.tensions.join(', ')}. `;
+    if(qc.spiritual)c+=`Spiritual life: ${qc.spiritual}. `;
+  }
+  return c;
+}
+
+/* ============================================================
+   SESSION
+============================================================ */
 function pickTopic(t){document.getElementById('topicInput').value=t;startSession(t);}
 function handleStart(){const v=document.getElementById('topicInput').value.trim();if(v)startSession(v);}
 
 async function startSession(topic){
-  if(!topic)topic=document.getElementById('topicInput').value.trim();
   if(!topic)return;
   cTopic=topic;cQs=[];cQIdx=0;inSession=true;
+  const m=S.mode;
   document.getElementById('sess-title').textContent=topic;
+  document.getElementById('sess-tag').className='tag '+modeTagClass();
+  document.getElementById('sess-tag').textContent=modeLabel();
+  document.getElementById('devo-next-btn').className='btn btn-full '+(m==='her'?'btn-lavender':m==='him'?'btn-steel':'btn-charcoal');
+  document.getElementById('prayer-next-btn').className='btn btn-full '+(m==='her'?'btn-lavender':m==='him'?'btn-steel':'btn-charcoal');
+  document.getElementById('game-tag').textContent=m==='couple'?'Connect — Together':m==='her'?'Reflect — She & God':'Reflect — He & God';
+  document.getElementById('wrap-instruction').textContent=m==='couple'?'Take a moment together. Let one of you pray aloud.':m==='her'?'Take a moment alone with God. Let His presence speak.':'Take a moment alone with God. Bring it honestly before Him.';
+  document.getElementById('prayer-log-sub').textContent=m==='couple'?'What did you pray for together? Write it down.':m==='her'?'What did God put on your heart? Write it down — just for you.':'What did God say to you today? Write it down.';
   ['step-devo','step-prayer','step-game','step-wrap'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('loading-text').textContent='Preparing your devotional...';
   document.getElementById('sess-loading').style.display='block';
   goTo('session');window.scrollTo(0,0);
-  await generateDevo(topic);
+  await genDevo(topic);
 }
 
-async function generateDevo(topic){
-  const p=S.profile;
-  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
-  const deepTopics=['infidelity','resentment','sexual satisfaction','long distance','parenting styles','financial stress','financial crisis','intimacy struggles'];
-  const isDeep=deepTopics.some(d=>topic.toLowerCase().includes(d.split(' ')[0]));
-  const deepCtx=isDeep?'This is a sensitive, painful topic. Be extra gentle, compassionate, and non-judgmental. Acknowledge the real pain without minimizing it. Encourage professional counseling where appropriate. ':'';
-  const prompt=`You are a warm, pastoral devotional writer for married Christian couples. ${nameCtx}${deepCtx}Write a short devotional for the topic: "${topic}".
-
-Respond ONLY with valid JSON, no markdown:
-{"title":"devotional title 5-8 words","verse":"full Bible verse text","ref":"Book Chapter:Verse","body":"2-3 warm paragraphs 120-150 words total, separate with \\n\\n","reflect":"one open-ended intimate reflection question","closing":"short closing blessing verse different from main","closingRef":"Book Chapter:Verse"}`;
-
-  try{
-    const raw=await callAI(prompt);
-    renderDevo(JSON.parse(raw));
-  }catch(e){
-    console.error('Devo error:',e);
-    const k=Object.keys(FALLBACK_DEVOS).find(k=>k!=='default'&&topic.toLowerCase().includes(k));
-    renderDevo(FALLBACK_DEVOS[k]||FALLBACK_DEVOS.default);
-  }
+async function genDevo(topic){
+  const m=S.mode;
+  const deep=['infidelity','resentment','sexual','long distance','parenting conflict','financial crisis','emotional distance'];
+  const isDeep=deep.some(d=>topic.toLowerCase().includes(d.split(' ')[0]));
+  const dc=isDeep?'Sensitive topic. Be gentle, compassionate, non-judgmental. Acknowledge real pain. Encourage professional counseling where appropriate. ':'';
+  const aud=m==='her'?'a Christian wife reflecting alone with God':m==='him'?'a Christian husband reflecting alone with God':'a married Christian couple';
+  const prompt=`Warm pastoral devotional writer for ${aud}. ${buildCtx()}${dc}Write devotional for: "${topic}".
+Respond ONLY valid JSON no markdown:
+{"title":"5-8 word title","verse":"full verse","ref":"Book Ch:V","body":"2-3 paragraphs 120-150 words separate with \\n\\n","reflect":"open-ended ${m==='couple'?'couple':'personal'} reflection question","closing":"short closing verse","closingRef":"Book Ch:V"}`;
+  try{renderDevo(JSON.parse(await callAI(prompt)));}
+  catch(e){renderDevo({title:"Drawing Near",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Whatever brought you here today, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you that you haven't fully brought before God?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"});}
 }
 
 function renderDevo(d){
   document.getElementById('sess-loading').style.display='none';
   document.getElementById('close-verse').textContent='"'+(d.closing||'May the God of hope fill you with all joy and peace.')+'"';
   document.getElementById('close-ref').textContent=d.closingRef||'Romans 15:13';
-  const p=S.profile;
-  const badge=S.prefs.personalize&&p.p1&&p.p2?`<div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:12px;letter-spacing:0.04em">✦ For ${p.p1} & ${p.p2}</div>`:'';
+  const m=S.mode;
+  const reflBg=m==='her'?'var(--lavender-pale)':m==='him'?'var(--steel-pale)':'var(--sage-pale)';
+  const reflBorder=m==='her'?'var(--lavender-border)':m==='him'?'var(--steel-border)':'var(--sage-border)';
+  const reflColor=m==='her'?'var(--lavender)':m==='him'?'var(--steel)':'var(--sage)';
+  const reflTextColor=m==='her'?'#3a1a6a':m==='him'?'#1a3a5a':'#2d4a31';
+  const reflLabel=m==='couple'?'Reflect Together':m==='her'?'Reflect — Just You & God':'Reflect — Just You & God';
   document.getElementById('devo-inner').innerHTML=
-    badge+
-    `<div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:14px;line-height:1.2">${d.title}</div>`+
+    `<div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--charcoal);margin-bottom:14px;line-height:1.2">${d.title}</div>`+
     `<div class="verse-block"><div class="verse-text">"${d.verse}"</div><div class="verse-ref">${d.ref}</div></div>`+
     `<div class="body-text" style="margin:14px 0">${(d.body||'').replace(/\n\n/g,'</p><p class="body-text" style="margin-top:12px">').replace(/\n/g,'<br>')}</div>`+
-    `<div style="background:var(--sage-pale);border:1px solid var(--sage-border);border-radius:16px;padding:16px 18px">`+
-    `<div class="overline" style="color:var(--sage);margin-bottom:8px">Reflect Together</div>`+
-    `<div style="font-size:15px;font-style:italic;color:#2d4a31;line-height:1.65;font-family:'Cormorant Garamond',serif">${d.reflect}</div></div>`;
+    `<div style="background:${reflBg};border:1.5px solid ${reflBorder};border-radius:16px;padding:16px 18px">`+
+    `<div class="overline" style="color:${reflColor};margin-bottom:8px">${reflLabel}</div>`+
+    `<div style="font-size:16px;font-style:italic;color:${reflTextColor};line-height:1.65;font-family:'Cormorant Garamond',serif;font-weight:600">${d.reflect}</div></div>`;
   document.getElementById('step-devo').style.display='block';
 }
 
 async function goToPrayer(){
   document.getElementById('step-devo').style.display='none';
-  document.getElementById('loading-text').textContent='Preparing your prayer points...';
+  document.getElementById('loading-text').textContent='Preparing prayer points...';
   document.getElementById('sess-loading').style.display='block';
-  await generatePrayerPoints(cTopic);
+  const m=S.mode;
+  const aud=m==='her'?'a Christian wife praying alone with God':m==='him'?'a Christian husband praying alone with God':'a married Christian couple praying together';
+  const prompt=`3 prayer points for ${aud} on: "${cTopic}". ${buildCtx()}Each: focus title (4-6 words), prayer starting Lord/Father (1-2 sentences), applicable verse.
+ONLY valid JSON: {"points":[{"title":"","prayer":"","verse":"","ref":""},{"title":"","prayer":"","verse":"","ref":""},{"title":"","prayer":"","verse":"","ref":""}]}`;
+  try{renderPrayer(JSON.parse(await callAI(prompt)).points);}
+  catch(e){renderPrayer([{title:"Open and honest heart",prayer:"Lord, give me courage to be fully honest before You in this season.",verse:"Search me, God, and know my heart.",ref:"Psalm 139:23"},{title:"Wisdom and guidance",prayer:"Father, grant wisdom as I navigate this. Let Your Word be my lamp.",verse:"If any of you lacks wisdom, let him ask God, who gives generously.",ref:"James 1:5"},{title:"Peace that passes understanding",prayer:"Lord, guard my heart and mind in Christ Jesus today.",verse:"The peace of God which surpasses all understanding will guard your hearts.",ref:"Philippians 4:7"}]);}
   document.getElementById('sess-loading').style.display='none';
   document.getElementById('step-prayer').style.display='block';
   window.scrollTo(0,0);
 }
 
-async function generatePrayerPoints(topic){
-  const p=S.profile;
-  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
-  const prompt=`You are a pastoral prayer guide for married Christian couples. ${nameCtx}Generate 3 specific prayer points for a couple to pray together about the topic: "${topic}".
-
-Each prayer point should be a short, specific thing to pray about, with an applicable Bible verse.
-
-Respond ONLY with valid JSON, no markdown:
-{"points":[{"title":"short prayer focus (4-6 words)","prayer":"1-2 sentence prayer prompt starting with 'Lord...' or 'Father...'","verse":"short applicable Bible verse","ref":"Book Chapter:Verse"},{"title":"...","prayer":"...","verse":"...","ref":"..."},{"title":"...","prayer":"...","verse":"...","ref":"..."}]}`;
-
-  try{
-    const raw=await callAI(prompt);
-    const parsed=JSON.parse(raw);
-    renderPrayerPoints(parsed.points);
-  }catch(e){
-    console.error('Prayer points error:',e);
-    renderPrayerPoints([
-      {title:"Open hearts to each other",prayer:"Lord, give us the courage to be fully honest and vulnerable with one another in this season.",verse:"Therefore confess your sins to each other and pray for each other so that you may be healed.",ref:"James 5:16"},
-      {title:"Wisdom and guidance",prayer:"Father, grant us your wisdom as we navigate this together. Let your Word be a lamp to our feet.",verse:"If any of you lacks wisdom, let him ask God, who gives generously to all.",ref:"James 1:5"},
-      {title:"Unity in your Spirit",prayer:"Lord, bind our hearts together in Your love. May we reflect Your grace toward each other.",verse:"And above all these put on love, which binds everything together in perfect harmony.",ref:"Colossians 3:14"}
-    ]);
-  }
-}
-
-function renderPrayerPoints(points){
-  document.getElementById('prayer-points-inner').innerHTML=
-    `<div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--charcoal);margin-bottom:6px">Pray Over This Together</div>`+
-    `<p class="muted" style="margin-bottom:18px;font-size:13px">Take turns praying through each point aloud.</p>`+
-    points.map((pt,i)=>`
-      <div style="background:var(--gold-pale);border:1px solid var(--gold-border);border-radius:16px;padding:18px;margin-bottom:12px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
-          <div style="width:26px;height:26px;background:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0">${i+1}</div>
-          <div style="font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--charcoal)">${pt.title}</div>
-        </div>
-        <p style="font-size:14px;color:var(--charcoal-light);line-height:1.7;font-style:italic;margin-bottom:12px">${pt.prayer}</p>
-        <div style="background:rgba(255,255,255,0.6);border-left:2px solid var(--gold);border-radius:0 10px 10px 0;padding:10px 12px">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:var(--warm-brown,#6b4c35);line-height:1.5">"${pt.verse}"</div>
-          <div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px">${pt.ref}</div>
-        </div>
-      </div>`).join('');
+function renderPrayer(pts){
+  const m=S.mode;
+  const gold=m==='her'?'var(--lavender)':m==='him'?'var(--steel)':'var(--gold)';
+  const goldPale=m==='her'?'linear-gradient(135deg,var(--lavender-pale),#ede0ff)':m==='him'?'linear-gradient(135deg,var(--steel-pale),#d8e8f0)':'linear-gradient(135deg,var(--gold-pale),#f0e4c8)';
+  const goldBorder=m==='her'?'var(--lavender-border)':m==='him'?'var(--steel-border)':'var(--gold-border)';
+  const textColor=m==='her'?'#3a1a6a':m==='him'?'#1a3a5a':'#6b4820';
+  const prayLabel=m==='couple'?'Pray Together':m==='her'?'Pray Through This':'Pray Through This';
+  const prayDesc=m==='couple'?'Take turns praying through each point aloud.':'Bring each point honestly before God in your own words.';
+  document.getElementById('prayer-inner').innerHTML=
+    `<div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charcoal);margin-bottom:6px">${prayLabel}</div>`+
+    `<p class="muted" style="margin-bottom:18px;font-size:14px">${prayDesc}</p>`+
+    pts.map((pt,i)=>`<div style="background:${goldPale};border:1.5px solid ${goldBorder};border-radius:16px;padding:18px;margin-bottom:12px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:28px;height:28px;background:${gold};border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0">${i+1}</div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--charcoal)">${pt.title}</div></div>
+      <p style="font-size:15px;color:var(--charcoal-light);line-height:1.7;font-style:italic;font-weight:500;margin-bottom:12px">${pt.prayer}</p>
+      <div style="background:rgba(255,255,255,0.6);border-left:3px solid ${gold};border-radius:0 10px 10px 0;padding:10px 12px"><div style="font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:${textColor};line-height:1.5;font-weight:600">"${pt.verse}"</div><div style="font-size:11px;color:${gold};font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin-top:4px">${pt.ref}</div></div>
+    </div>`).join('');
 }
 
 async function goToGame(){
   document.getElementById('step-prayer').style.display='none';
-  document.getElementById('loading-text').textContent='Crafting questions for you...';
+  const m=S.mode;const isSolo=m!=='couple';
+  document.getElementById('loading-text').textContent=isSolo?'Preparing your reflections...':'Crafting questions for you...';
   document.getElementById('sess-loading').style.display='block';
-  await generateQuestions(cTopic);
+  const type=m==='her'?'personal reflection questions for a Christian wife alone with God':m==='him'?'personal reflection questions for a Christian husband alone with God':'deep conversation starters for a married couple';
+  const prompt=`5 ${type} on: "${cTopic}". ${buildCtx()}Open-ended, faith-adjacent, emotionally meaningful. ONLY JSON: {"questions":["q1","q2","q3","q4","q5"]}`;
+  try{cQs=JSON.parse(await callAI(prompt)).questions;}
+  catch(e){cQs=[...FALLBACK_QS].sort(()=>Math.random()-0.5);}
   document.getElementById('sess-loading').style.display='none';
   document.getElementById('step-game').style.display='block';
   document.getElementById('convo-card').innerHTML='<div class="convo-ph">Tap "Next →" to begin</div>';
   updateQBar();window.scrollTo(0,0);
 }
 
-async function generateQuestions(topic){
-  const p=S.profile;
-  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
-  const prompt=`You are writing deep, intimate conversation starter questions for a married Christian couple. ${nameCtx}The topic of their session today is: "${topic}".
-
-Generate exactly 5 questions that are emotionally meaningful, specific to this topic, and help the couple know each other more deeply. Make them open-ended and faith-adjacent but not preachy.
-
-Respond ONLY with valid JSON, no markdown:
-{"questions":["question 1","question 2","question 3","question 4","question 5"]}`;
-
-  try{
-    const raw=await callAI(prompt);
-    const parsed=JSON.parse(raw);
-    cQs=parsed.questions;
-  }catch(e){
-    console.error('Questions error:',e);
-    cQs=[...FALLBACK_QS].sort(()=>Math.random()-0.5);
-  }
-}
-
 async function doAIQ(){
-  const p=S.profile;
-  const nameCtx=S.prefs.personalize&&p.p1&&p.p2?`The couple's names are ${p.p1} and ${p.p2}. `:'';
-  const prompt=`Generate ONE deep, intimate conversation starter question for a married Christian couple. ${nameCtx}Topic: "${cTopic}". Make it emotionally meaningful and specific. Respond with ONLY the question text, nothing else.`;
-  try{
-    const q=await callAI(prompt);
-    showQ(q.replace(/^"|"$/g,''));
-  }catch(e){
-    showQ(FALLBACK_QS[Math.floor(Math.random()*FALLBACK_QS.length)]);
-  }
+  const m=S.mode;
+  const type=m==='her'?'personal reflection question for a Christian wife alone with God':m==='him'?'personal reflection question for a Christian husband alone with God':'deep conversation starter for a married couple';
+  const prompt=`ONE ${type} on: "${cTopic}". ${buildCtx()}Respond with ONLY the question.`;
+  try{showQ((await callAI(prompt)).replace(/^"|"$/g,''));}catch(e){showQ(FALLBACK_QS[Math.floor(Math.random()*FALLBACK_QS.length)]);}
   cQIdx++;S.totalQ++;updateQBar();
 }
-
-function doNextQ(){
-  if(cQIdx>=cQs.length){goToWrap();return;}
-  let q=cQs[cQIdx];
-  if(S.prefs.personalize&&S.profile.p1&&S.profile.p2)
-    q=q.replace(/\bme\b/gi,S.profile.p1).replace(/\byou\b/gi,S.profile.p2);
-  showQ(q);cQIdx++;S.totalQ++;updateQBar();
-}
-
-function showQ(q){
-  const c=document.getElementById('convo-card');
-  c.style.opacity='0';c.style.transform='translateY(10px)';
-  setTimeout(()=>{c.innerHTML='<div class="convo-q">'+q+'</div>';c.style.transition='all 0.28s ease';c.style.opacity='1';c.style.transform='translateY(0)';},220);
-}
-
-function updateQBar(){
-  const total=Math.max(cQs.length,5);
-  document.getElementById('q-bar').style.width=Math.min(100,Math.round((cQIdx/total)*100))+'%';
-  document.getElementById('q-num').textContent=cQIdx+' / '+total;
-}
-
-function goToWrap(){
-  document.getElementById('step-game').style.display='none';
-  document.getElementById('step-wrap').style.display='block';
-  document.getElementById('prayer-text').value='';
-  window.scrollTo(0,0);
-}
+function doNextQ(){if(cQIdx>=cQs.length){goToWrap();return;}showQ(cQs[cQIdx]);cQIdx++;S.totalQ++;updateQBar();}
+function showQ(q){const c=document.getElementById('convo-card');c.style.opacity='0';c.style.transform='translateY(10px)';setTimeout(()=>{c.innerHTML='<div class="convo-q">'+q+'</div>';c.style.transition='all 0.28s ease';c.style.opacity='1';c.style.transform='translateY(0)';},220);}
+function updateQBar(){const t=Math.max(cQs.length,5);document.getElementById('q-bar').style.width=Math.min(100,Math.round((cQIdx/t)*100))+'%';document.getElementById('q-num').textContent=cQIdx+' / '+t;}
+function goToWrap(){document.getElementById('step-game').style.display='none';document.getElementById('step-wrap').style.display='block';document.getElementById('prayer-text').value='';window.scrollTo(0,0);}
 
 function finishSession(save){
   const note=save?document.getElementById('prayer-text').value.trim():'';
   const today=new Date().toISOString().split('T')[0];
-  S.sessions.push({date:new Date().toISOString(),topic:cTopic,note,qCount:cQIdx});
   const yesterday=new Date(Date.now()-86400000).toISOString().split('T')[0];
-  if(S.streak.lastDate===today){}
-  else if(S.streak.lastDate===yesterday)S.streak.cur++;
-  else S.streak.cur=1;
+  S.sessions.push({date:new Date().toISOString(),topic:cTopic,note,qCount:cQIdx,mode:S.mode});
+  if(S.streak.lastDate===today){}else if(S.streak.lastDate===yesterday)S.streak.cur++;else S.streak.cur=1;
   if(S.streak.cur>S.streak.best)S.streak.best=S.streak.cur;
-  S.streak.lastDate=today;
-  saveS();inSession=false;goTo('home');
+  S.streak.lastDate=today;saveS();inSession=false;goTo('home');
 }
 
+/* ============================================================
+   PRAYERS / STREAK / PROFILE
+============================================================ */
 function renderPrayers(){
   const logged=S.sessions.filter(s=>s.note).reverse();
   const el=document.getElementById('prayers-body');
-  if(!logged.length){el.innerHTML=`<div class="empty-state"><div style="font-size:44px;margin-bottom:14px">🙏</div><p style="font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;margin-bottom:8px">No prayers logged yet</p><p class="muted" style="font-size:13px">Finish a session and save your prayer note — it will appear here.</p></div>`;return;}
-  el.innerHTML=logged.map(s=>`<div class="card-sm"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px"><div class="tag tag-gold" style="text-transform:capitalize">${s.topic}</div><div class="muted">${new Date(s.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div></div><div class="body-text" style="font-style:italic;font-size:13px">"${s.note}"</div></div>`).join('');
+  if(!logged.length){el.innerHTML=`<div class="empty-state"><div style="font-size:44px;margin-bottom:14px">🙏</div><p style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;margin-bottom:8px">No prayers logged yet</p><p class="muted">Finish a session and save your prayer note.</p></div>`;return;}
+  el.innerHTML=logged.map(s=>`<div class="card-sm">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div class="tag ${s.mode==='her'?'tag-lavender':s.mode==='him'?'tag-steel':'tag-gold'}" style="text-transform:capitalize;font-size:10px">${s.topic}</div>
+      <div class="muted">${new Date(s.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
+    </div>
+    <div class="body-text" style="font-style:italic;font-size:14px">"${s.note}"</div>
+    <div style="margin-top:6px;font-size:11px;font-weight:700;color:${s.mode==='her'?'var(--lavender)':s.mode==='him'?'var(--steel)':'var(--gold)'}">${s.mode==='her'?'She & God':s.mode==='him'?'He & God':'Together'}</div>
+  </div>`).join('');
 }
 
 function renderStreak(){
-  document.getElementById('s-cur').textContent=S.streak.cur;
-  document.getElementById('s-best').textContent=S.streak.best;
-  document.getElementById('s-tsess').textContent=S.sessions.length;
-  document.getElementById('s-tpray').textContent=S.sessions.filter(s=>s.note).length;
+  document.getElementById('s-cur').textContent=S.streak.cur;document.getElementById('s-best').textContent=S.streak.best;
+  document.getElementById('s-tsess').textContent=S.sessions.length;document.getElementById('s-tpray').textContent=S.sessions.filter(s=>s.note).length;
   document.getElementById('s-ttop').textContent=new Set(S.sessions.map(s=>s.topic.toLowerCase())).size;
   document.getElementById('s-tq').textContent=S.sessions.reduce((a,s)=>a+(s.qCount||0),0);
-  const dates=new Set(S.sessions.map(s=>s.date.split('T')[0]));
-  const today=new Date().toISOString().split('T')[0];
-  let cal='';
-  for(let i=13;i>=0;i--){
-    const d=new Date(Date.now()-i*86400000);
-    const ds=d.toISOString().split('T')[0];
-    cal+=`<div class="day-dot${dates.has(ds)?' done':ds===today?' today':''}">${d.toLocaleDateString('en-US',{weekday:'narrow'})}</div>`;
-  }
+  const dates=new Set(S.sessions.map(s=>s.date.split('T')[0]));const today=new Date().toISOString().split('T')[0];
+  let cal='';for(let i=13;i>=0;i--){const d=new Date(Date.now()-i*86400000);const ds=d.toISOString().split('T')[0];cal+=`<div class="day-dot${dates.has(ds)?' done':ds===today?' today':''}">${d.toLocaleDateString('en-US',{weekday:'narrow'})}</div>`;}
   document.getElementById('s-cal').innerHTML=cal;
 }
 
 function renderProfile(){
-  const p=S.profile;
-  if(p.p1&&p.p2){
-    document.getElementById('profile-form').style.display='none';
-    document.getElementById('profile-view').style.display='block';
-    document.getElementById('pv-sub').textContent=S.sessions.length?'Together since your first session':'No sessions yet — start one on the Home tab!';
-    document.getElementById('pv-avatars').innerHTML=
-      `<div class="avatar av1" style="width:52px;height:52px;font-size:22px">${p.p1[0].toUpperCase()}</div>`+
-      `<div class="avatar av2" style="width:52px;height:52px;font-size:22px;margin-left:-8px">${p.p2[0].toUpperCase()}</div>`+
-      `<div style="margin-left:12px"><div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--charcoal)">${p.p1} & ${p.p2}</div></div>`;
-  }else{
-    document.getElementById('profile-form').style.display='block';
-    document.getElementById('profile-view').style.display='none';
+  const p=S.profile;const on=S.prefs.personalize;
+  const card=document.getElementById('profile-names-card');
+  const rows=[];
+  if(S.onboarded.couple&&p.p1&&p.p2)rows.push({label:'Together',name:`${p.p1} & ${p.p2}`,color:'var(--gold)',detail:S.quiz.couple.season||''});
+  if(S.onboarded.her&&p.herName)rows.push({label:'She & God',name:p.herName,color:'var(--lavender)',detail:S.quiz.her.season||''});
+  if(S.onboarded.him&&p.himName)rows.push({label:'He & God',name:p.himName,color:'var(--steel)',detail:S.quiz.him.season||''});
+  if(rows.length){
+    card.style.display='block';
+    document.getElementById('pv-content').innerHTML=rows.map(r=>`
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+        <div style="width:44px;height:44px;border-radius:50%;background:${r.color}22;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;color:${r.color};border:2px solid ${r.color}44">${r.name[0].toUpperCase()}</div>
+        <div><div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--charcoal)">${r.name}</div><div style="font-size:12px;font-weight:600;color:${r.color};margin-top:1px">${r.label}${r.detail?' · '+r.detail:''}</div></div>
+      </div>`).join('');
   }
-  const on=S.prefs.personalize;
   document.getElementById('tog-bg').style.background=on?'var(--gold)':'var(--border)';
-  document.getElementById('tog-th').style.transform=on?'translateX(22px)':'translateX(0)';
-}
-function editProf(){
-  document.getElementById('p1').value=S.profile.p1;
-  document.getElementById('p2').value=S.profile.p2;
-  document.getElementById('p-ann').value=S.profile.ann||'';
-  document.getElementById('profile-form').style.display='block';
-  document.getElementById('profile-view').style.display='none';
-}
-function saveProf(){
-  const p1=document.getElementById('p1').value.trim();
-  const p2=document.getElementById('p2').value.trim();
-  if(!p1||!p2){alert('Please enter both names.');return;}
-  S.profile={p1,p2,ann:document.getElementById('p-ann').value};
-  saveS();renderProfile();renderHome();
-}
-function togglePref(key){
-  if(key==='personalize'){
-    S.prefs.personalize=!S.prefs.personalize;saveS();
-    const on=S.prefs.personalize;
-    document.getElementById('tog-bg').style.background=on?'var(--gold)':'var(--border)';
-    document.getElementById('tog-th').style.transform=on?'translateX(22px)':'translateX(0)';
-  }
-}
-function exportData(){
-  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='covenant-two-backup.json';a.click();
-}
-function confirmLeave(){
-  if(!inSession){goTo('home');return;}
-  openModal('Leave session?','Your current session progress will be lost.',()=>{inSession=false;closeModal();goTo('home');});
-}
-function confirmReset(){
-  openModal('Reset all data?','This permanently deletes your profile, sessions, prayers, and streak.',()=>{
-    localStorage.removeItem('ct_v3');
-    S={profile:{p1:'',p2:'',ann:''},prefs:{personalize:false},sessions:[],streak:{cur:0,best:0,lastDate:''},totalQ:0};
-    saveS();closeModal();
-    document.getElementById('main-nav').style.display='none';
-    document.querySelectorAll('.screen').forEach(s=>s.style.display='none');
-    document.getElementById('screen-setup').style.display='block';
-    document.getElementById('screen-setup').classList.add('active');
-  });
-}
-function openModal(title,body,onConfirm){
-  document.getElementById('m-title').textContent=title;
-  document.getElementById('m-body').textContent=body;
-  document.getElementById('m-confirm').onclick=onConfirm;
-  document.getElementById('modal-bg').classList.add('open');
-}
-function closeModal(e){
-  if(e&&e.target!==document.getElementById('modal-bg'))return;
-  document.getElementById('modal-bg').classList.remove('open');
+  document.getElementById('tog-th').style.transform=on?'translateX(24px)':'translateX(0)';
 }
 
+function togglePref(){S.prefs.personalize=!S.prefs.personalize;saveS();const on=S.prefs.personalize;document.getElementById('tog-bg').style.background=on?'var(--gold)':'var(--border)';document.getElementById('tog-th').style.transform=on?'translateX(24px)':'translateX(0)';}
+function retakeQuiz(){openModal('Update your profile?','This will walk you through the setup again.',()=>{closeModal();S.onboarded={couple:false,her:false,him:false};saveS();showSplash();});}
+function exportData(){const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='covenant-two-backup.json';a.click();}
+
+/* ============================================================
+   MODALS
+============================================================ */
+function confirmLeave(){if(!inSession){goTo('home');return;}openModal('Leave session?','Your current progress will be lost.',()=>{inSession=false;closeModal();goTo('home');});}
+function confirmReset(){openModal('Reset all data?','This permanently deletes everything — all profiles, sessions, and prayers.',()=>{localStorage.removeItem('ct_v5');location.reload();});}
+function openModal(t,b,fn){document.getElementById('m-title').textContent=t;document.getElementById('m-body').textContent=b;document.getElementById('m-confirm').onclick=fn;document.getElementById('modal-bg').classList.add('open');}
+function closeModal(e){if(e&&e.target!==document.getElementById('modal-bg'))return;document.getElementById('modal-bg').classList.remove('open');}
+
+/* ============================================================
+   INIT
+============================================================ */
 loadS();
-if(S.profile.p1&&S.profile.p2){
-  document.getElementById('screen-setup').style.display='none';
+const anyOnboarded=S.onboarded.couple||S.onboarded.her||S.onboarded.him;
+if(anyOnboarded){
   document.getElementById('main-nav').style.display='flex';
   goTo('home');
 }else{
-  document.getElementById('screen-setup').style.display='block';
-  document.getElementById('screen-setup').classList.add('active');
+  document.getElementById('screen-splash').style.display='block';
+  document.getElementById('screen-splash').classList.add('active');
 }
-document.getElementById('topicInput').addEventListener('keydown',function(e){
-  if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();handleStart();}
-});
+document.getElementById('topicInput').addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();handleStart();}});
 </script>
 </body>
 </html>

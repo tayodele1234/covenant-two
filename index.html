@@ -231,8 +231,11 @@ textarea.input{resize:none;line-height:1.7}
       </button>
     </div>
   </div>
-  <div style="margin-bottom:16px">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+  <!-- Quiz completion nudge -->
+  <div id="quiz-nudge-card" class="card" style="display:none;border-color:var(--gold-border)"></div>
+
+  <!-- Solo mode invite -->
+  <div id="solo-invite-card" style="display:none;margin-bottom:16px"></div>
       <div class="overline" id="sug-label">Suggested for you</div>
       <button class="btn-ghost" style="font-size:12px;font-weight:700" id="refresh-btn" onclick="refreshSuggested()">Refresh ↻</button>
     </div>
@@ -828,6 +831,11 @@ function renderHome(){
   refreshSuggested();
   if(!isSolo)renderDeeper();
 
+  // Fix 1: Nudge existing users who haven't completed quiz
+  renderQuizNudges();
+  // Fix 3: Solo mode invite after 3 couple sessions
+  renderSoloInvite();
+
   // Last session
   if(S.sessions.length){
     const last=S.sessions[S.sessions.length-1];
@@ -842,8 +850,70 @@ function renderHome(){
 }
 
 /* ============================================================
-   SUGGESTED TOPICS
+   FIX 1: QUIZ COMPLETION NUDGES
 ============================================================ */
+function renderQuizNudges(){
+  const m=S.mode;
+  // Check if current mode has no quiz answers
+  const coupleNoQuiz=m==='couple'&&S.onboarded.couple&&!S.quiz.couple?.season;
+  const herNoQuiz=m==='her'&&S.onboarded.her&&!S.quiz.her?.season;
+  const himNoQuiz=m==='him'&&S.onboarded.him&&!S.quiz.him?.season;
+  const nudge=document.getElementById('quiz-nudge-card');
+  if(!nudge)return;
+  if(coupleNoQuiz||herNoQuiz||himNoQuiz){
+    const color=modeColor();
+    const btnClass=modeBtnClass();
+    nudge.style.display='block';
+    nudge.innerHTML=`
+      <div style="display:flex;align-items:flex-start;gap:14px">
+        <div style="width:44px;height:44px;border-radius:14px;background:${color}22;border:1.5px solid ${color}44;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="8" r="6"/><path d="M3 21v-2a9 9 0 0118 0v2"/></svg>
+        </div>
+        <div style="flex:1">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--charcoal);margin-bottom:4px">Personalize your experience</div>
+          <div style="font-size:13px;color:var(--muted);font-weight:500;line-height:1.5;margin-bottom:12px">Answer a few quick questions so your devotionals and suggestions feel truly tailored to where you are right now.</div>
+          <button class="btn ${btnClass}" style="padding:10px 20px;font-size:13px" onclick="retakeCurrentQuiz()">Complete My Profile →</button>
+        </div>
+      </div>`;
+  }else{
+    nudge.style.display='none';
+  }
+}
+
+function retakeCurrentQuiz(){
+  const m=S.mode;
+  if(m==='couple'){S.onboarded.couple=false;saveS();showScreen('screen-couple-onboard');}
+  else if(m==='her'){S.onboarded.her=false;saveS();beginSolo('her');}
+  else{S.onboarded.him=false;saveS();beginSolo('him');}
+}
+
+/* ============================================================
+   FIX 3: SOLO MODE INVITE NUDGE (after 3 couple sessions)
+============================================================ */
+function renderSoloInvite(){
+  const el=document.getElementById('solo-invite-card');
+  if(!el)return;
+  const coupleSessions=S.sessions.filter(s=>s.mode==='couple').length;
+  const herDone=S.onboarded.her;
+  const himDone=S.onboarded.him;
+  // Show invite after 3 couple sessions if solo not set up
+  if(S.mode==='couple'&&coupleSessions>=3&&(!herDone||!himDone)){
+    el.style.display='block';
+    el.innerHTML=`
+      <div style="background:linear-gradient(135deg,rgba(124,92,191,0.08),rgba(58,90,122,0.08));border:1.5px solid var(--border);border-radius:20px;padding:20px">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--charcoal);margin-bottom:6px">Did you know you can use this alone?</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:500;line-height:1.55;margin-bottom:14px">Each of you can have a personal devotional space. She & God for her quiet time. He & God for his.</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          ${!herDone?`<button class="btn btn-lavender" style="padding:10px 18px;font-size:13px" onclick="beginSolo('her')">Set up She & God</button>`:''}
+          ${!himDone?`<button class="btn btn-steel" style="padding:10px 18px;font-size:13px" onclick="beginSolo('him')">Set up He & God</button>`:''}
+        </div>
+      </div>`;
+  }else{
+    el.style.display='none';
+  }
+}
+
+
 function getTopicPool(){
   const m=S.mode;
   if(m==='her')return HER_TOPICS;
@@ -970,13 +1040,31 @@ async function startSession(topic){
 
 async function genDevo(topic){
   const m=S.mode;
-  const deep=['infidelity','resentment','sexual','long distance','parenting conflict','financial crisis','emotional distance'];
-  const isDeep=deep.some(d=>topic.toLowerCase().includes(d.split(' ')[0]));
-  const dc=isDeep?'Sensitive topic. Be gentle, compassionate, non-judgmental. Acknowledge real pain. Encourage professional counseling where appropriate. ':'';
+  // Fix 2: Topic-specific pastoral frameworks for Deeper Waters
+  const deepFrameworks={
+    'infidelity':'This couple is dealing with infidelity. Use a rebuilding trust framework. Acknowledge the devastation of betrayal without minimizing it. Focus on: (1) the possibility of redemption through Christ, (2) the hard work of rebuilding trust step by step, (3) the need for professional counseling alongside spiritual healing. Never rush forgiveness or minimize the pain of the betrayed partner. Be pastoral, not prescriptive.',
+    'resentment':'This couple is dealing with deep resentment. Use a forgiveness pathway framework. Distinguish between forgiveness (releasing the debt) and reconciliation (rebuilding the relationship) — they are not the same. Acknowledge that resentment is often accumulated hurt that was never properly addressed. Focus on: what was never said, what was never grieved, and what God says about releasing bitterness for their own freedom. Encourage them to name what hurt without attacking.',
+    'sexual':'This couple is dealing with intimacy struggles. Be tasteful, pastorally warm, and frank. Address both physical and emotional intimacy as deeply connected. Focus on: safety, vulnerability, the theology of physical intimacy in marriage as a gift from God, and how unresolved emotional distance often manifests as physical disconnection. Never shame. Always dignify.',
+    'long distance':'This couple is navigating long distance marriage. Acknowledge the unique grief of loving someone deeply while being physically apart. Focus on: intentional emotional connection across distance, the spiritual discipline of praying for each other daily, practical rhythms that keep the marriage alive, and trusting God with seasons of separation.',
+    'parenting':'This couple is in conflict over parenting styles. Acknowledge that parenting conflict is one of the most common and destabilizing forces in marriage. Focus on: getting aligned on core values rather than tactics, presenting a united front to children while disagreeing privately, the difference between different styles and genuinely harmful approaches, and seeking wisdom together from God and trusted mentors.',
+    'financial':'This couple is in financial crisis. Acknowledge the fear and shame that financial stress produces. Focus on: God as provider and the spiritual battle against anxiety, the importance of facing numbers together rather than in shame, the difference between financial stress and character failure, and practical next steps toward alignment and a plan.',
+    'emotional':'This couple is experiencing significant emotional distance. Acknowledge that emotional distance is often a slow drift rather than a dramatic rupture — and that it can feel more hopeless than a visible crisis. Focus on: small consistent actions that rebuild emotional safety, the difference between being in the same house and being truly present, and what it means to emotionally pursue your spouse the way God pursues us.',
+    'grief':'This couple is walking through grief and loss together. Acknowledge that grief affects people differently and that two people can love each other deeply while grieving completely differently. Focus on: giving each other permission to grieve differently, the danger of grief pulling couples apart instead of together, and the biblical promise that God is near to the brokenhearted.'
+  };
+  const topicLower=topic.toLowerCase();
+  let dc='';
+  for(const[key,framework]of Object.entries(deepFrameworks)){
+    if(topicLower.includes(key.split(' ')[0])){dc=framework+' ';break;}
+  }
+  if(!dc){
+    const genericDeep=['infidelity','resentment','sexual','long distance','parenting conflict','financial crisis','emotional distance','grief'];
+    const isDeep=genericDeep.some(d=>topicLower.includes(d.split(' ')[0]));
+    if(isDeep)dc='Sensitive topic. Be gentle, compassionate, non-judgmental. Acknowledge real pain. Encourage professional counseling where appropriate. ';
+  }
   const aud=m==='her'?'a Christian wife reflecting alone with God':m==='him'?'a Christian husband reflecting alone with God':'a married Christian couple';
   const prompt=`Warm pastoral devotional writer for ${aud}. ${buildCtx()}${dc}Write devotional for: "${topic}".
 Respond ONLY valid JSON no markdown:
-{"title":"5-8 word title","verse":"full verse","ref":"Book Ch:V","body":"2-3 paragraphs 120-150 words separate with \\n\\n","reflect":"open-ended ${m==='couple'?'couple':'personal'} reflection question","closing":"short closing verse","closingRef":"Book Ch:V"}`;
+{"title":"5-8 word title","verse":"full verse","ref":"Book Ch:V","body":"2-3 paragraphs 120-150 words separate with \\n\\n","reflect":"open-ended ${m==='couple'?'couple':'personal'} reflection question under 12 words","closing":"short closing verse","closingRef":"Book Ch:V"}`;
   try{renderDevo(JSON.parse(await callAI(prompt)));}
   catch(e){renderDevo({title:"Drawing Near",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Whatever brought you here today, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you that you haven't fully brought before God?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"});}
 }

@@ -83,7 +83,29 @@ textarea.input{resize:none;line-height:1.7}
 .day-dot{width:36px;height:36px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--hint)}
 .day-dot.done{background:var(--gold);border-color:var(--gold);color:#fff}
 .day-dot.today{border-color:var(--gold);color:var(--gold);background:var(--gold-pale)}
-/* QUIZ */
+/* ANIMATIONS */
+@keyframes splashLogo{from{opacity:0;transform:scale(0.8) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes splashFade{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes celebPulse{0%{transform:scale(0.5);opacity:0}60%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes celebRing{0%{transform:scale(0.6);opacity:0.8}100%{transform:scale(2.2);opacity:0}}
+@keyframes celebFadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes stepSlideIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes stepSlideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-30px)}}
+@keyframes milestoneGlow{0%{opacity:0;transform:scale(0.9)}20%{opacity:1;transform:scale(1.02)}80%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(0.95)}}
+@keyframes checkDraw{from{stroke-dashoffset:100}to{stroke-dashoffset:0}}
+@keyframes saveGlow{0%{box-shadow:0 4px 16px rgba(196,154,60,0.3)}50%{box-shadow:0 4px 40px rgba(196,154,60,0.7)}100%{box-shadow:0 4px 16px rgba(196,154,60,0.3)}}
+
+/* CELEBRATION SCREEN */
+.celeb-screen{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;pointer-events:none;opacity:0}
+.celeb-screen.show{pointer-events:all;animation:milestoneGlow 3s ease forwards}
+.celeb-ring{position:absolute;width:200px;height:200px;border-radius:50%;border:2px solid var(--gold);animation:celebRing 1.5s ease-out 0.3s both}
+.celeb-icon{font-size:72px;animation:celebPulse 0.7s ease 0.1s both;position:relative;z-index:1}
+.celeb-title{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#fff;margin-top:24px;animation:celebFadeUp 0.6s ease 0.5s both;opacity:0;position:relative;z-index:1}
+.celeb-sub{font-size:15px;font-weight:600;color:rgba(255,255,255,0.65);margin-top:10px;max-width:260px;line-height:1.6;animation:celebFadeUp 0.6s ease 0.7s both;opacity:0;position:relative;z-index:1}
+
+/* MILESTONE SCREEN */
+.milestone-overlay{position:fixed;inset:0;background:linear-gradient(160deg,#1a1410,#2d1f10);z-index:300;display:none;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+.milestone-overlay.show{display:flex}
 .quiz-screen{min-height:100vh;display:flex;flex-direction:column;max-width:520px;margin:0 auto;padding:0 20px 40px;position:relative;z-index:1}
 .quiz-option{background:var(--card);border:2px solid var(--border);border-radius:16px;padding:16px 18px;cursor:pointer;transition:all 0.2s;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;color:var(--charcoal);text-align:left;width:100%;margin-bottom:10px;display:flex;align-items:center;gap:12px}
 .quiz-option.sel-couple{background:var(--gold-pale);border-color:var(--gold)}
@@ -105,35 +127,108 @@ textarea.input{resize:none;line-height:1.7}
 <!-- SPLASH -->
 <div id="screen-splash" class="screen" style="padding:0">
   <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:520px;margin:0 auto">
-    <svg width="110" height="110" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:28px;border-radius:32px;box-shadow:0 8px 32px rgba(0,0,0,0.15)">
+    <svg width="110" height="110" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="margin-bottom:28px;border-radius:32px;box-shadow:0 8px 32px rgba(0,0,0,0.15);animation:splashLogo 0.8s ease both">
       <rect width="200" height="200" rx="40" fill="#faf6ef"/>
       <path d="M62,100 A38,38 0 1,1 100,138" fill="none" stroke="#1a1410" stroke-width="13" stroke-linecap="round"/>
       <path d="M100,138 A38,38 0 1,1 138,100 L138,118 Q138,135 124,145 L108,157 Q104,160 100,157 L84,145 Q70,135 70,118 L70,100" fill="none" stroke="#c49a3c" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
       <line x1="100" y1="76" x2="100" y2="108" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/>
       <line x1="86" y1="92" x2="114" y2="92" stroke="#c49a3c" stroke-width="8" stroke-linecap="round"/>
     </svg>
-    <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px">Welcome to</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:var(--charcoal);letter-spacing:0.06em;line-height:1">COVENANT</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:400;color:var(--gold);letter-spacing:0.16em;margin-top:-6px">TWO</div>
-    <p style="font-size:16px;font-weight:500;color:var(--muted);margin:20px 0 40px;max-width:280px;line-height:1.7">Grow closer to God and each other — one session at a time.</p>
-    <div style="width:100%;max-width:360px;display:flex;flex-direction:column;gap:14px">
+    <div style="font-size:10px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:10px;animation:splashFade 0.8s 0.2s ease both;opacity:0">Welcome to</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:var(--charcoal);letter-spacing:0.06em;line-height:1;animation:splashFade 0.8s 0.3s ease both;opacity:0">COVENANT</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:400;color:var(--gold);letter-spacing:0.16em;margin-top:-6px;animation:splashFade 0.8s 0.4s ease both;opacity:0">TWO</div>
+    <p style="font-size:15px;font-weight:600;color:var(--muted);margin:16px 0 6px;max-width:300px;line-height:1.65;animation:splashFade 0.8s 0.5s ease both;opacity:0">A devotional app for your marriage and your personal walk with God.</p>
+    <p style="font-size:13px;font-weight:500;color:var(--hint);margin-bottom:36px;max-width:260px;line-height:1.6;animation:splashFade 0.8s 0.55s ease both;opacity:0">Built on Scripture. Designed for real life.</p>
+    <div style="width:100%;max-width:360px;display:flex;flex-direction:column;gap:14px;animation:splashFade 0.8s 0.65s ease both;opacity:0">
       <button class="btn btn-charcoal btn-full" style="font-size:16px;padding:18px" onclick="beginCouple()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         We're setting this up together
       </button>
-      <button class="btn btn-lavender btn-full" style="font-size:16px;padding:18px" onclick="beginSolo('her')">
+      <button class="btn btn-gold btn-full" style="font-size:16px;padding:18px" onclick="showSoloGenderPick()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
-        Just me — She &amp; God
-      </button>
-      <button class="btn btn-steel btn-full" style="font-size:16px;padding:18px" onclick="beginSolo('him')">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
-        Just me — He &amp; God
+        Just me today
       </button>
     </div>
   </div>
 </div>
 
-<!-- COUPLE NAME ENTRY -->
+<!-- SOLO GENDER PICK -->
+<div id="screen-solo-gender" class="screen" style="padding:0">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:520px;margin:0 auto">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:var(--charcoal);margin-bottom:10px;line-height:1.2">Which experience<br>is this for?</div>
+    <p style="font-size:15px;font-weight:500;color:var(--muted);margin-bottom:40px;max-width:280px;line-height:1.65">Each mode is designed specifically for where you are right now.</p>
+    <div style="width:100%;max-width:360px;display:flex;flex-direction:column;gap:16px">
+      <button onclick="beginSolo('her')" style="background:linear-gradient(145deg,#1a1028,#2d1850);border:1.5px solid rgba(124,92,191,0.3);border-radius:22px;padding:24px 22px;text-align:left;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:48px;height:48px;border-radius:50%;background:rgba(124,92,191,0.2);border:1.5px solid rgba(196,168,240,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#c4a8f0" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div style="text-align:left">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#fff;margin-bottom:3px">She &amp; God</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:500;line-height:1.4">A personal quiet time built for wives. Warm, nurturing, and deeply personal.</div>
+          </div>
+        </div>
+      </button>
+      <button onclick="beginSolo('him')" style="background:linear-gradient(145deg,#0e1a28,#1a2d40);border:1.5px solid rgba(58,90,122,0.3);border-radius:22px;padding:24px 22px;text-align:left;cursor:pointer;transition:all 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:48px;height:48px;border-radius:50%;background:rgba(58,90,122,0.2);border:1.5px solid rgba(154,184,212,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#90b8d4" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.58-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div style="text-align:left">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#fff;margin-bottom:3px">He &amp; God</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.5);font-weight:500;line-height:1.4">Direct, honest, challenge-oriented. Built for husbands who want to grow.</div>
+          </div>
+        </div>
+      </button>
+    </div>
+    <button class="btn-ghost" style="margin-top:24px;font-size:14px" onclick="showSplash()">← Back</button>
+  </div>
+</div>
+
+<!-- QUIZ WELCOME (shown before quiz questions) -->
+<div id="screen-quiz-welcome" class="screen" style="padding:0">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:520px;margin:0 auto">
+    <div style="font-size:52px;margin-bottom:24px;animation:celebPulse 0.7s ease both">✦</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:var(--charcoal);line-height:1.2;margin-bottom:12px" id="qw-title">A few quick questions</div>
+    <p style="font-size:16px;font-weight:500;color:var(--muted);max-width:280px;line-height:1.7;margin-bottom:36px" id="qw-sub">Just a few questions so we can make this feel like it was made for you. No wrong answers — just be honest.</p>
+    <button class="btn btn-full" id="qw-btn" style="max-width:360px;font-size:16px;padding:17px" onclick="startActualQuiz()">Let's do it →</button>
+    <button class="btn-ghost" style="margin-top:16px" onclick="showSplash()">← Back</button>
+  </div>
+</div>
+
+<!-- QUIZ COMPLETION CELEBRATION -->
+<div id="screen-celebration" class="screen" style="padding:0">
+  <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px;text-align:center;max-width:520px;margin:0 auto;position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1a1410 0%,#2d1f10 60%,#1e2a1a 100%)"></div>
+    <div style="position:absolute;width:300px;height:300px;border-radius:50%;border:1.5px solid rgba(196,154,60,0.2);animation:celebRing 2s ease-out 0.5s both"></div>
+    <div style="position:absolute;width:200px;height:200px;border-radius:50%;border:1.5px solid rgba(196,154,60,0.3);animation:celebRing 2s ease-out 0.8s both"></div>
+    <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center">
+      <div style="font-size:80px;animation:celebPulse 0.8s ease both;margin-bottom:24px" id="celeb-icon">✝</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:#fff;line-height:1.1;margin-bottom:12px;animation:celebFadeUp 0.6s ease 0.4s both;opacity:0" id="celeb-title">You are all set</div>
+      <div style="font-size:18px;font-weight:600;color:var(--gold);margin-bottom:10px;animation:celebFadeUp 0.6s ease 0.55s both;opacity:0" id="celeb-name"></div>
+      <p style="font-size:16px;font-weight:500;color:rgba(255,255,255,0.6);max-width:280px;line-height:1.7;animation:celebFadeUp 0.6s ease 0.7s both;opacity:0" id="celeb-sub">Your experience is now personalized. Every devotional, every question — made for where you are right now.</p>
+      <div style="margin-top:36px;animation:celebFadeUp 0.6s ease 0.9s both;opacity:0">
+        <div class="verse-block" style="text-align:left;max-width:320px">
+          <div class="verse-text" id="celeb-verse">"For I know the plans I have for you, declares the Lord."</div>
+          <div class="verse-ref">Jeremiah 29:11</div>
+        </div>
+      </div>
+      <button class="btn btn-gold" style="margin-top:28px;padding:16px 40px;font-size:16px;animation:celebFadeUp 0.6s ease 1.1s both;opacity:0" onclick="launchApp()" id="celeb-btn">Begin →</button>
+    </div>
+  </div>
+</div>
+
+<!-- STREAK MILESTONE OVERLAY -->
+<div class="milestone-overlay" id="milestone-overlay">
+  <div style="position:absolute;width:350px;height:350px;border-radius:50%;border:1.5px solid rgba(196,154,60,0.15);animation:celebRing 2.5s ease-out infinite"></div>
+  <div style="position:relative;z-index:2;text-align:center">
+    <div style="font-size:80px;animation:celebPulse 0.7s ease both" id="ms-icon">🔥</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;color:var(--gold);line-height:1;margin:20px 0 8px" id="ms-streak">7</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#fff;margin-bottom:12px" id="ms-title">Day Streak</div>
+    <p style="font-size:16px;color:rgba(255,255,255,0.6);font-weight:500;max-width:260px;line-height:1.65;margin:0 auto" id="ms-sub">Seven days of showing up. God sees that.</p>
+    <button class="btn btn-gold" style="margin-top:32px;padding:14px 36px" onclick="closeMilestone()">Keep Going →</button>
+  </div>
+</div>
 <div id="screen-couple-onboard" class="screen" style="padding:0">
   <div class="quiz-screen">
     <div style="padding:48px 0 28px">
@@ -222,6 +317,7 @@ textarea.input{resize:none;line-height:1.7}
       He &amp; God
     </button>
   </div>
+  <div id="toggle-tooltip" style="text-align:center;font-size:12px;color:var(--hint);font-weight:500;margin-top:-12px;margin-bottom:14px;display:none">Switch between couple and personal sessions</div>
   <div class="card" id="topic-card" style="border-color:var(--gold-border);background:linear-gradient(135deg,#fffef9,#fdf8ed)">
     <div class="overline" style="margin-bottom:10px" id="home-topic-label">What's on your hearts today?</div>
     <div style="display:flex;gap:10px;align-items:flex-end">
@@ -236,6 +332,10 @@ textarea.input{resize:none;line-height:1.7}
 
   <!-- Solo mode invite -->
   <div id="solo-invite-card" style="display:none;margin-bottom:16px"></div>
+
+  <!-- Suggested Topics -->
+  <div style="margin-bottom:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
       <div class="overline" id="sug-label">Suggested for you</div>
       <button class="btn-ghost" style="font-size:12px;font-weight:700" id="refresh-btn" onclick="refreshSuggested()">Refresh ↻</button>
     </div>
@@ -560,6 +660,7 @@ const FALLBACK_QS=["What are you most afraid to say out loud?","Where do you fee
 let S={
   mode:'couple',
   lastSoloMode:null,
+  shownToggleTip:false,
   profile:{p1:'',p2:'',herName:'',himName:''},
   quiz:{couple:{},her:{},him:{}},
   prefs:{personalize:false},
@@ -611,7 +712,8 @@ function beginCouple(){showScreen('screen-couple-onboard');}
 function startCoupleQuiz(){
   const p1=document.getElementById('co-p1').value.trim(),p2=document.getElementById('co-p2').value.trim();
   if(!p1||!p2){alert('Please enter both names.');return;}
-  S.profile.p1=p1;S.profile.p2=p2;cqIdx=0;cqAns={};renderCQ();showScreen('screen-couple-quiz');
+  S.profile.p1=p1;S.profile.p2=p2;cqIdx=0;cqAns={};
+  showQuizWelcome('couple');
 }
 
 function renderCQ(){
@@ -647,27 +749,21 @@ function cqSel(val){const q=CQ[cqIdx];if(q.multi){if(!cqAns[q.key])cqAns[q.key]=
 function cqBack(){if(cqIdx>0){cqIdx--;renderCQ();}}
 function cqNext(){
   const q=CQ[cqIdx];const a=cqAns[q.key];if(!a||(Array.isArray(a)&&!a.length)){alert('Please select an option.');return;}
-  if(cqIdx<CQ.length-1){cqIdx++;renderCQ();}else{S.quiz.couple={...cqAns};S.onboarded.couple=true;S.mode='couple';saveS();launchApp();}
+  if(cqIdx<CQ.length-1){cqIdx++;renderCQ();}else{
+    S.quiz.couple={...cqAns};S.onboarded.couple=true;S.mode='couple';saveS();
+    const name=S.profile.p1&&S.profile.p2?S.profile.p1+' & '+S.profile.p2:'';
+    showCelebration(name,'couple');
+  }
 }
 
 /* ============================================================
    ONBOARDING — SOLO
 ============================================================ */
-function beginSolo(gender){
-  sqGender=gender;
-  const label=document.getElementById('solo-onboard-label');
-  const btn=document.getElementById('solo-onboard-btn');
-  label.textContent=gender==='her'?'She & God':'He & God';
-  label.style.color=gender==='her'?'var(--lavender)':'var(--steel)';
-  btn.className='btn btn-full '+(gender==='her'?'btn-lavender':'btn-steel');
-  document.getElementById('solo-name').placeholder=gender==='her'?'Your first name':'Your first name';
-  showScreen('screen-solo-onboard');
-}
 
 function startSoloQuiz(){
   const name=document.getElementById('solo-name').value.trim();if(!name){alert('Please enter your name.');return;}
   if(sqGender==='her')S.profile.herName=name;else S.profile.himName=name;
-  sqIdx=0;sqAns={};renderSQ();showScreen('screen-solo-quiz');
+  sqIdx=0;sqAns={};showQuizWelcome(sqGender);
 }
 
 function renderSQ(){
@@ -711,9 +807,10 @@ function sqNext(){
   if(!a||(Array.isArray(a)&&!a.length)){alert('Please select an option.');return;}
   if(sqIdx<qs.length-1){sqIdx++;renderSQ();}
   else{
+    const name=sqGender==='her'?S.profile.herName:S.profile.himName;
     if(sqGender==='her'){S.quiz.her={...sqAns};S.onboarded.her=true;S.mode='her';}
     else{S.quiz.him={...sqAns};S.onboarded.him=true;S.mode='him';}
-    saveS();launchApp();
+    saveS();showCelebration(name,sqGender);
   }
 }
 
@@ -722,6 +819,7 @@ function chk(){return'<svg width="12" height="12" viewBox="0 0 24 24" fill="none
 function launchApp(){
   document.getElementById('main-nav').style.display='flex';
   goTo('home');
+  setTimeout(showToggleTooltip,1200);
 }
 
 /* ============================================================
@@ -850,8 +948,130 @@ function renderHome(){
 }
 
 /* ============================================================
-   FIX 1: QUIZ COMPLETION NUDGES
+   ROTATING LOADING MESSAGES
 ============================================================ */
+const LOADING_MSGS=[
+  ['Finding a word just for you...','Let the Word dwell in you richly'],
+  ['Searching the Scriptures...','Something is being prepared'],
+  ['Writing something personal...','He knows what you need today'],
+  ['Getting your session ready...','This moment matters'],
+  ['Preparing your devotional...','Just a few more seconds'],
+];
+function setLoadingMsg(type){
+  const msgs=LOADING_MSGS[Math.floor(Math.random()*LOADING_MSGS.length)];
+  document.getElementById('loading-text').textContent=type==='prayer'?'Preparing your prayer points...':type==='reflect'?'Preparing your reflections...':msgs[0];
+  document.getElementById('loading-sub') && (document.getElementById('loading-sub').textContent=msgs[1]);
+}
+
+/* ============================================================
+   SPLASH & GENDER PICK
+============================================================ */
+let pendingQuizMode='couple';
+
+function showSoloGenderPick(){showScreen('screen-solo-gender');}
+
+function beginSolo(gender){
+  sqGender=gender;
+  const label=document.getElementById('solo-onboard-label');
+  const btn=document.getElementById('solo-onboard-btn');
+  if(label){label.textContent=gender==='her'?'She & God':'He & God';label.style.color=gender==='her'?'var(--lavender)':'var(--steel)';}
+  if(btn)btn.className='btn btn-full '+(gender==='her'?'btn-lavender':'btn-steel');
+  showScreen('screen-solo-onboard');
+}
+
+/* ============================================================
+   QUIZ WELCOME SCREEN
+============================================================ */
+let quizWelcomeTarget='couple';
+
+function showQuizWelcome(target){
+  quizWelcomeTarget=target;
+  const isCouple=target==='couple';
+  const isHer=target==='her';
+  document.getElementById('qw-title').textContent='Just a few questions';
+  document.getElementById('qw-sub').textContent=isCouple
+    ?'So we can make every session feel like it was written for your marriage specifically. No wrong answers — just be honest.'
+    :isHer?'So your quiet time feels personal and not generic. A few honest answers go a long way.'
+    :'So your time with God feels tailored to where you actually are right now. Be straight with yourself.';
+  const btn=document.getElementById('qw-btn');
+  btn.className='btn btn-full max-width:360px '+(isCouple?'btn-charcoal':isHer?'btn-lavender':'btn-steel');
+  btn.style.cssText='max-width:360px;font-size:16px;padding:17px;width:100%';
+  showScreen('screen-quiz-welcome');
+}
+
+function startActualQuiz(){
+  if(quizWelcomeTarget==='couple'){renderCQ();showScreen('screen-couple-quiz');}
+  else{renderSQ();showScreen('screen-solo-quiz');}
+}
+
+/* ============================================================
+   QUIZ COMPLETION CELEBRATION
+============================================================ */
+function showCelebration(name,mode){
+  const isCouple=mode==='couple';
+  const isHer=mode==='her';
+  document.getElementById('celeb-icon').textContent=isCouple?'✝':isHer?'🌸':'⚔️';
+  document.getElementById('celeb-title').textContent=isCouple?'You are all set':'You are all set';
+  document.getElementById('celeb-name').textContent=name?`Welcome, ${name}`:'';
+  document.getElementById('celeb-sub').textContent=isCouple
+    ?'Your experience is now personalized. Every devotional, every question — made for where your marriage is right now.'
+    :isHer?'Your quiet time is now tailored to your heart. Every devotional written just for you.'
+    :'Your time with God is now tailored to you. Every session written to where you actually are.';
+  const verses=[
+    {v:'"For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you."',r:'Jeremiah 29:11'},
+    {v:'"Draw near to God, and he will draw near to you."',r:'James 4:8'},
+    {v:'"Two are better than one, because they have a good return for their labor."',r:'Ecclesiastes 4:9'},
+  ];
+  const verse=isCouple?verses[2]:verses[Math.floor(Math.random()*2)];
+  document.getElementById('celeb-verse').textContent=verse.v;
+  document.getElementById('screen-celebration').querySelector('.verse-ref').textContent=verse.r;
+  showScreen('screen-celebration');
+}
+
+/* ============================================================
+   STREAK MILESTONES
+============================================================ */
+const MILESTONE_DAYS=[3,7,14,21,30,60,90];
+const MILESTONE_MESSAGES={
+  3:'Three days of showing up. That is how habits begin.',
+  7:'Seven days straight. God sees your consistency.',
+  14:'Two weeks. This is becoming part of who you are.',
+  21:'Twenty one days. Science says this is a habit now. Scripture says it is even more.',
+  30:'Thirty days. One month of intentional time with God.',
+  60:'Sixty days. Two months of showing up. This is remarkable.',
+  90:'Ninety days. You are not the same person who started this.',
+};
+
+function checkMilestone(streak){
+  if(MILESTONE_DAYS.includes(streak)){
+    const msg=MILESTONE_MESSAGES[streak]||`${streak} days. Keep going.`;
+    document.getElementById('ms-streak').textContent=streak;
+    document.getElementById('ms-title').textContent=streak===1?'Day Streak':'Day Streak';
+    document.getElementById('ms-sub').textContent=msg;
+    document.getElementById('ms-icon').textContent=streak>=30?'🏆':streak>=14?'⚡':'🔥';
+    const overlay=document.getElementById('milestone-overlay');
+    overlay.classList.add('show');
+  }
+}
+function closeMilestone(){
+  document.getElementById('milestone-overlay').classList.remove('show');
+}
+
+/* ============================================================
+   FIRST-TIME TOGGLE TOOLTIP
+============================================================ */
+function showToggleTooltip(){
+  if(S.shownToggleTip)return;
+  const tip=document.getElementById('toggle-tooltip');
+  if(tip){
+    tip.style.display='block';
+    tip.style.animation='celebFadeUp 0.4s ease both';
+    setTimeout(()=>{tip.style.opacity='0';tip.style.transition='opacity 0.5s';setTimeout(()=>{tip.style.display='none';},500);},4000);
+    S.shownToggleTip=true;saveS();
+  }
+}
+
+
 function renderQuizNudges(){
   const m=S.mode;
   // Check if current mode has no quiz answers
@@ -1033,6 +1253,7 @@ async function startSession(topic){
   document.getElementById('prayer-log-sub').textContent=m==='couple'?'What did you pray for together? Write it down.':m==='her'?'What did God put on your heart? Write it down — just for you.':'What did God say to you today? Write it down.';
   ['step-devo','step-prayer','step-game','step-wrap'].forEach(id=>document.getElementById(id).style.display='none');
   document.getElementById('loading-text').textContent='Preparing your devotional...';
+  setLoadingMsg('devo');
   document.getElementById('sess-loading').style.display='block';
   goTo('session');window.scrollTo(0,0);
   await genDevo(topic);
@@ -1069,11 +1290,19 @@ Respond ONLY valid JSON no markdown:
   catch(e){renderDevo({title:"Drawing Near",verse:"Draw near to God, and he will draw near to you.",ref:"James 4:8",body:"Whatever brought you here today, let it be an invitation. He is not far. He is faithful.",reflect:"What is something weighing on you that you haven't fully brought before God?",closing:"Cast all your anxiety on him because he cares for you.",closingRef:"1 Peter 5:7"});}
 }
 
+function showStepAnimated(id){
+  const el=document.getElementById(id);
+  el.style.display='block';
+  el.style.animation='none';
+  void el.offsetWidth;
+  el.style.animation='stepSlideIn 0.35s ease both';
+  window.scrollTo(0,0);
+}
+
 function renderDevo(d){
   document.getElementById('sess-loading').style.display='none';
   document.getElementById('close-verse').textContent='"'+(d.closing||'May the God of hope fill you with all joy and peace.')+'"';
-  document.getElementById('close-ref').textContent=d.closingRef||'Romans 15:13';
-  const m=S.mode;
+  document.getElementById('close-ref').textContent=d.closingRef||'Romans 15:13';  const m=S.mode;
   const reflBg=m==='her'?'var(--lavender-pale)':m==='him'?'var(--steel-pale)':'var(--sage-pale)';
   const reflBorder=m==='her'?'var(--lavender-border)':m==='him'?'var(--steel-border)':'var(--sage-border)';
   const reflColor=m==='her'?'var(--lavender)':m==='him'?'var(--steel)':'var(--sage)';
@@ -1086,7 +1315,7 @@ function renderDevo(d){
     `<div style="background:${reflBg};border:1.5px solid ${reflBorder};border-radius:16px;padding:16px 18px">`+
     `<div class="overline" style="color:${reflColor};margin-bottom:8px">${reflLabel}</div>`+
     `<div style="font-size:16px;font-style:italic;color:${reflTextColor};line-height:1.65;font-family:'Cormorant Garamond',serif;font-weight:600">${d.reflect}</div></div>`;
-  document.getElementById('step-devo').style.display='block';
+  showStepAnimated('step-devo');
 }
 
 async function goToPrayer(){
@@ -1100,8 +1329,7 @@ ONLY valid JSON: {"points":[{"title":"","prayer":"","verse":"","ref":""},{"title
   try{renderPrayer(JSON.parse(await callAI(prompt)).points);}
   catch(e){renderPrayer([{title:"Open and honest heart",prayer:"Lord, give me courage to be fully honest before You in this season.",verse:"Search me, God, and know my heart.",ref:"Psalm 139:23"},{title:"Wisdom and guidance",prayer:"Father, grant wisdom as I navigate this. Let Your Word be my lamp.",verse:"If any of you lacks wisdom, let him ask God, who gives generously.",ref:"James 1:5"},{title:"Peace that passes understanding",prayer:"Lord, guard my heart and mind in Christ Jesus today.",verse:"The peace of God which surpasses all understanding will guard your hearts.",ref:"Philippians 4:7"}]);}
   document.getElementById('sess-loading').style.display='none';
-  document.getElementById('step-prayer').style.display='block';
-  window.scrollTo(0,0);
+  showStepAnimated('step-prayer');
 }
 
 function renderPrayer(pts){
@@ -1134,9 +1362,8 @@ ONLY JSON: {"questions":["q1","q2","q3","q4","q5"]}`;
   try{cQs=JSON.parse(await callAI(prompt)).questions;}
   catch(e){cQs=[...FALLBACK_QS].sort(()=>Math.random()-0.5);}
   document.getElementById('sess-loading').style.display='none';
-  document.getElementById('step-game').style.display='block';
+  showStepAnimated('step-game');
   document.getElementById('convo-card').innerHTML='<div class="convo-ph">Tap "Next →" to begin</div>';
-  updateQBar();window.scrollTo(0,0);
 }
 
 async function doAIQ(){
@@ -1149,7 +1376,11 @@ async function doAIQ(){
 function doNextQ(){if(cQIdx>=cQs.length){goToWrap();return;}showQ(cQs[cQIdx]);cQIdx++;S.totalQ++;updateQBar();}
 function showQ(q){const c=document.getElementById('convo-card');c.style.opacity='0';c.style.transform='translateY(10px)';setTimeout(()=>{c.innerHTML='<div class="convo-q">'+q+'</div>';c.style.transition='all 0.28s ease';c.style.opacity='1';c.style.transform='translateY(0)';},220);}
 function updateQBar(){const t=Math.max(cQs.length,5);document.getElementById('q-bar').style.width=Math.min(100,Math.round((cQIdx/t)*100))+'%';document.getElementById('q-num').textContent=cQIdx+' / '+t;}
-function goToWrap(){document.getElementById('step-game').style.display='none';document.getElementById('step-wrap').style.display='block';document.getElementById('prayer-text').value='';window.scrollTo(0,0);}
+function goToWrap(){
+  document.getElementById('step-game').style.display='none';
+  showStepAnimated('step-wrap');
+  document.getElementById('prayer-text').value='';
+}
 
 function finishSession(save){
   const note=save?document.getElementById('prayer-text').value.trim():'';
@@ -1158,7 +1389,12 @@ function finishSession(save){
   S.sessions.push({date:new Date().toISOString(),topic:cTopic,note,qCount:cQIdx,mode:S.mode});
   if(S.streak.lastDate===today){}else if(S.streak.lastDate===yesterday)S.streak.cur++;else S.streak.cur=1;
   if(S.streak.cur>S.streak.best)S.streak.best=S.streak.cur;
-  S.streak.lastDate=today;saveS();inSession=false;goTo('home');
+  S.streak.lastDate=today;
+  const streakJustHit=S.streak.cur;
+  saveS();inSession=false;
+  goTo('home');
+  // Check milestone after short delay so home renders first
+  setTimeout(()=>checkMilestone(streakJustHit),600);
 }
 
 /* ============================================================
